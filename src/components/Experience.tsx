@@ -1,3 +1,43 @@
 'use client';
-import {useLang} from './LanguageProvider';
-export function Experience(){const {lang}=useLang();const rows=lang==='en'?[['Backend & distributed systems','Concurrency, transactional boundaries and recoverable workflows.','FlashSale / OpsBridge'],['Cloud & platform engineering','Infrastructure as code, GitOps and operational visibility.','AKS SRE Platform'],['Applied AI & business applications','Retrieval, human review and auditable business workflows.','Document Intelligence / QuanLyKho']]:[['Backend & hệ thống phân tán','Xử lý đồng thời, ranh giới giao dịch và quy trình phục hồi.','FlashSale / OpsBridge'],['Cloud & kỹ thuật nền tảng','Hạ tầng dưới dạng code, GitOps và khả năng quan sát.','AKS SRE Platform'],['AI ứng dụng & phần mềm nghiệp vụ','Truy xuất, kiểm duyệt thủ công và quy trình có thể kiểm tra.','Document Intelligence / QuanLyKho']];return <section id="experience" className="section"><div className="container-custom"><p className="eyebrow">06 / {lang==='en'?'ENGINEERING EXPERIENCE':'KINH NGHIỆM KỸ THUẬT'}</p><h2 className="section-title">{lang==='en'?'Practice, through projects.':'Kinh nghiệm qua dự án.'}</h2><p className="section-subtitle">{lang==='en'?'Project-based experience documented in the repositories below.':'Kinh nghiệm phát triển dự án được ghi lại trong các repository.'}</p>{rows.map(([title,desc,source],i)=><div className="experience-row" key={title}><span>0{i+1}</span><div><h3>{title}</h3><p>{desc}</p></div><a href="#projects">{source} ↗</a></div>)}</div></section>}
+
+import { useLang } from './LanguageProvider';
+import { experience } from '@/content/data';
+
+export function Experience() {
+  const { lang } = useLang();
+
+  return (
+    <section id="experience" className="section">
+      <div className="container-custom">
+        <p className="eyebrow">06 / {lang === 'en' ? 'EXPERIENCE' : 'KINH NGHIỆM'}</p>
+        <h2 className="section-title">
+          {lang === 'en' ? 'Professional Experience' : 'Kinh nghiệm làm việc'}
+        </h2>
+        <p className="section-subtitle">
+          {lang === 'en'
+            ? 'Software engineering experience across backend, fullstack, and independent project work.'
+            : 'Kinh nghiệm kỹ thuật phần mềm trong backend, fullstack và các dự án độc lập.'}
+        </p>
+        <div className="experience-list">
+          {experience.items.map((item) => (
+            <div className="experience-item" key={item.id}>
+              <div className="experience-header">
+                <h3>{item.role[lang]}</h3>
+                <span className="experience-period">{item.period[lang]}</span>
+              </div>
+              <p className="experience-company">{item.company[lang]}</p>
+              <p className="experience-description">{item.description[lang]}</p>
+              <div className="experience-tech">
+                {item.tech.map((t) => (
+                  <span key={t} className="tech-pill">
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

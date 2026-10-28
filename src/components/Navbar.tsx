@@ -37,7 +37,7 @@ export function Navbar({ lang, setLang, t }: NavbarProps) {
 
   return (
     <nav className="nav-glass fixed top-0 left-0 right-0 z-50 border-b border-border/40 backdrop-blur-xl backdrop-saturate-150 shadow-[0_1px_0_rgb(var(--border)/0.4)]">
-      <div className="container-custom flex items-center justify-between h-20">
+      <div className="container-custom flex items-center justify-between h-16">
         <Link
           href="#"
           className="flex items-center gap-2 font-display text-2xl font-bold tracking-tight group"
@@ -94,7 +94,7 @@ export function Navbar({ lang, setLang, t }: NavbarProps) {
               <X className="w-5 h-5" />
             </button>
           </div>
-          <div className="container-custom py-20 flex flex-col gap-6">
+          <div className="container-custom py-12 flex flex-col gap-6">
             {links.map((link) => (
               <Link
                 key={link.key}

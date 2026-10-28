@@ -2,9 +2,17 @@
 
 import { motion, useReducedMotion } from 'framer-motion';
 import { useLang } from './LanguageProvider';
-import { Code, Cloud, Zap } from 'lucide-react';
+import { Code, Cloud, Layers, Zap } from 'lucide-react';
 
 const milestones = [
+  {
+    id: 'fullstack-intern',
+    icon: Layers,
+    title: { en: 'Fullstack Intern', vi: 'Thực tập sinh Fullstack' },
+    subtitle: { en: 'Frontend and backend features, API integration and UI components.', vi: 'Tính năng frontend và backend, tích hợp API và thành phần giao diện.' },
+    tech: { en: 'React · Next.js · TypeScript · Tailwind CSS · Node.js · PostgreSQL', vi: 'React · Next.js · TypeScript · Tailwind CSS · Node.js · PostgreSQL' },
+    work: { en: 'Internship — 3 months', vi: 'Thực tập — 3 tháng' },
+  },
   {
     id: 'backend',
     icon: Code,

@@ -2,7 +2,7 @@ services:
   - type: web
     name: portfolio-candidate
     env: docker
-    repo: https://github.com/tanmainguyenbinh-glitch/TKM.git
+    repo: https://github.com/imtarget05/portfolio
     rootDir: portfolio
     dockerfilePath: ./Dockerfile
     buildCommand: "npm run build"

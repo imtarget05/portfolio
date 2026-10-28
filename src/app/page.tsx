@@ -9,6 +9,7 @@ import { Contact } from '@/components/Contact';
 import { Footer } from '@/components/Footer';
 import { LanguageProvider } from '@/components/LanguageProvider';
 import { CVTimeline } from '@/components/CVTimeline';
+import { Experience } from '@/components/Experience';
 import { ApplyCTA } from '@/components/ApplyCTA';
 import { ChatWidget } from '@/components/ChatWidget';
 
@@ -18,6 +19,7 @@ export default function Home() {
       <main className="flex-grow">
         <Hero3D />
         <CVTimeline />
+        <Experience />
         <About />
         <LicensesCertifications />
         <Expertise />
