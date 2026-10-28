@@ -34,7 +34,7 @@ export function FeaturedProjects() {
       <div className="container-custom">
         <motion.div className="deck-heading" initial={{ opacity: 0, y: 25 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: .65 }}>
           <div>
-            <p className="eyebrow">05 / {lang === 'en' ? 'SELECTED WORK' : 'DỰ ÁN CHỌN LỌC'}</p>
+            <p className="eyebrow">04 / {lang === 'en' ? 'SELECTED WORK' : 'DỰ ÁN CHỌN LỌC'}</p>
             <h2>{lang === 'en' ? 'BUILT WITH' : 'DỰ ÁN & BẰNG CHỨNG.'}</h2>
           </div>
           <p>{lang === 'en' ? 'Each case study links to its repository, evidence documents and verified status. CI results are snapshots, not guarantees.' : 'Mỗi case study dẫn đến repo, bằng chứng và trạng thái đã kiểm chứng. Kết quả CI là chấm dứt thời điểm, không phải cam kết.'}</p>

@@ -44,7 +44,7 @@ export function CVTimeline() {
   const reducedMotion = useReducedMotion();
 
   return (
-    <section id="experience" className="section cv-section">
+    <section id="about" className="section cv-section">
       <div className="container-custom">
         <motion.div className="cv-header reveal-3d" initial={reducedMotion ? false : { opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.25 }} transition={{ duration: 0.7 }}>
           <p className="eyebrow">01 / {lang === 'en' ? 'CANDIDATE PROFILE' : 'HỒ SƠ ỨNG VIÊN'}</p>

@@ -26,6 +26,7 @@ export function Navbar({ lang, setLang, t }: NavbarProps) {
 
   const links = [
     { key: 'nav.about', href: '#about' },
+    { key: 'nav.licenses', href: '#licenses' },
     { key: 'nav.expertise', href: '#expertise' },
     { key: 'nav.projects', href: '#projects' },
     { key: 'nav.tech', href: '#tech' },

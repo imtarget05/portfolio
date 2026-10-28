@@ -9,7 +9,7 @@ export function Experience() {
   return (
     <section id="experience" className="section">
       <div className="container-custom">
-        <p className="eyebrow">06 / {lang === 'en' ? 'EXPERIENCE' : 'KINH NGHIỆM'}</p>
+        <p className="eyebrow">07 / {lang === 'en' ? 'EXPERIENCE' : 'KINH NGHIỆM'}</p>
         <h2 className="section-title">
           {lang === 'en' ? 'Professional Experience' : 'Kinh nghiệm làm việc'}
         </h2>

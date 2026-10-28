@@ -8,7 +8,7 @@ export function About() {
   const reducedMotion = useReducedMotion();
   const firstLine = lang === 'en' ? 'BUILT WITH' : 'XÂY DỰNG';
   const secondLine = lang === 'en' ? 'INTENTION.' : 'CÓ CHỦ ĐÍCH.';
-  return <section id="about" className="section statement-section">
+  return <section className="section statement-section">
     <div className="container-custom statement-layout">
       <p className="eyebrow">02 / {lang === 'en' ? 'THE APPROACH' : 'CÁCH TIẾP CẬN'}</p>
       <div>
