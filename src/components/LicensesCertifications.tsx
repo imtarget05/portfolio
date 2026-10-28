@@ -37,32 +37,58 @@ export function LicensesCertifications() {
         </motion.div>
 
         <div className="cert-grid">
-          {certifications.map((cert) => (
+          {certifications.map((cert, idx) => (
             <motion.div
               key={cert.id}
               className="cert-card"
-              initial={reducedMotion ? false : { opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              layout
+              initial={reducedMotion ? false : { opacity: 0, y: 40, rotateX: 10 }}
+              whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
               viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.6, delay: certifications.indexOf(cert) * 0.08 }}
+              transition={{ duration: 0.6, delay: idx * 0.08 }}
+              whileHover={{ rotateX: 5, rotateY: 5 }}
             >
-              <div className="cert-image">
+              <div className="cert-image-wrap relative overflow-hidden rounded-2xl border border-border/50 bg-muted/50 aspect-[4/3]">
                 {cert.image ? (
-                  <Image src={cert.image} alt={cert.name[lang]} fill className="cert-image-img" sizes="(max-width: 768px) 100vw, 50vw" />
+                  <Image
+                    src={cert.image}
+                    alt={cert.name[lang]}
+                    fill
+                    className="cert-image-img object-cover transition-transform duration-700 group-hover:scale-105"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    priority={idx < 3}
+                  />
                 ) : (
-                  <div className="cert-image-placeholder">
-                    <span className="badge-text">{lang === 'en' ? 'DIGITAL' : 'SỐ'}</span>
+                  <div className="absolute inset-0 flex flex-col items-center justify-center text-muted-foreground/40 text-sm font-medium">
+                    <span className="mb-1">{lang === 'en' ? 'DIGITAL CERT' : 'CHỨNG CHỈ SỐ'}</span>
+                    <span className="text-xs">{cert.credentialId}</span>
                   </div>
                 )}
               </div>
-              <div className="cert-content">
-                <h3 className="cert-name">{cert.name[lang]}</h3>
-                <p className="cert-issuer">{cert.issuer[lang]}</p>
-                <div className="cert-meta">
-                  {cert.date && <span className="cert-meta-item"><span className="meta-label">{issued}</span> {cert.date[lang]}</span>}
-                  {cert.expiry && <span className="cert-meta-item"><span className="meta-label">{expires}</span> {cert.expiry[lang]}</span>}
-                  {cert.score && <span className="cert-meta-item"><span className="meta-label">{score}</span> {cert.score[lang]}</span>}
-                  {cert.credentialId && <span className="cert-meta-item"><span className="meta-label">{credential}</span> {cert.credentialId}</span>}
+              <div className="cert-content mt-3">
+                <h3 className="cert-name font-bold text-foreground text-lg leading-tight">{cert.name[lang]}</h3>
+                <p className="cert-issuer text-sm text-muted-foreground">{cert.issuer[lang]}</p>
+                <div className="cert-meta mt-2 space-y-1">
+                  {cert.date && (
+                    <span className="cert-meta-item flex items-center gap-1 text-xs text-muted-foreground">
+                      <span className="meta-label font-semibold text-foreground">{issued}</span> {cert.date[lang]}
+                    </span>
+                  )}
+                  {cert.expiry && (
+                    <span className="cert-meta-item flex items-center gap-1 text-xs text-muted-foreground">
+                      <span className="meta-label font-semibold text-foreground">{expires}</span> {cert.expiry[lang]}
+                    </span>
+                  )}
+                  {cert.score && (
+                    <span className="cert-meta-item flex items-center gap-1 text-xs text-muted-foreground">
+                      <span className="meta-label font-semibold text-foreground">{score}</span> {cert.score[lang]}
+                    </span>
+                  )}
+                  {cert.credentialId && (
+                    <span className="cert-meta-item flex items-center gap-1 text-xs text-muted-foreground truncate">
+                      <span className="meta-label font-semibold text-foreground">{credential}</span> {cert.credentialId}
+                    </span>
+                  )}
                 </div>
               </div>
             </motion.div>
