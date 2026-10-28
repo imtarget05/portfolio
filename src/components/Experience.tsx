@@ -9,15 +9,10 @@ export function Experience() {
   return (
     <section id="experience" className="section">
       <div className="container-custom">
-        <p className="eyebrow">07 / {lang === 'en' ? 'EXPERIENCE' : 'KINH NGHIỆM'}</p>
+        <p className="eyebrow">08 / {lang === 'en' ? 'EXPERIENCE' : 'KINH NGHIỆM'}</p>
         <h2 className="section-title">
           {lang === 'en' ? 'Professional Experience' : 'Kinh nghiệm làm việc'}
         </h2>
-        <p className="section-subtitle">
-          {lang === 'en'
-            ? 'Software engineering experience across backend, fullstack, and independent project work.'
-            : 'Kinh nghiệm kỹ thuật phần mềm trong backend, fullstack và các dự án độc lập.'}
-        </p>
         <div className="experience-list">
           {experience.items.map((item) => (
             <div className="experience-item" key={item.id}>

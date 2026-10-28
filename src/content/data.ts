@@ -25,25 +25,9 @@ export const experience = {
   title: { en: 'Experience', vi: 'Kinh Nghiệm' },
   items: [
     {
-      id: 'senior-fullstack',
-      role: { en: 'Software Engineering — Project Work', vi: 'Kỹ thuật Phần mềm — Dự án' },
-      company: { en: 'Independent projects', vi: 'Dự án độc lập' },
-      period: { en: 'Selected work', vi: 'Dự án chọn lọc' },
-      description: { en: 'Building backend systems, cloud infrastructure and applied AI workflows documented in the portfolio repositories.', vi: 'Xây dựng hệ thống backend, hạ tầng cloud và AI ứng dụng được ghi lại trong các repository dự án.' },
-      tech: ['.NET', 'C#', 'Azure', 'Kubernetes', 'PostgreSQL'],
-    },
-    {
-      id: 'backend-developer',
-      role: { en: 'Backend Engineering — Project Work', vi: 'Kỹ thuật Backend — Dự án' },
-      company: { en: 'Independent projects', vi: 'Dự án độc lập' },
-      period: { en: 'Portfolio work', vi: 'Portfolio work' },
-      description: { en: 'Explored REST APIs, distributed workflows and business systems through repository-backed projects.', vi: 'Phát triển REST API, quy trình phân tán và hệ thống nghiệp vụ qua các dự án có repository.' },
-      tech: ['.NET', 'C#', 'Python', 'FastAPI', 'PostgreSQL', 'Redis'],
-    },
-    {
       id: 'fullstack-intern',
       role: { en: 'Fullstack Intern', vi: 'Thực tập sinh Fullstack' },
-      company: { en: 'Internship', vi: 'Công ty thực tập' },
+      company: { en: 'ERA Group', vi: 'Công ty TNHH ERA Group' },
       period: { en: '3 months', vi: '3 tháng' },
       description: { en: 'Fullstack development internship contributing to frontend and backend features, API integration, and UI components.', vi: 'Thực tập phát triển fullstack tham gia tính năng frontend và backend, tích hợp API và các thành phần giao diện.' },
       tech: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Node.js', 'PostgreSQL'],

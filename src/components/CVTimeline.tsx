@@ -2,7 +2,7 @@
 
 import { motion, useReducedMotion } from 'framer-motion';
 import { useLang } from './LanguageProvider';
-import { Code, Cloud, Layers, Zap } from 'lucide-react';
+import { Layers } from 'lucide-react';
 
 const milestones = [
   {
@@ -12,30 +12,6 @@ const milestones = [
     subtitle: { en: 'Frontend and backend features, API integration and UI components.', vi: 'Tính năng frontend và backend, tích hợp API và thành phần giao diện.' },
     tech: { en: 'React · Next.js · TypeScript · Tailwind CSS · Node.js · PostgreSQL', vi: 'React · Next.js · TypeScript · Tailwind CSS · Node.js · PostgreSQL' },
     work: { en: 'Internship — 3 months', vi: 'Thực tập — 3 tháng' },
-  },
-  {
-    id: 'backend',
-    icon: Code,
-    title: { en: 'Backend & Distributed Systems', vi: 'Backend & Hệ thống Phân tán' },
-    subtitle: { en: 'Concurrency, transactional boundaries, recoverable workflows.', vi: 'Xử lý đồng thời, ranh giới giao dịch, quy trình phục hồi.' },
-    tech: { en: '.NET · C# · FastAPI · PostgreSQL · Redis', vi: '.NET · C# · FastAPI · PostgreSQL · Redis' },
-    work: { en: 'FlashSale / OpsBridge', vi: 'FlashSale / OpsBridge' },
-  },
-  {
-    id: 'cloud',
-    icon: Cloud,
-    title: { en: 'Cloud & Platform Engineering', vi: 'Cloud & Kỹ thuật Nền tảng' },
-    subtitle: { en: 'IaC, GitOps, Kubernetes, observability and incident recovery.', vi: 'IaC, GitOps, Kubernetes, quan sát hệ thống và khôi phục sự cố.' },
-    tech: { en: 'Azure · AKS · Terraform · Argo CD · Docker', vi: 'Azure · AKS · Terraform · Argo CD · Docker' },
-    work: { en: 'AKS SRE Platform', vi: 'Nền tảng AKS SRE' },
-  },
-  {
-    id: 'ai',
-    icon: Zap,
-    title: { en: 'Applied AI & Business Applications', vi: 'AI Ứng dụng & Phần mềm N nghiệp vụ' },
-    subtitle: { en: 'RAG, agentic AI, document intelligence and human-review workflows.', vi: 'RAG, agentic AI, trí tuệ tài liệu và quy trình kiểm duyệt con người.' },
-    tech: { en: 'LangGraph · Qdrant · MLflow · Ollama · Airflow', vi: 'LangGraph · Qdrant · MLflow · Ollama · Airflow' },
-    work: { en: 'Doc Intelligence / QuanLyKho', vi: 'Doc Intelligence / QuanLyKho' },
   },
 ];
 
