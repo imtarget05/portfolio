@@ -138,10 +138,7 @@ export function ChatWidget() {
     setError(null);
     setInput('');
     const chat = createChat(true);
-    setChats((prev) => {
-      const next = [chat, ...prev];
-      return next;
-    });
+    setChats((prev) => [chat, ...prev]);
     setActiveChatId(chat.id);
     setShowHistory(false);
   }, [createChat]);
@@ -150,11 +147,11 @@ export function ChatWidget() {
     (id: string) => {
       setChats((prev) => prev.filter((c) => c.id !== id));
       setShowHistory(false);
-      // Nếu xóa session hiện tại, chuyển sang session còn lại
       if (activeChatId === id) {
         const remaining = chats.find((c) => c.id !== id);
-        setActiveChatId(remaining ? remaining.id : null);
-        if (!remaining) {
+        if (remaining) {
+          setActiveChatId(remaining.id);
+        } else {
           const newChat = createChat(true);
           setChats([newChat]);
           setActiveChatId(newChat.id);
@@ -244,9 +241,7 @@ export function ChatWidget() {
       key={chat.id}
       onClick={() => handleSelectChat(chat.id)}
       className={`w-full flex items-center gap-2 px-3 py-2.5 text-sm rounded-lg text-left transition-colors ${
-        activeChatId === chat.id
-          ? 'bg-primary/10 text-primary'
-          : 'text-muted-foreground hover:bg-muted/50'
+        activeChatId === chat.id ? 'bg-primary/10 text-primary' : 'text-muted-foreground hover:bg-muted/50'
       }`}
     >
       <div className="flex-1 min-w-0">
@@ -294,6 +289,7 @@ export function ChatWidget() {
 
   return (
     <div className="fixed bottom-6 right-6 z-[100]">
+      {/* Bóng bong bong - luôn hiện khi đóng */}
       {!isOpen ? (
         <button
           onClick={toggle}
@@ -302,43 +298,46 @@ export function ChatWidget() {
         >
           <MessageSquare size={24} />
         </button>
-      ) : (
+      ) : null}
+
+      {/* Panel slide từ bên phải (như GPT) khi mở */}
+      {isOpen && (
         <>
-          {/* Overlay: bấm bên ngoài panel để đóng */}
+          {/* Overlay bấm bên ngoài để đóng */}
           <div className="fixed inset-0 bg-black/40 z-[99]" onClick={toggle} aria-hidden="true" />
 
-          {/* Panel slide-in từ bên phải (như GPT) */}
           <div
-            className="fixed right-0 bottom-0 top-0 z-[100] w-full md:w-96 lg:w-[420px] bg-white dark:bg-card border-l border-border shadow-2xl flex flex-col z-[100] outline-none"
+            className="fixed right-0 top-0 bottom-0 z-[100] w-full md:w-96 lg:w-[450px] bg-white dark:bg-card border-l border-border shadow-2xl flex flex-col z-[100] outline-none"
             tabIndex={-1}
           >
+            {/* Header panel */}
             <div className="p-4 border-b border-border bg-white/80 dark:bg-card/80 backdrop-blur-sm flex items-center justify-between">
-              <h3 className="font-semibold text-foreground">
-                {lang === 'vi' ? 'Trợ lý AI' : 'AI Assistant'}
-              </h3>
               <div className="flex items-center gap-2">
-                {/* Nút x Historical past (mobile only); desktop sidebar luôn hiện */}
                 <button
-                  onClick={() => setShowHistory(true)}
-                  className="md:hidden p-1.5 text-muted-foreground hover:text-primary rounded transition-colors"
-                  aria-label={lang === 'vi' ? 'Lịch sử' : 'History'}
+                  onClick={handleNewChat}
+                  className="flex items-center gap-1 text-xs text-primary hover:underline transition-colors"
+                  aria-label={lang === 'vi' ? 'Cuộc trò chuyện mới' : 'New chat'}
                 >
-                  <Menu size={20} />
-                </button>
-                <button
-                  onClick={toggle}
-                  className="p-1.5 text-muted-foreground hover:text-primary rounded transition-colors"
-                  aria-label={lang === 'vi' ? 'Đóng' : 'Close'}
-                >
-                  <X size={20} />
+                  <Plus size={14} />
+                  <span>{lang === 'vi' ? 'Cuộc mới' : 'New chat'}</span>
                 </button>
               </div>
+              <button
+                onClick={toggle}
+                className="p-1.5 text-muted-foreground hover:text-primary rounded transition-colors"
+                aria-label={lang === 'vi' ? 'Đóng' : 'Close'}
+              >
+                <X size={20} />
+              </button>
             </div>
 
+            {/* Body */}
             <div className="flex-1 overflow-hidden flex min-w-0">
-              {/* Sidebar lịch sử (desktop) */}
+              {/* Sidebar lịch sử (desktop md+) */}
               <aside className="hidden md:flex md:w-72 flex-col border-r border-border bg-secondary/50">
-                <div className="p-3 border-b border-border">{newChatButton()}</div>
+                <div className="p-3 border-b border-border text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                  {lang === 'vi' ? 'Lịch sử' : 'History'}
+                </div>
                 {historyList()}
               </aside>
 
@@ -362,6 +361,8 @@ export function ChatWidget() {
                     {historyList()}
                   </div>
                 )}
+
+                {/* Khu vực tin nhắn */}
                 <div className="flex-1 overflow-y-auto p-4 space-y-4">
                   {messages.map((msg) => (
                     <div
@@ -372,7 +373,9 @@ export function ChatWidget() {
                           : 'mr-auto bg-muted text-foreground rounded-tl-none'
                       }`}
                     >
-                      <p className="text-sm leading-relaxed overflow-wrap break-word word-break normal whitespace-normal">{msg.content}</p>
+                      <p className="text-sm leading-relaxed overflow-wrap break-word word-break normal whitespace-normal">
+                        {msg.content}
+                      </p>
                       <span
                         className={`block mt-1 text-[10px] text-right ${
                           msg.role === 'user' ? 'text-primary/60' : 'text-muted-foreground/60'
@@ -397,6 +400,8 @@ export function ChatWidget() {
                   )}
                   <div ref={endRef} />
                 </div>
+
+                {/* Ô nhập tin nhắn */}
                 <div className="p-3 border-t border-border bg-card/80 backdrop-blur">
                   <form
                     onSubmit={(e) => {
