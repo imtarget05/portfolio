@@ -348,13 +348,13 @@ export function ChatWidget() {
                   {messages.map((msg) => (
                     <div
                       key={msg.id}
-                      className={`max-w-[85%] p-3 rounded-xl break-words overflow-wrap-anywhere whitespace-normal ${
+                      className={`max-w-[85%] p-3 rounded-xl overflow-wrap break-word whitespace-normal word-break normal ${
                         msg.role === 'user'
                           ? 'ml-auto bg-primary text-white rounded-tr-none'
                           : 'mr-auto bg-muted text-foreground rounded-tl-none'
                       }`}
                     >
-                      <p className="text-sm leading-relaxed overflow-wrap-anywhere break-words whitespace-normal">{msg.content}</p>
+                      <p className="text-sm leading-relaxed overflow-wrap break-word word-break normal whitespace-normal">{msg.content}</p>
                       <span
                         className={`block mt-1 text-[10px] text-right ${
                           msg.role === 'user' ? 'text-primary/60' : 'text-muted-foreground/60'
