@@ -84,12 +84,126 @@ export const contact = {
 
 
 
-export const education = [];
+export const education = [
+  {
+    id: 'uit',
+    school: { en: 'University of Information Technology (UIT)', vi: 'Trường Đại học Công nghệ Thông tin (UIT)' },
+    degree: { en: 'Bachelor of Software Engineering', vi: 'Cử nhân Kỹ thuật Phần mềm' },
+    period: { en: '2023 — 2027', vi: '2023 — 2027' },
+    location: { en: 'Ho Chi Minh City, Vietnam', vi: 'TP. Hồ Chí Minh, Việt Nam' },
+  },
+];
 
-export const certifications = [];
+export const certifications = [
+  {
+    id: 'toeic-lr',
+    name: { en: 'TOEIC Listening & Reading', vi: 'TOEIC Nghe/Đọc' },
+    issuer: { en: 'ETS / IIG Vietnam', vi: 'ETS / IIG Việt Nam' },
+    date: { en: 'Jan 2026', vi: '01/2026' },
+    expiry: { en: 'Jan 2027', vi: '01/2027' },
+    score: { en: '595/990', vi: '595/990' },
+    image: '/images/certificates/toeic-lr.jpg',
+  },
+  {
+    id: 'toeic-sw',
+    name: { en: 'TOEIC Speaking & Writing', vi: 'TOEIC Nói/Viết' },
+    issuer: { en: 'ETS / IIG Vietnam', vi: 'ETS / IIG Việt Nam' },
+    date: { en: 'Apr 2026', vi: '04/2026' },
+    expiry: { en: 'Apr 2027', vi: '04/2027' },
+    score: { en: '210/400', vi: '210/400' },
+    image: '/images/certificates/toeic-sw.jpg',
+  },
+  {
+    id: 'google-ai-essentials',
+    name: { en: 'Google AI Essentials', vi: 'Google AI Essentials' },
+    issuer: { en: 'Google', vi: 'Google' },
+    date: { en: 'Aug 2025', vi: '08/2025' },
+    credentialId: 'WENGZE49XSCV',
+    image: null,
+  },
+  {
+    id: 'google-crash-python',
+    name: { en: 'Crash Course on Python', vi: 'Python Crash Course' },
+    issuer: { en: 'Google', vi: 'Google' },
+    date: { en: 'Sep 2025', vi: '09/2025' },
+    credentialId: 'A0VZD4ZAX6D6',
+    image: null,
+  },
+  {
+    id: 'google-google-it-automation',
+    name: { en: 'Google IT Automation with Python', vi: 'Google IT Automation with Python' },
+    issuer: { en: 'Google', vi: 'Google' },
+    credentialId: 'PSX4R6MJI2T4',
+    image: null,
+  },
+  {
+    id: 'google-accelerate-ai',
+    name: { en: 'Accelerate Your Job Search with AI', vi: 'Tăng tốc tìm việc với AI' },
+    issuer: { en: 'Google', vi: 'Google' },
+    date: { en: 'Apr 2026', vi: '04/2026' },
+    credentialId: '2WI13SPU1L9J',
+    image: null,
+  },
+  {
+    id: 'google-automate-python',
+    name: { en: 'Automating Real-World Tasks with Python', vi: 'Tự động hóa tác vụ thực tế với Python' },
+    issuer: { en: 'Google', vi: 'Google' },
+    credentialId: 'U318QFRRKIJT',
+    image: null,
+  },
+  {
+    id: 'google-troubleshoot',
+    name: { en: 'Troubleshooting and Debugging Techniques', vi: 'Khắc phục và gỡ lỗi' },
+    issuer: { en: 'Google', vi: 'Google' },
+    credentialId: 'NGPR75MTBHQ8',
+    image: null,
+  },
+  {
+    id: 'google-config-cloud',
+    name: { en: 'Configuration Management and the Cloud', vi: 'Quản lý cấu hình và đám mây' },
+    issuer: { en: 'Google', vi: 'Google' },
+    credentialId: 'QAUBAZRDNP3T',
+    image: null,
+  },
+  {
+    id: 'google-ai-essentials-aug',
+    name: { en: 'Google AI Essentials', vi: 'Google AI Essentials' },
+    issuer: { en: 'Google', vi: 'Google' },
+    date: { en: 'Aug 2025', vi: '08/2025' },
+    credentialId: 'DUPLICATE_AI_ESSENTIALS',
+    image: null,
+  },
+  {
+    id: 'google-crash-python-sep',
+    name: { en: 'Crash Course on Python', vi: 'Python Crash Course' },
+    issuer: { en: 'Google', vi: 'Google' },
+    date: { en: 'Sep 2025', vi: '09/2025' },
+    credentialId: 'CRASH_PYTHON_SEP',
+    image: null,
+  },
+  {
+    id: 'google-interact-os',
+    name: { en: 'Using Python to Interact with the Operating System', vi: 'Sử dụng Python tương tác với HĐH' },
+    issuer: { en: 'Google', vi: 'Google' },
+    credentialId: '0L4616E83KIN',
+    image: null,
+  },
+  {
+    id: 'google-intro-git',
+    name: { en: 'Introduction to Git and GitHub', vi: 'Giới thiệu Git và GitHub' },
+    issuer: { en: 'Google', vi: 'Google' },
+    credentialId: 'EDBIUJ0ISAVK',
+    image: null,
+  },
+];
 
-
-export const languages = [];
+export const languages = [
+  {
+    name: { en: 'English', vi: 'Tiếng Anh' },
+    level: { en: 'TOEIC 595 / 990', vi: 'TOEIC 595 / 990' },
+    detail: { en: 'Listening/Reading: 595 · Speaking/Writing: 210 · Valid until Jan 2027', vi: 'Nghe/Đọc: 595 · Nói/Viết: 210 · HSL đến 01/2027' },
+  },
+];
 
 export const footer = {
   copyright: { en: '© 2026 Mai Nguyen Binh Tan. All rights reserved.', vi: '© 2026 Mai Nguyen Binh Tan. Bảo lưu mọi quyền.' },

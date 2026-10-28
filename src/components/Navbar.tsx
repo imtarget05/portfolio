@@ -46,7 +46,7 @@ export function Navbar({ lang, setLang, t }: NavbarProps) {
             router.push('/');
           }}
         >
-          <span className="text-cobalt-600 dark:text-cobalt-400 drop-shadow-[0_0_10px_rgb(175_62_41/0.35)] group-hover:drop-shadow-[0_0_16px_rgb(175_62_41/0.55)] transition-all">MBT<span className="brand-dot">.</span></span>
+          <span className="text-cobalt-600 dark:text-cobalt-400 drop-shadow-[0_0_10px_rgb(175_62_41/0.35)] group-hover:drop-shadow-[0_0_16px_rgb(175_62_41/0.55)] transition-all">MNBT<span className="brand-dot">.</span></span>
         </Link>
 
         <div className="hidden lg:flex items-center gap-5">

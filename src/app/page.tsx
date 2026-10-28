@@ -1,5 +1,6 @@
 import { Hero3D } from '@/components/Hero3D';
 import { About } from '@/components/About';
+import { LicensesCertifications } from '@/components/LicensesCertifications';
 import { Expertise } from '@/components/Expertise';
 import { FeaturedProjects } from '@/components/FeaturedProjects';
 import { TechStack } from '@/components/TechStack';
@@ -18,6 +19,7 @@ export default function Home() {
         <Hero3D />
         <CVTimeline />
         <About />
+        <LicensesCertifications />
         <Expertise />
         <FeaturedProjects />
         <TechStack />
