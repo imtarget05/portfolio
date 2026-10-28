@@ -1,4 +1,8 @@
 import { projects } from '../src/content/data';
+import { execSync } from 'child_process';
+import { writeFileSync, unlinkSync } from 'fs';
+import { tmpdir } from 'os';
+import { join } from 'path';
 
 const EMBEDDING_MODEL = '@cf/baai/bge-base-en-v1.5';
 
@@ -120,16 +124,11 @@ export async function embedProjects(): Promise<number> {
     allChunks.push(...buildChunks(project));
   }
 
-  const vectors: Array<{ id: string; values: number[]; metadata: Chunk['metadata'] }> = [];
+  const vectors = [];
   for (let index = 0; index < allChunks.length; index++) {
     const chunk = allChunks[index];
     const values = await embedText(chunk.text);
-    if (!values) {
-      console.error(
-        `Failed to embed chunk ${index} (${chunk.metadata.projectId}-${chunk.metadata.type}-${chunk.metadata.lang})`
-      );
-      continue;
-    }
+    if (!values) continue;
     vectors.push({
       id: `project-${chunk.metadata.projectId}-chunk-${chunk.metadata.type}-${chunk.metadata.lang}`,
       values,
@@ -137,36 +136,30 @@ export async function embedProjects(): Promise<number> {
     });
   }
 
-  const BATCH_SIZE = 100;
-  let inserted = 0;
-  for (let start = 0; start < vectors.length; start += BATCH_SIZE) {
-    const batch = vectors.slice(start, start + BATCH_SIZE);
-    try {
-      const response = await fetch(
-        `https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/vectorize/v2/indexes/${VECTORIZE_INDEX_ID}/vectors`,
-        {
-          method: 'PUT',
-          headers: {
-            Authorization: `Bearer ${CLOUDFLARE_API_TOKEN}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ vectors: batch }),
-        }
-      );
-      const data = await response.json();
-      if (!response.ok) {
-        console.error(`Vectorize batch failed: ${data.error?.message || response.statusText}`);
-        continue;
-      }
-      inserted += batch.length;
-      console.log(`Upserted ${batch.length} vectors`);
-    } catch (err) {
-      console.error('Vectorize batch error:', err);
-    }
+  if (vectors.length === 0) {
+    console.log('No vectors to insert');
+    return 0;
   }
 
-  console.log(`Embedded ${inserted}/${allChunks.length} vectors into index ${VECTORIZE_INDEX_ID}`);
-  return inserted;
+  const tempFile = join(tmpdir(), `vectorize-${Date.now()}.json`);
+  const ndjson = vectors.map((v) => JSON.stringify(v)).join('\n') + '\n';
+  writeFileSync(tempFile, ndjson);
+
+  try {
+    const output = execSync(
+      `wrangler vectorize insert ${VECTORIZE_INDEX_ID} --file=${tempFile}`,
+      { encoding: 'utf-8', stdio: 'pipe' }
+    );
+    console.log(output);
+    return vectors.length;
+  } catch (err: any) {
+    console.error('Wrangler insert failed:', err.stderr || err.message);
+    return 0;
+  } finally {
+    try {
+      unlinkSync(tempFile);
+    } catch {}
+  }
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
