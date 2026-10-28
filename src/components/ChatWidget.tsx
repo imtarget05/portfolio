@@ -150,8 +150,18 @@ export function ChatWidget() {
     (id: string) => {
       setChats((prev) => prev.filter((c) => c.id !== id));
       setShowHistory(false);
+      // Nếu xóa session hiện tại, chuyển sang session còn lại
+      if (activeChatId === id) {
+        const remaining = chats.find((c) => c.id !== id);
+        setActiveChatId(remaining ? remaining.id : null);
+        if (!remaining) {
+          const newChat = createChat(true);
+          setChats([newChat]);
+          setActiveChatId(newChat.id);
+        }
+      }
     },
-    []
+    [activeChatId, chats, createChat]
   );
 
   const handleSelectChat = useCallback((id: string) => {
@@ -294,9 +304,12 @@ export function ChatWidget() {
         </button>
       ) : (
         <>
+          {/* Overlay: bấm bên ngoài panel để đóng */}
           <div className="fixed inset-0 bg-black/40 z-[99]" onClick={toggle} aria-hidden="true" />
+
+          {/* Panel slide-in từ bên phải (như GPT) */}
           <div
-            className="fixed bottom-6 right-6 w-full md:w-96 h-[600px] bg-white dark:bg-card border border-border rounded-2xl shadow-2xl flex flex-col z-[100] outline-none"
+            className="fixed right-0 bottom-0 top-0 z-[100] w-full md:w-96 lg:w-[420px] bg-white dark:bg-card border-l border-border shadow-2xl flex flex-col z-[100] outline-none"
             tabIndex={-1}
           >
             <div className="p-4 border-b border-border bg-white/80 dark:bg-card/80 backdrop-blur-sm flex items-center justify-between">
@@ -304,6 +317,7 @@ export function ChatWidget() {
                 {lang === 'vi' ? 'Trợ lý AI' : 'AI Assistant'}
               </h3>
               <div className="flex items-center gap-2">
+                {/* Nút x Historical past (mobile only); desktop sidebar luôn hiện */}
                 <button
                   onClick={() => setShowHistory(true)}
                   className="md:hidden p-1.5 text-muted-foreground hover:text-primary rounded transition-colors"
@@ -320,14 +334,18 @@ export function ChatWidget() {
                 </button>
               </div>
             </div>
+
             <div className="flex-1 overflow-hidden flex min-w-0">
+              {/* Sidebar lịch sử (desktop) */}
               <aside className="hidden md:flex md:w-72 flex-col border-r border-border bg-secondary/50">
                 <div className="p-3 border-b border-border">{newChatButton()}</div>
                 {historyList()}
               </aside>
+
               <main className="flex-1 flex flex-col min-w-0 relative">
+                {/* Overlay lịch sử (mobile) */}
                 {showHistory && (
-                  <div className="absolute inset-0 z-10 bg-white dark:bg-card border-r border-border flex flex-col">
+                  <div className="fixed inset-0 z-[101] bg-white dark:bg-card border-r border-border flex flex-col">
                     <div className="p-4 border-b border-border flex items-center justify-between">
                       <h3 className="font-semibold text-foreground">
                         {lang === 'vi' ? 'Lịch sử' : 'History'}
