@@ -23,7 +23,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     (key: string) => {
       const content: Record<string, Record<Lang, string>> = {
         'nav.about': { en: 'About', vi: 'Giới thiệu' },
-        'nav.licenses': { en: 'LICENSESCERTIFICATIONS', vi: 'LICENSESCERTIFICATIONS' },
+        'nav.licenses': { en: 'LICENSESCERTIFICATIONS', vi: 'Giấy phép & Chứng chỉ' },
         'nav.expertise': { en: 'Expertise', vi: 'Chuyên môn' },
         'nav.projects': { en: 'Projects', vi: 'Dự án' },
         'nav.tech': { en: 'Tech Stack', vi: 'Công nghệ' },
