@@ -10,6 +10,8 @@ on:
 jobs:
   embed:
     runs-on: ubuntu-latest
+    # Không làm fail pipeline nếu chưa cấu hình secrets Cloudflare
+    continue-on-error: true
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -25,7 +27,7 @@ jobs:
       - name: Install tsx
         run: npm install -g tsx
 
-      - name: Run project embedding
+      - name: Run project embedding (optional, needs Cloudflare secrets)
         run: npx tsx scripts/embed-projects.ts
         env:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

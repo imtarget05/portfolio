@@ -3,11 +3,12 @@ name: Scheduled Vectorize Embed
 on:
   schedule:
     - cron: '0 2 * * 0'  # Mỗi Chủ Nhật 02:00 UTC
-  workflow_dispatch:  # Cho phép chạy thủ công
+  workflow_dispatch:
 
 jobs:
   embed:
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -23,7 +24,7 @@ jobs:
       - name: Install tsx
         run: npm install -g tsx
 
-      - name: Run scheduled project embedding
+      - name: Run scheduled project embedding (optional, needs Cloudflare secrets)
         run: npx tsx scripts/embed-projects.ts
         env:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
