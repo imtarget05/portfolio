@@ -36,6 +36,7 @@ export function LicensesCertifications() {
           </motion.p>
         </motion.div>
 
+        {/* Horizontal scroll on mobile, grid on desktop */}
         <div className="cert-grid">
           {certifications.map((cert, idx) => (
             <motion.div
@@ -48,7 +49,7 @@ export function LicensesCertifications() {
               transition={{ duration: 0.6, delay: idx * 0.08 }}
               whileHover={{ rotateX: 5, rotateY: 5 }}
             >
-              <div className="cert-image-wrap relative overflow-hidden rounded-2xl border border-border/50 bg-muted/50 aspect-[4/3]">
+              <div className="cert-image-wrap relative overflow-hidden rounded-2xl border border-border/50 bg-gray-100 dark:bg-gray-800/50 aspect-[4/3]">
                 {cert.image ? (
                   <Image
                     src={cert.image}
@@ -57,9 +58,13 @@ export function LicensesCertifications() {
                     className="cert-image-img object-cover transition-transform duration-700 group-hover:scale-105"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     priority={idx < 3}
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                    }}
                   />
                 ) : (
-                  <div className="absolute inset-0 flex flex-col items-center justify-center text-muted-foreground/40 text-sm font-medium">
+                  <div className="absolute inset-0 flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 text-sm font-medium">
                     <span className="mb-1">{lang === 'en' ? 'DIGITAL CERT' : 'CHỨNG CHỈ SỐ'}</span>
                     <span className="text-xs">{cert.credentialId}</span>
                   </div>

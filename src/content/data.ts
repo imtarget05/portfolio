@@ -40,6 +40,14 @@ export const experience = {
       description: { en: 'Explored REST APIs, distributed workflows and business systems through repository-backed projects.', vi: 'Phát triển REST API, quy trình phân tán và hệ thống nghiệp vụ qua các dự án có repository.' },
       tech: ['.NET', 'C#', 'Python', 'FastAPI', 'PostgreSQL', 'Redis'],
     },
+    {
+      id: 'fullstack-intern',
+      role: { en: 'Fullstack Intern', vi: 'Thực tập sinh Fullstack' },
+      company: { en: 'Internship', vi: 'Công ty thực tập' },
+      period: { en: '3 months', vi: '3 tháng' },
+      description: { en: 'Fullstack development internship contributing to frontend and backend features, API integration, and UI components.', vi: 'Thực tập phát triển fullstack tham gia tính năng frontend và backend, tích hợp API và các thành phần giao diện.' },
+      tech: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Node.js', 'PostgreSQL'],
+    },
   ],
 };
 
@@ -102,7 +110,7 @@ export const certifications = [
     date: { en: 'Jan 2026', vi: '01/2026' },
     expiry: { en: 'Jan 2027', vi: '01/2027' },
     score: { en: '595/990', vi: '595/990' },
-    image: '/images/certificates/toeic-lr.jpg',
+    image: '/images/certificates/TOEIC_Listening_Reading_Certificate.png',
   },
   {
     id: 'toeic-sw',
@@ -111,7 +119,7 @@ export const certifications = [
     date: { en: 'Apr 2026', vi: '04/2026' },
     expiry: { en: 'Apr 2027', vi: '04/2027' },
     score: { en: '210/400', vi: '210/400' },
-    image: '/images/certificates/toeic-sw.jpg',
+    image: '/images/certificates/TOEIC_Speaking_Writing_Certificate.png',
   },
   {
     id: 'google-ai-essentials',
@@ -119,7 +127,7 @@ export const certifications = [
     issuer: { en: 'Google', vi: 'Google' },
     date: { en: 'Aug 2025', vi: '08/2025' },
     credentialId: 'WENGZE49XSCV',
-    image: '/images/certificates/google-ai-essentials.jpg',
+    image: null,
   },
   {
     id: 'google-crash-python',
@@ -127,14 +135,14 @@ export const certifications = [
     issuer: { en: 'Google', vi: 'Google' },
     date: { en: 'Sep 2025', vi: '09/2025' },
     credentialId: 'A0VZD4ZAX6D6',
-    image: '/images/certificates/crash-python.jpg',
+    image: '/images/certificates/CERTIFICATE_LANDING_PAGE~A0VZD4ZAX6D6.jpeg',
   },
   {
     id: 'google-google-it-automation',
     name: { en: 'Google IT Automation with Python', vi: 'Google IT Automation with Python' },
     issuer: { en: 'Google', vi: 'Google' },
     credentialId: 'PSX4R6MJI2T4',
-    image: '/images/certificates/google-it-automation.jpg',
+    image: null,
   },
   {
     id: 'google-accelerate-ai',
@@ -142,28 +150,28 @@ export const certifications = [
     issuer: { en: 'Google', vi: 'Google' },
     date: { en: 'Apr 2026', vi: '04/2026' },
     credentialId: '2WI13SPU1L9J',
-    image: '/images/certificates/google-accelerate-ai.jpg',
+    image: '/images/certificates/CERTIFICATE_LANDING_PAGE~2WI13SPU1L9J.jpeg',
   },
   {
     id: 'google-automate-python',
     name: { en: 'Automating Real-World Tasks with Python', vi: 'Tự động hóa tác vụ thực tế với Python' },
     issuer: { en: 'Google', vi: 'Google' },
     credentialId: 'U318QFRRKIJT',
-    image: '/images/certificates/automating-python.jpg',
+    image: '/images/certificates/CERTIFICATE_LANDING_PAGE~U318QFRRKIJT.jpeg',
   },
   {
     id: 'google-troubleshoot',
     name: { en: 'Troubleshooting and Debugging Techniques', vi: 'Khắc phục và gỡ lỗi' },
     issuer: { en: 'Google', vi: 'Google' },
     credentialId: 'NGPR75MTBHQ8',
-    image: '/images/certificates/troubleshooting.jpg',
+    image: '/images/certificates/CERTIFICATE_LANDING_PAGE~NGPR75MTBHQ8.jpeg',
   },
   {
     id: 'google-config-cloud',
     name: { en: 'Configuration Management and the Cloud', vi: 'Quản lý cấu hình và đám mây' },
     issuer: { en: 'Google', vi: 'Google' },
     credentialId: 'QAUBAZRDNP3T',
-    image: '/images/certificates/google-config-cloud.jpg',
+    image: '/images/certificates/CERTIFICATE_LANDING_PAGE~QAUBAZRDNP3T.jpeg',
   },
   {
     id: 'google-ai-essentials-aug',
@@ -171,7 +179,7 @@ export const certifications = [
     issuer: { en: 'Google', vi: 'Google' },
     date: { en: 'Aug 2025', vi: '08/2025' },
     credentialId: 'DUPLICATE_AI_ESSENTIALS',
-    image: '/images/certificates/google-ai-essentials.jpg',
+    image: null,
   },
   {
     id: 'google-crash-python-sep',
@@ -179,21 +187,21 @@ export const certifications = [
     issuer: { en: 'Google', vi: 'Google' },
     date: { en: 'Sep 2025', vi: '09/2025' },
     credentialId: 'CRASH_PYTHON_SEP',
-    image: '/images/certificates/crash-python.jpg',
+    image: null,
   },
   {
     id: 'google-interact-os',
     name: { en: 'Using Python to Interact with the Operating System', vi: 'Sử dụng Python tương tác với HĐH' },
     issuer: { en: 'Google', vi: 'Google' },
     credentialId: '0L4616E83KIN',
-    image: '/images/certificates/python-os.jpg',
+    image: '/images/certificates/CERTIFICATE_LANDING_PAGE~0L4616E83KIN.jpeg',
   },
   {
     id: 'google-intro-git',
     name: { en: 'Introduction to Git and GitHub', vi: 'Giới thiệu Git và GitHub' },
     issuer: { en: 'Google', vi: 'Google' },
     credentialId: 'EDBIUJ0ISAVK',
-    image: '/images/certificates/git-github.jpg',
+    image: '/images/certificates/CERTIFICATE_LANDING_PAGE~EDBIUJ0ISAVK.jpeg',
   },
 ];
 
