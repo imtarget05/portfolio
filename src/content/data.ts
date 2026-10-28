@@ -174,22 +174,6 @@ export const certifications = [
     image: '/images/certificates/CERTIFICATE_LANDING_PAGE~QAUBAZRDNP3T.jpeg',
   },
   {
-    id: 'google-ai-essentials-aug',
-    name: { en: 'Google AI Essentials', vi: 'Google AI Essentials' },
-    issuer: { en: 'Google', vi: 'Google' },
-    date: { en: 'Aug 2025', vi: '08/2025' },
-    credentialId: 'DUPLICATE_AI_ESSENTIALS',
-    image: null,
-  },
-  {
-    id: 'google-crash-python-sep',
-    name: { en: 'Crash Course on Python', vi: 'Python Crash Course' },
-    issuer: { en: 'Google', vi: 'Google' },
-    date: { en: 'Sep 2025', vi: '09/2025' },
-    credentialId: 'CRASH_PYTHON_SEP',
-    image: null,
-  },
-  {
     id: 'google-interact-os',
     name: { en: 'Using Python to Interact with the Operating System', vi: 'Sử dụng Python tương tác với HĐH' },
     issuer: { en: 'Google', vi: 'Google' },
