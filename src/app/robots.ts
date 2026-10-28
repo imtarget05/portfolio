@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: 'https://portfolio-candidate.onrender.com/sitemap.xml',
+    sitemap: 'https://portfolio-of-mainguyenbinhtan.onrender.com/sitemap.xml',
   };
 }

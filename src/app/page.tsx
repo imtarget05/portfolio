@@ -1,5 +1,6 @@
 import { Hero3D } from '@/components/Hero3D';
 import { CVTimeline } from '@/components/CVTimeline';
+import { Education } from '@/components/Education';
 import { About } from '@/components/About';
 import { LicensesCertifications } from '@/components/LicensesCertifications';
 import { Expertise } from '@/components/Expertise';
@@ -19,6 +20,7 @@ export default function Home() {
       <main className="flex-grow">
         <Hero3D />
         <CVTimeline />
+        <Education />
         <About />
         <LicensesCertifications />
         <Expertise />

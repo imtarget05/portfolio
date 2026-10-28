@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { projects } from '@/content/data';
+import { projects, experience } from '@/content/data';
 
 const CLOUDFLARE_ACCOUNT_ID = process.env.CLOUDFLARE_ACCOUNT_ID;
 const CLOUDFLARE_API_TOKEN = process.env.CLOUDFLARE_API_TOKEN;
@@ -42,6 +42,19 @@ const formatProject = (p: (typeof projects)[number], lang: Lang): string => {
   ].join('\n');
 };
 
+const formatExperience = (exp: (typeof experience.items)[number], lang: Lang): string => {
+  const role = exp.role[lang];
+  const company = exp.company[lang];
+  const period = exp.period[lang];
+  const description = exp.description[lang];
+  const tech = exp.tech.join(', ');
+  return [
+    `- **${role}** at ${company} (${period})`,
+    `  ${description}`,
+    `  Tech: ${tech}`,
+  ].join('\n');
+};
+
 const buildSystemPrompt = (lang: Lang): string => {
   const isEn = lang === 'en';
   const intro = isEn
@@ -51,6 +64,7 @@ const buildSystemPrompt = (lang: Lang): string => {
   const featuredHeading = isEn ? 'FEATURED PROJECTS' : 'DỰ ÁN NỔI BẬT';
   const additionalHeading = isEn ? 'ADDITIONAL PROJECTS' : 'DỰ ÁN BỔ SUNG';
   const skillsHeading = isEn ? 'SKILLS' : 'KỸ NĂNG';
+  const experienceHeading = isEn ? 'EXPERIENCE' : 'KINH NGHIỆM';
   const contactHeading = isEn ? 'CONTACT' : 'LIÊN HỆ';
   const instructionsHeading = isEn ? 'INSTRUCTIONS' : 'HƯỚNG DẪN';
 
@@ -101,6 +115,8 @@ const buildSystemPrompt = (lang: Lang): string => {
     )
     .join('\n\n');
 
+  const experienceList = experience.items.map((e) => formatExperience(e, lang)).join('\n\n');
+
   const skills = isEn
     ? 'Backend: C#, .NET, Java, Spring Boot, Python, FastAPI, PostgreSQL, Oracle.\nDistributed systems: Redis, RabbitMQ, outbox/inbox, idempotency.\nCloud: Azure, AKS, Kubernetes, Terraform, Argo CD, Docker, GitHub Actions, Prometheus, Grafana.\nApplied AI: RAG, LangGraph, Qdrant, MLflow.'
     : 'Backend: C#, .NET, Java, Spring Boot, Python, FastAPI, PostgreSQL, Oracle.\nHệ thống phân tán: Redis, RabbitMQ, outbox/inbox, idempotency.\nĐám mây: Azure, AKS, Kubernetes, Terraform, Argo CD, Docker, GitHub Actions, Prometheus, Grafana.\nAI ứng dụng: RAG, LangGraph, Qdrant, MLflow.';
@@ -110,13 +126,36 @@ const buildSystemPrompt = (lang: Lang): string => {
     : 'GitHub: https://github.com/imtarget05\nEmail: tanmainguyenbinh@gmail.com\nLinkedIn: https://www.linkedin.com/in/mainguyenbinhtan2005/?isSelfProfile=true\nVị trí: Hồ Chí Minh, Việt Nam';
 
   const instructions = isEn
-    ? 'Answer concisely and professionally, in the same language as the user\'s question (English or Vietnamese). If you don\'t know something, say so honestly. Do not make up projects or experience.'
-    : 'Trả lời ngắn gọn, chuyên nghiệp, cùng ngôn ngữ với câu hỏi của người dùng (tiếng Anh hoặc tiếng Việt). Nếu không biết, hãy thừa nhận thẳng thắn. Đừng bịa dự án hoặc kinh nghiệm.';
+    ? `Answer concisely and professionally, in the same language as the user's question (English or Vietnamese). If you don't know something, say so honestly. Do not make up projects or experience.
+
+FORMATTING RULES (strict):
+• Keep responses SHORT — 2-4 sentences max for simple questions
+• Use bullet points (•) for lists
+• Use **bold** for key terms/technologies
+• Group related info into clear sections with headers
+• For skills: group by category with clear labels
+• For projects: structured format — **Title**, Stack, Highlights
+• Add visual separators (---) between sections
+• NO verbose explanations unless explicitly asked`
+    : `Trả lời ngắn gọn, chuyên nghiệp, cùng ngôn ngữ với câu hỏi của người dùng (tiếng Anh hoặc tiếng Việt). Nếu không biết, hãy thừa nhận thẳng thắn. Đừng bịa dự án hoặc kinh nghiệm.
+
+QUY TẮC ĐỊNH DẠNG (bắt buộc):
+• Giữ câu trả lời NGẮN — tối đa 2-4 câu cho câu hỏi đơn giản
+• Sử dụng bullet points (•) cho danh sách
+• Sử dụng **bold** cho thuật ngữ/ngôn ngữ quan trọng
+• Nhóm thông tin liên quan thành các mục rõ ràng với tiêu đề
+• Với kỹ năng: nhóm theo danh mục với nhãn rõ ràng
+• Với dự án: định dạng có cấu trúc — **Tiêu đề**, Stack, Điểm nổi bật
+• Thêm phân cách (---) giữa các phần
+• KHÔNG giải thích chi tiết trừ khi được yêu cầu`;
 
   return [
     'You are an AI assistant for the portfolio of Mai Nguyen Binh Tan.',
     '',
     `PERSONAL: ${intro}`,
+    '',
+    `${experienceHeading}:`,
+    experienceList,
     '',
     `${featuredHeading}:`,
     featuredList,
