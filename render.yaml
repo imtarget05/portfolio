@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: portfolio-candidate
+    name: portfolio-of-mainguyenbinhtan
     env: docker
     repo: https://github.com/imtarget05/portfolio
     rootDir: portfolio
