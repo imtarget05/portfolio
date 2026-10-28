@@ -781,6 +781,19 @@ details[open] summary span { transform:rotate(45deg); }
 .hero-marquee-track>span { flex:none; display:flex; align-items:center; gap:42px; white-space:nowrap; font-size:10px; font-weight:650; letter-spacing:.21em; }
 .hero-marquee-track b { color:#bd7154; font-size:14px; font-weight:400; }
 @keyframes hero-marquee { to { transform:translateX(-50%); } }
+
+/* Certificates continuous horizontal marquee (3 blocks at a time) */
+.cert-marquee { overflow:hidden; position:relative; margin-top:40px; }
+.cert-marquee-track { display:flex; gap:24px; width:max-content; animation:cert-marquee 22s linear infinite; }
+.cert-marquee:hover .cert-marquee-track { animation-play-state:paused; }
+.cert-card-marquee { flex:none; width:280px; }
+@media (min-width:768px){ .cert-card-marquee{ width:360px; } }
+@media (min-width:1024px){ .cert-card-marquee{ width:392px; } }
+@keyframes cert-marquee { to { transform:translateX(-50%); } }
+@media (prefers-reduced-motion:reduce){
+  .cert-marquee-track{ animation:none; }
+  .cert-marquee{ overflow:visible; display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:24px; }
+}
 .nav-progress { position:absolute; bottom:0; left:0; right:0; height:2px; background:#b3422d; transform-origin:left center; box-shadow:0 0 12px #b3422d77; }
 .nav-link { position:relative; }
 .nav-link::after { content:""; position:absolute; left:0; right:0; bottom:-8px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .3s ease; }
