@@ -1,0 +1,33 @@
+name: Embed Portfolio Projects to Vectorize
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/content/data.ts'
+      - 'scripts/embed-projects.ts'
+
+jobs:
+  embed:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install tsx
+        run: npm install -g tsx
+
+      - name: Run project embedding
+        run: npx tsx scripts/embed-projects.ts
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          VECTORIZE_INDEX_ID: ${{ secrets.VECTORIZE_INDEX_ID }}

@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: portfolio-candidate
+    env: docker
+    repo: https://github.com/tanmainguyenbinh-glitch/TKM.git
+    rootDir: portfolio
+    dockerfilePath: ./Dockerfile
+    buildCommand: "npm run build"
+    startCommand: "npm start"
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NEXT_TELEMETRY_DISABLED
+        value: "1"
+      - key: PORT
+        value: 3000
+      - key: CLOUDFLARE_ACCOUNT_ID
+        value: your_cloudflare_account_id
+      - key: CLOUDFLARE_API_TOKEN
+        value: your_cloudflare_api_token
+      - key: CLOUDFLARE_AI_MODEL
+        value: "@cf/meta/llama-3.1-8b-instruct"
+      - key: VECTORIZE_INDEX_ID
+        value: your_vectorize_index_id
+      - key: VECTORIZE_API_TOKEN
+        value: your_cloudflare_api_token
+    healthCheckPath: /
+    autoDeploy: true
