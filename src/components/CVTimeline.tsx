@@ -2,7 +2,8 @@
 
 import { motion, useReducedMotion } from 'framer-motion';
 import { useLang } from './LanguageProvider';
-import { Layers } from 'lucide-react';
+import { Layers, GraduationCap } from 'lucide-react';
+import { education } from '@/content/data';
 
 const milestones = [
   {
@@ -46,6 +47,20 @@ export function CVTimeline() {
                     <span>{m.tech[lang]}</span>
                   </div>
                   <p className="text-sm text-muted-foreground">{m.work[lang]}</p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+          {education.map((e, index) => (
+            <motion.div key={e.id} className="cv-timeline-item" initial={reducedMotion ? false : { opacity: 0, y: 40, rotateX: 10 }} whileInView={{ opacity: 1, y: 0, rotateX: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.6, delay: (milestones.length + index) * 0.12 }}>
+              <div className="flex items-start gap-4">
+                <div className="mt-2 w-10 h-10 rounded-full bg-primary/10 dark:bg-primary/20 flex items-center justify-center text-primary dark:text-primary border border-primary/20 shadow-lg preserve-3d card-3d-inner">
+                  <GraduationCap size={20} strokeWidth={2.5} />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-foreground mb-1">{e.school[lang]}</h3>
+                  <p className="text-muted-foreground text-sm mb-2">{e.degree[lang]}</p>
+                  <p className="text-sm text-muted-foreground">{e.period[lang]} · {e.location[lang]}</p>
                 </div>
               </div>
             </motion.div>

@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useLang } from '@/components/LanguageProvider';
-import { Send, MessageSquare, X, Loader2, Trash2 } from 'lucide-react';
+import { Send, MessageSquare, X, Loader2, Trash2, Clock } from 'lucide-react';
 
 const SYSTEM_PROMPT_VI = `Bạn là trợ lý hỗ trợ của trang portfolio Mai Nguyen Binh Tan. Hãy trả lời các câu hỏi về kỹ năng, dự án và kinh nghiệm của anh ấy dựa trên nội dung trang portfolio. Anh ấy là Kỹ sư Phần mềm chuyên về Backend, Hạ tầng Cloud & AI ứng dụng. Giữ câu trả lời ngắn gọn, chuyên nghiệp và dùng cùng ngôn ngữ với câu hỏi của người dùng (Tiếng Việt hoặc Tiếng Anh). Nếu không biết, hãy thừa nhận ngay. Đừng bịa dự án hay kinh nghiệm.`;
 const SYSTEM_PROMPT_EN = `You are a helpful assistant for Mai Nguyen Binh Tan's portfolio. Answer questions about his skills, projects, and experience based on the portfolio context. He is a Software Engineer specializing in Backend, Cloud Infrastructure & Applied AI. Keep answers concise, professional, and in the same language as the user's question (English or Vietnamese). If you don't know something, say so honestly. Do not make up projects or experience.`;
@@ -46,6 +46,7 @@ const generateTitle = (firstMessage: string): string => {
 export function ChatWidget() {
   const { lang } = useLang();
   const [isOpen, setIsOpen] = useState(false);
+  const [showHistory, setShowHistory] = useState(false);
   const [sessions, setSessions] = useState<ChatSession[]>([]);
   const [activeSessionId, setActiveSessionId] = useState<string | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -113,6 +114,7 @@ export function ChatWidget() {
       setSessions((prev) => [data.session, ...prev]);
       setActiveSessionId(data.session.id);
       setMessages([]);
+      setShowHistory(false);
     } catch (err) {
       console.error('Failed to create session:', err);
       setError(lang === 'vi' ? 'Không thể tạo cuộc trò chuyện mới' : 'Failed to create new conversation');
@@ -227,10 +229,16 @@ export function ChatWidget() {
   const handleClose = useCallback(() => {
     setIsOpen(false);
     setError(null);
+    setShowHistory(false);
   }, []);
 
   const handleSessionClick = useCallback((sessionId: string) => {
     setActiveSessionId(sessionId);
+    setShowHistory(false);
+  }, []);
+
+  const handleHistoryBackdropClick = useCallback(() => {
+    setShowHistory(false);
   }, []);
 
   return (
@@ -253,6 +261,14 @@ export function ChatWidget() {
             aria-hidden="true"
           />
 
+          {showHistory && (
+            <div
+              className="fixed inset-0 bg-black/20 z-[100]"
+              onClick={handleHistoryBackdropClick}
+              aria-hidden="true"
+            />
+          )}
+
           <div
             ref={panelRef}
             className="fixed bottom-6 right-6 z-[100] w-[340px] h-[420px] max-h-[calc(100vh-2rem)] bg-white dark:bg-card border border-border shadow-2xl rounded-2xl flex flex-col overflow-auto animate-slide-up"
@@ -274,6 +290,13 @@ export function ChatWidget() {
                     <line x1="12" y1="5" x2="12" y2="19"></line>
                     <line x1="5" y1="12" x2="19" y2="12"></line>
                   </svg>
+                </button>
+                <button
+                  onClick={() => setShowHistory(!showHistory)}
+                  className="p-1.5 text-muted-foreground hover:text-primary rounded-lg hover:bg-muted transition-colors focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  aria-label={lang === 'vi' ? 'Lịch sử' : 'History'}
+                >
+                  <Clock size={18} />
                 </button>
                 <button
                   onClick={handleClose}
@@ -353,47 +376,82 @@ export function ChatWidget() {
                 </form>
               </div>
             </main>
-
-            {sessions.length > 0 && (
-              <div className="shrink-0 border-t border-border bg-white/50 dark:bg-card/50 backdrop-blur-sm max-h-48 overflow-y-auto">
-                <div className="px-3 py-2 text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                  {lang === 'vi' ? 'Lịch sử' : 'History'}
-                </div>
-                <ul className="px-2 pb-2 space-y-1">
-                  {sessions
-                    .slice()
-                    .sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime())
-                    .map((session) => (
-                      <li key={session.id}>
-                        <div className="flex items-center justify-between w-full px-2 py-1.5 rounded-lg">
-                          <button
-                            onClick={() => handleSessionClick(session.id)}
-                            className={`flex-1 text-left text-xs truncate transition-colors ${
-                              session.id === activeSessionId
-                                ? 'text-primary'
-                                : 'text-muted-foreground hover:text-foreground'
-                            }`}
-                            aria-current={session.id === activeSessionId ? 'true' : 'false'}
-                          >
-                            {session.title}
-                          </button>
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              deleteSession(session.id);
-                            }}
-                            className="p-1 text-muted-foreground hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors opacity-0 group-hover:opacity-100"
-                            aria-label={lang === 'vi' ? 'Xóa cuộc trò chuyện' : 'Delete conversation'}
-                          >
-                            <Trash2 size={14} />
-                          </button>
-                        </div>
-                      </li>
-                    ))}
-                </ul>
-              </div>
-            )}
           </div>
+
+          {showHistory && (
+            <div
+              className="fixed top-0 right-0 bottom-0 z-[101] w-[280px] bg-white dark:bg-card border-l border-border animate-in slide-in-from-right duration-300"
+              role="dialog"
+              aria-label={lang === 'vi' ? 'Lịch sử trò chuyện' : 'Chat history'}
+            >
+              <header className="shrink-0 flex items-center justify-between px-4 py-3 border-b border-border bg-white/80 dark:bg-card/80 backdrop-blur-sm">
+                <span className="font-semibold text-foreground text-sm">
+                  {lang === 'vi' ? 'Lịch sử' : 'History'}
+                </span>
+                <button
+                  onClick={() => setShowHistory(false)}
+                  className="p-1.5 text-muted-foreground hover:text-primary rounded-lg hover:bg-muted transition-colors"
+                  aria-label={lang === 'vi' ? 'Đóng lịch sử' : 'Close history'}
+                >
+                  <X size={18} />
+                </button>
+              </header>
+
+              <div className="flex-1 flex flex-col min-h-0 overflow-auto">
+                <button
+                  onClick={createNewSession}
+                  className="mx-3 mt-3 px-3 py-2 text-sm font-medium text-primary hover:bg-primary/10 rounded-lg transition-colors flex items-center gap-2"
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                  </svg>
+                  {lang === 'vi' ? 'Cuộc trò chuyện mới' : 'New Conversation'}
+                </button>
+
+                {sessions.length > 0 ? (
+                  <ul className="flex-1 overflow-y-auto px-2 py-2 space-y-1">
+                    {sessions
+                      .slice()
+                      .sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime())
+                      .map((session) => (
+                        <li key={session.id}>
+                          <div className="flex items-center justify-between w-full px-2 py-1.5 rounded-lg group">
+                            <button
+                              onClick={() => handleSessionClick(session.id)}
+                              className={`flex-1 text-left text-xs truncate transition-colors ${
+                                session.id === activeSessionId
+                                  ? 'text-primary bg-primary/5'
+                                  : 'text-muted-foreground hover:text-foreground hover:bg-muted'
+                              }`}
+                              aria-current={session.id === activeSessionId ? 'true' : 'false'}
+                            >
+                              {session.title}
+                            </button>
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                deleteSession(session.id);
+                              }}
+                              className="p-1 text-muted-foreground hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors opacity-0 group-hover:opacity-100"
+                              aria-label={lang === 'vi' ? 'Xóa cuộc trò chuyện' : 'Delete conversation'}
+                            >
+                              <Trash2 size={14} />
+                            </button>
+                          </div>
+                        </li>
+                      ))}
+                  </ul>
+                ) : (
+                  <div className="flex-1 flex items-center justify-center px-4">
+                    <p className="text-sm text-muted-foreground text-center">
+                      {lang === 'vi' ? 'Chưa có lịch sử trò chuyện' : 'No chat history yet'}
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
         </>
       )}
     </div>
