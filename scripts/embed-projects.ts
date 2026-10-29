@@ -39,13 +39,19 @@ function buildChunks(project: (typeof projects)[number]): Chunk[] {
     const problem = lang === 'en' ? project.problem : project.problemVi;
     const solution = lang === 'en' ? project.solution : project.solutionVi;
 
+    // For career orientation projects, include explicit focus area
+    const focusArea = project.id === 'career-orientation'
+      ? lang === 'en' ? 'Career orientation: IT & Banking sector, Backend/API development' : 'Định hướng nghề nghiệp: Ngoại ngành CNTT & Ngân hàng'
+      : '';
+
     const text1 = [
       `Title: ${title}`,
       `Category: ${category}`,
       `Stack: ${stack}`,
       `Problem: ${problem}`,
       `Solution: ${solution}`,
-    ].join('\n');
+      focusArea ? `Focus: ${focusArea}` : '',
+    ].join('\n').replace(/\n\n$/, '\n'); // Remove trailing double newline
     chunks.push({
       text: text1,
       metadata: {
