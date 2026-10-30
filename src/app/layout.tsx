@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import './globals.css';
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+const inter = Inter({ subsets: ['latin', 'vietnamese'], variable: '--font-inter' });
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://localhost:3000'),

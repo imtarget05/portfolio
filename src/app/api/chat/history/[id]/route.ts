@@ -33,6 +33,34 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
   }
 }
 
+export async function PATCH(request: NextRequest, { params }: RouteParams) {
+  try {
+    const { id } = await params;
+    const body = await request.json();
+    const { title } = body;
+
+    if (!title) {
+      return NextResponse.json({ error: 'title is required' }, { status: 400 });
+    }
+
+    const result = await sql`
+      UPDATE chat_sessions
+      SET title = ${title}, updated_at = NOW()
+      WHERE id = ${id}
+      RETURNING id, title, user_id, created_at, updated_at
+    `;
+
+    if (result.length === 0) {
+      return NextResponse.json({ error: 'Session not found' }, { status: 404 });
+    }
+
+    return NextResponse.json({ session: result[0] });
+  } catch (error) {
+    console.error('Failed to update session title:', error);
+    return NextResponse.json({ error: 'Failed to update session title' }, { status: 500 });
+  }
+}
+
 export async function DELETE(request: NextRequest, { params }: RouteParams) {
   try {
     const { id } = await params;

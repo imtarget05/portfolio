@@ -1,5 +1,7 @@
 'use client';
 
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useLang } from '@/components/LanguageProvider';
 import { Send, MessageSquare, X, Loader2, Trash2, Clock } from 'lucide-react';
@@ -31,8 +33,11 @@ interface SessionWithMessages extends ChatSession {
 
 type Lang = 'en' | 'vi';
 
-const formatTime = (ts: string, lang: Lang): string => {
-  return new Date(ts).toLocaleTimeString(lang === 'vi' ? 'vi-VN' : 'en-US', {
+const formatTime = (ts: string | null | undefined, lang: Lang): string => {
+  if (!ts) return '--:--';
+  const date = new Date(ts);
+  if (Number.isNaN(date.getTime())) return '--:--';
+  return date.toLocaleTimeString(lang === 'vi' ? 'vi-VN' : 'en-US', {
     hour: '2-digit',
     minute: '2-digit',
   });
@@ -190,13 +195,27 @@ export function ChatWidget() {
       });
 
       setMessages((prev) => [...prev, assistantMsg]);
+      const defaultTitle = lang === 'vi' ? 'Cuộc trò chuyện mới' : 'New Conversation';
+      const newTitle = generateTitle(text);
       setSessions((prev) =>
         prev.map((s) =>
           s.id === activeSessionId
-            ? { ...s, title: s.title === (lang === 'vi' ? 'Cuộc trò chuyện mới' : 'New Conversation') ? generateTitle(text) : s.title, updated_at: new Date().toISOString() }
+            ? {
+                ...s,
+                title: s.title === defaultTitle ? newTitle : s.title,
+                updated_at: new Date().toISOString(),
+              }
             : s
         )
       );
+      const session = sessions.find((s) => s.id === activeSessionId);
+      if (session && session.title === defaultTitle && activeSessionId) {
+        await fetch(`/api/chat/history/${activeSessionId}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title: newTitle }),
+        });
+      }
     } catch {
       const msg =
         lang === 'vi'
@@ -206,7 +225,7 @@ export function ChatWidget() {
     } finally {
       setLoading(false);
     }
-  }, [input, loading, activeSessionId, messages, lang, uid]);
+  }, [input, loading, activeSessionId, messages, sessions, lang, uid]);
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent) => {
@@ -320,7 +339,15 @@ export function ChatWidget() {
                     }`}
                   >
                     <p className="break-words whitespace-normal text-sm leading-relaxed">
-                      {msg.content}
+                      {msg.role === 'assistant' ? (
+                        <div className="p-0 m-0">
+                          <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                            {msg.content}
+                          </ReactMarkdown>
+                        </div>
+                      ) : (
+                        msg.content
+                      )}
                     </p>
                     <span
                       className={`block mt-1 text-[10px] text-right ${
