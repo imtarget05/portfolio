@@ -801,7 +801,7 @@ details[open] summary span { transform:rotate(45deg); }
 .statement-layout { grid-template-columns:minmax(125px,1fr) minmax(0,3fr); }
 .statement-layout h2.statement-heading { font-size:clamp(57px,7.1vw,112px); line-height:1.08; letter-spacing:-.07em; margin:0 0 54px; font-weight:850; }
 .statement-layout h2.statement-heading-vi { font-size:clamp(51px,6.6vw,100px); line-height:1.16; letter-spacing:-.066em; }
-.statement-line { display:block; padding:.055em 0; overflow:hidden; white-space:nowrap; }
+.statement-line { display:block; padding:.055em 0;  white-space:nowrap; }
 .statement-line>span { display:block; width:max-content; max-width:100%; }
 .statement-line-accent { color:var(--editorial-accent); }
 .statement-layout h2 .statement-line:first-child,.statement-layout h2 .statement-line:first-child span { color:rgb(var(--foreground)); }
