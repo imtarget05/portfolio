@@ -20,7 +20,6 @@ export function Education() {
               <div className="experience-header">
                 <div className="flex items-center gap-2">
                   <GraduationCap size={20} className="text-primary" />
-                  <h3>{item.degree[lang]}</h3>
                 </div>
                 <span className="experience-period">{item.period[lang]}</span>
               </div>

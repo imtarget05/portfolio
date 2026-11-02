@@ -80,7 +80,6 @@ export const education = [
   {
     id: 'uit',
     school: { en: 'University of Information Technology (UIT)', vi: 'Trường Đại học Công nghệ Thông tin (UIT)' },
-    degree: { en: 'Bachelor of Software Engineering', vi: 'Cử nhân Kỹ thuật Phần mềm' },
     period: { en: '2023 — 2027', vi: '2023 — 2027' },
     location: { en: 'Ho Chi Minh City, Vietnam', vi: 'TP. Hồ Chí Minh, Việt Nam' },
   },

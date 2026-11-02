@@ -12,7 +12,7 @@ export function About() {
     <div className="container-custom statement-layout">
       <p className="eyebrow">02 / {lang === 'en' ? 'THE APPROACH' : 'CÁCH TIẾP CẬN'}</p>
       <div>
-        <motion.h2 className={`statement-heading ${lang === 'vi' ? 'statement-heading-vi' : ''}`} aria-label={`${firstLine} ${secondLine}`} initial={reducedMotion ? false : 'hidden'} whileInView="visible" viewport={{ once: true, amount: .2 }}>
+        <motion.h2 className={`statement-heading ${lang === 'vi' ? 'statement-heading-vi' : ''}`} aria-label={`${firstLine} ${secondLine}`} initial={reducedMotion ? false : 'hidden'} whileInView="visible" viewport={{ amount: .2 }}>
           <span className="statement-line"><motion.span key={`${lang}-first`} variants={{ hidden: { opacity: 0, y: '85%' }, visible: { opacity: 1, y: 0 } }} transition={{ duration: .8, ease: [0.22, 1, 0.36, 1] }}>{firstLine}</motion.span></span>
           <span className="statement-line statement-line-accent"><motion.span key={`${lang}-second`} variants={{ hidden: { opacity: 0, y: '85%' }, visible: { opacity: 1, y: 0 } }} transition={{ duration: .8, delay: .12, ease: [0.22, 1, 0.36, 1] }}>{secondLine}</motion.span></span>
         </motion.h2>

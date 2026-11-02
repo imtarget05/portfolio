@@ -59,7 +59,6 @@ export function CVTimeline() {
                 </div>
                 <div>
                   <h3 className="text-lg font-bold text-foreground mb-1">{e.school[lang]}</h3>
-                  <p className="text-muted-foreground text-sm mb-2">{e.degree[lang]}</p>
                   <p className="text-sm text-muted-foreground">{e.period[lang]} · {e.location[lang]}</p>
                 </div>
               </div>
