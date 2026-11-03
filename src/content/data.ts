@@ -510,7 +510,7 @@ export const projects = [
     tech: ['Python', 'FastAPI', 'React', 'scikit-learn', 'XGBoost', 'MLflow', 'Docker', 'PostgreSQL'],
     github: 'https://github.com/imtarget05/CreditFlow',
     image: undefined,
-    featured: false,
+    featured: true,
     problem: 'A risk score alone is insufficient without business-cost trade-offs, controlled approvals and traceable model decisions.',
     problemVi: 'Điểm rủi ro riêng lẻ chưa đủ để ra quyết định nếu thiếu cân nhắc chi phí nghiệp vụ, phê duyệt và dấu vết mô hình.',
     solution: 'Evaluates risk models against an asymmetric business cost; exposes a stateful API, audit snapshots and MLflow experiments. State machine with human-review approval states between model prediction and business action.',
