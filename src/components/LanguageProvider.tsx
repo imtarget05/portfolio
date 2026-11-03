@@ -25,6 +25,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
         'nav.about': { en: 'About', vi: 'Giới thiệu' },
         'nav.licenses': { en: 'LICENSESCERTIFICATIONS', vi: 'Giấy phép & Chứng chỉ' },
         'nav.expertise': { en: 'Expertise', vi: 'Chuyên môn' },
+        'nav.skills': { en: 'Skills', vi: 'Kỹ năng' },
         'nav.projects': { en: 'Projects', vi: 'Dự án' },
         'nav.tech': { en: 'Tech Stack', vi: 'Công nghệ' },
         'nav.experience': { en: 'Experience', vi: 'Kinh nghiệm' },

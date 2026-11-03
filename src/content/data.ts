@@ -248,6 +248,7 @@ export interface ContactInfo {
 export const nav = {
   about: { en: 'About', vi: 'Giới thiệu' },
   expertise: { en: 'Expertise', vi: 'Chuyên môn' },
+  skills: { en: 'Skills', vi: 'Kỹ năng' },
   projects: { en: 'Projects', vi: 'Dự án' },
   tech: { en: 'Tech Stack', vi: 'Công nghệ' },
   experience: { en: 'Experience', vi: 'Kinh nghiệm' },

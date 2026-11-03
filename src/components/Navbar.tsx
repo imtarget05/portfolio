@@ -28,6 +28,7 @@ export function Navbar({ lang, setLang, t }: NavbarProps) {
     { key: 'nav.about', href: '#about' },
     { key: 'nav.licenses', href: '#licenses' },
     { key: 'nav.expertise', href: '#expertise' },
+    { key: 'nav.skills', href: '/skills' },
     { key: 'nav.projects', href: '#projects' },
     { key: 'nav.tech', href: '#tech' },
     { key: 'nav.services', href: '#services' },
