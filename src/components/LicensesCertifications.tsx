@@ -45,7 +45,7 @@ export function LicensesCertifications() {
         )}
       </div>
       <div className="cert-content mt-3">
-        <h3 className="cert-name font-bold text-foreground text-lg leading-tight">{cert.name[lang]}</h3>
+        <h3 className="cert-name font-bold text-foreground text-lg leading-tight text-center">{cert.name[lang]}</h3>
         <p className="cert-issuer text-sm text-muted-foreground">{cert.issuer[lang]}</p>
         <div className="cert-meta mt-2 space-y-1">
           {cert.date && (
