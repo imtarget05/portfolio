@@ -110,7 +110,7 @@ export const certifications = [
     issuer: { en: 'Google', vi: 'Google' },
     date: { en: 'Aug 2025', vi: '08/2025' },
     credentialId: 'WENGZE49XSCV',
-    image: '/images/certificates/Screenshot 2026-10-28 at 20.11.14.png',
+    image: '/images/certificates/Screenshot 2026-10-28 at 20.15.57.png',
   },
   {
     id: 'google-crash-python',
@@ -125,7 +125,7 @@ export const certifications = [
     name: { en: 'Google IT Automation with Python', vi: 'Google IT Automation with Python' },
     issuer: { en: 'Google', vi: 'Google' },
     credentialId: 'PSX4R6MJI2T4',
-    image: '/images/certificates/Screenshot 2026-10-28 at 20.15.57.png',
+    image: '/images/certificates/Screenshot 2026-10-28 at 20.11.14.png',
   },
   {
     id: 'google-accelerate-ai',
