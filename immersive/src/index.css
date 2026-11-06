@@ -1,0 +1,74 @@
+body {
+  margin: 0;
+  color: var(--foreground);
+  background-color: var(--background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+  isolation: isolate;
+}
+
+/* Glass design system CSS variables */
+:root {
+  --background: #ffffff;
+  --foreground: #0f172a;
+  --card: rgba(255, 255, 255, 0.6);
+  --card-border: rgba(255, 255, 255, 0.7);
+  --card-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.12);
+  --glass-bg: rgba(255, 255, 255, 0.55);
+  --glass-border: rgba(255, 255, 255, 0.65);
+  --radius-xl: 1.5rem;
+  --radius-lg: 1rem;
+  --radius-md: 0.75rem;
+  --duration-fast: 0.2s;
+  --duration-base: 0.4s;
+  --duration-slow: 0.8s;
+  --ease-glass: cubic-bezier(0.23, 1, 0.32, 1);
+  --font-display: 'Inter', system-ui, sans-serif;
+}
+
+.dark {
+  --background: #020617;
+  --foreground: #f8fafc;
+  --card: rgba(15, 23, 42, 0.5);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+  --glass-bg: rgba(15, 23, 42, 0.55);
+  --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+html.scroll-lock,
+body.scroll-lock {
+  overflow: hidden;
+}
+
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--card-shadow);
+  border-radius: var(--radius-xl);
+}
+
+.glass-text {
+  background: linear-gradient(to bottom right, #ffffff 0%, #e2e8f0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.dark .glass-text {
+  background: linear-gradient(to bottom right, #ffffff 0%, #94a3b8 100%);
+}
+
+/* Hide scrollbar for chrome but keep function */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

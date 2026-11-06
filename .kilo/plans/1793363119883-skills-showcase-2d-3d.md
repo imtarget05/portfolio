@@ -1,47 +1,146 @@
-# Plan: Skills Showcase Page with 2D + 3D Visualization
+# Plan: Premium Immersive 3D Website (Apple Liquid Glass + Three.js)
 
 ## Goal
-Add a dedicated `/skills` route that showcases the owner's capabilities with 2D canvas visualizations and 3D interactive elements, plus add the nav link. Keep existing Expertise/TechStack sections on the home page unchanged.
+Build a standalone immersive 3D website (4 chapters: Introduction, Explore, Experience, Final Scene) with Apple-inspired Liquid Glass UI, genuine Three.js WebGL environment, scroll-linked camera transitions, GSAP animations, deployed as a free Render Static Site.
 
-## Context
-- Site is currently a single-page home (`/`) rendering all sections via `src/app/page.tsx`.
-- Skills data already exists: `src/content/data.ts` — `techStack` (4 categories: Backend, Frontend, Cloud & DevOps, AI & Data) and `expertise` (4 disciplines).
-- Existing components: `Expertise.tsx`, `TechStack.tsx` (sections on home page).
-- Existing 3D CSS: `.card-3d`, `.reveal-3d`, `.hero-3d-scene`, `.particle`, `.preserve-3d` in `src/app/globals.css` (lines 824–1047).
-- No `<canvas>`, no Three.js, no dedicated skills page, no 2D visualization.
-- Navbar links are anchor links (`#section-id`) in `src/components/Navbar.tsx:27–37`.
+## Context & Decisions
+| Decision | Value | Rationale |
+|----------|-------|-----------|
+| Stack | React + Vite + TypeScript + Three.js + @react-three/fiber + @react-three/drei + GSAP | Spec requirement; genuine WebGL, not CSS parallax |
+| Location | `immersive/` subdirectory at repo root (own package.json, vite config, render.yaml) | Keeps existing Next.js portfolio intact; meets free Render Static Site requirement |
+| Deployment | Render Static Site (`npm ci && npm run build`, publish `dist/`) | Spec constraint: no backend, no server-side GPU |
+| 3D assets | Procedural Three.js geometry only (no GLB/GLTF exist in repo) | No 3D models available; torii gate/terrain/particles built from BoxGeometry/CylinderGeometry/PlaneGeometry/Points |
+| Reference video | `references/3699.mp4` does not exist | Proceed from written spec (Japanese-inspired torii gate, atmospheric fog, depth) |
+| Language | Bilingual EN/VI (matches existing portfolio pattern) | Consistent with existing codebase |
+| Linking | Existing Next.js navbar gains a link to the immersive app URL; immersive app links back to portfolio | Cross-reference without merging codebases |
 
-## Decisions (recommended)
+## Tech Stack
+- React 18 + TypeScript (strict)
+- Vite (dev server + production build to `dist/`)
+- Three.js + @react-three/fiber + @react-three/drei
+- GSAP + ScrollTrigger
+- Tailwind CSS (for glass UI + layout)
+- Vitest (unit tests)
+- Deploy: Render Static Site
 
-1. **New route `/skills`** (not an enhanced home section) — user asked for "giao diện" (interface/page). Standalone page gives a dedicated showcase surface.
-2. **No new heavy dependencies** — use existing CSS 3D classes + HTML5 Canvas for 2D. Avoid Three.js/React Three Fiber to keep bundle small on Render Docker standalone.
-3. **2D visualization**: Canvas skill radar/spider chart per category (Backend, Frontend, Cloud & DevOps, AI & Data), interactive on hover.
-4. **3D visualization**: CSS 3D skill node cards using existing `.card-3d`/`.preserve-3d` patterns, arranged in a 3D grid with hover tilt. Each node = one skill/tech.
-5. **Add `/skills` to Navbar** (desktop + mobile overlay), plus nav label in `src/content/data.ts` `nav.skills` (EN: Skills, VI: Kỹ năng).
-6. **Bilingual** — EN/VI via existing `useLang()` + `data.ts` pattern.
-7. **Responsive** — canvas scales on mobile; 3D grid stacks to 2D cards on small screens.
-8. **Keep home page sections** — `Expertise` and `TechStack` remain on `/`; `/skills` is a deeper dive.
+## File Structure (new, under `immersive/`)
+```
+immersive/
+  package.json
+  vite.config.ts
+  tsconfig.json
+  index.html
+  render.yaml
+  README.md
+  public/
+    models/   (empty placeholder)
+    textures/ (empty placeholder)
+  src/
+    main.tsx
+    App.tsx
+    index.css (glass design system CSS variables)
+    components/
+      glass/
+        GlassNavbar.tsx
+        GlassButton.tsx
+        GlassCard.tsx
+        GlassModal.tsx
+        GlassDock.tsx
+        GlassOverlay.tsx
+      layout/
+        ChapterLayout.tsx
+        ScrollIndicator.tsx
+    experience/
+      scene/
+        Scene.tsx (Three.js canvas wrapper, lighting, fog, camera)
+        camera/
+          CameraController.tsx (scroll-linked camera path, mouse parallax)
+        environment/
+          ToriiGate.tsx
+          Terrain.tsx
+          FogVolume.tsx
+          Particles.tsx
+        objects/
+          (procedural geometry helpers)
+        effects/
+          PostProcessing.tsx (adaptive: disabled on mobile/reduced-motion)
+    hooks/
+      useScrollProgress.ts
+      useResizeHandler.ts
+      useThreeFallback.ts (WebGL availability check)
+    sections/
+      Chapter01.tsx (Introduction)
+      Chapter02.tsx (Explore)
+      Chapter03.tsx (Experience)
+      Chapter04.tsx (Final Scene)
+    styles/
+      glass.css
+    utils/
+      colors.ts
+      easing.ts
+    tests/
+      App.test.tsx
+      Scene.test.tsx
+```
 
-## Affected files (new + existing)
-| File | Action | Purpose |
-|------|--------|---------|
-| `src/app/skills/page.tsx` | new | `/skills` route page |
-| `src/components/SkillsShowcase.tsx` | new | Main 2D+3D skills visualization component |
-| `src/components/SkillRadar.tsx` | new | Canvas 2D radar chart per category |
-| `src/components/SkillNode3D.tsx` | new | CSS 3D skill node card |
-| `src/components/Navbar.tsx` | edit | Add `/skills` link (desktop + mobile) |
-| `src/content/data.ts` | edit | Add `nav.skills` EN/VI label |
-| `src/app/sitemap.ts` | edit | Add `/skills` to sitemap (if static routes listed) |
+## Phase-by-Phase Tasks
+
+### Phase 1 — Foundation
+1. Scaffold Vite + TypeScript + Tailwind project in `immersive/`
+2. Install deps: three, @react-three/fiber, @react-three/drei, gsap, react, react-dom, lucide-react, vitest, jsdom
+3. Create `index.html`, `vite.config.ts`, `tsconfig.json`, `render.yaml`
+4. Build glass design system (`index.css` CSS variables: glass bg, blur, border, shadow, radii, typography, durations)
+5. Create reusable glass components: GlassNavbar, GlassButton, GlassCard, GlassModal, GlassDock, GlassOverlay
+6. Create `App.tsx` with chapter routing (single page, scroll-based chapters, no hard mount/unmount of WebGL)
+
+### Phase 2 — 3D Experience
+7. Create `Scene.tsx` (R3F canvas, lighting: ambient + directional + spot, fog, shadows, environment)
+8. Create `CameraController.tsx` (scroll-linked camera path across 4 chapters, mouse parallax desktop, touch mobile, smooth interpolation, prefers-reduced-motion)
+9. Create environment objects: `ToriiGate.tsx`, `Terrain.tsx`, `FogVolume.tsx`, `Particles.tsx`
+10. Create `useThreeFallback.ts` hook (WebGL availability → CSS fallback)
+
+### Phase 3 — Integration (4 Chapters)
+11. Chapter01: fullscreen 3D hero, cinematic camera intro, heading, CTA, scroll indicator
+12. Chapter02: camera moves deeper, new architecture, floating glass panels, scroll-triggered reveals
+13. Chapter03: interactive glass cards, hover feedback, content transitions synced to 3D
+14. Chapter04: distinct viewpoint, final glass panel, CTA, minimal footer
+15. GSAP ScrollTrigger linking scroll → camera position + section reveals
+16. GlassNavbar state changes on scroll; keyboard-accessible nav
+
+### Phase 4 — Optimization
+17. Limit device pixel ratio; dispose WebGL resources on unmount
+18. Adaptive postprocessing (disabled on mobile/reduced-motion)
+19. Lazy-load optional assets; loading state + graceful fallback
+20. Mobile layout verification; no layout shifts / scroll jank
+
+### Phase 5 — Verification & Deploy
+21. `npm install`, `npm run dev` smoke test
+22. `npx vitest run` unit tests
+23. `npx tsc --noEmit` typecheck
+24. `npm run build` → `dist/`
+25. `npm run preview` local static serve check
+26. Test all 4 chapters, scroll transitions, mobile layout, console errors, reduced-motion
+27. Add `immersive/render.yaml` + README (dev + deploy instructions)
 
 ## Validation
-- `npx tsc --noEmit` — clean
-- `npm run lint` — clean
-- `npm run build` — production build succeeds
-- Verify `/skills` renders in dev (`npm run dev`) and links from nav work
-- Verify EN/VI toggle switches skill labels and chart text
+- `npm install` succeeds
+- `npx vitest run` — tests pass
+- `npx tsc --noEmit` — no type errors
+- `npm run build` — `dist/` generated, no errors
+- `npm run preview` — serves locally
+- 4 chapters navigable; scroll + camera transitions work
+- Mobile layout intact; no console errors / broken asset requests
+- Reduced-motion respected; WebGL fallback renders if WebGL unavailable
 
-## Rollback
-Revert commit; `/skills` route is additive, no existing pages modified except Navbar/data.ts/sitemap (additive only).
+## Render Deployment
+- Service Type: Static Site
+- Build Command: `npm ci && npm run build`
+- Publish Directory: `dist`
+- SPA rewrite: `/*` → `/index.html`
+- Environment: none required (no backend/API keys)
 
-## Open question for confirmation
-- 3D implementation: CSS 3D cards (recommended, no new deps) vs adding Three.js/React Three Fiber for richer 3D? Recommendation: CSS 3D first; Three.js can be added later if needed.
+## Risks / Open Questions
+- No GLB models exist; all geometry procedural — acceptable per spec but less detailed than a modeled torii gate
+- No reference video available — visual direction from written spec only
+- Cross-site linking URL for immersive app not yet known (Render URL assigned at deploy); to be added after first deploy
+- Performance: 60 FPS desktop / 30 FPS mobile targets; postprocessing disabled on mobile to protect FPS
