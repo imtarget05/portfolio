@@ -3,7 +3,7 @@ services:
     name: immersive-3d
     env: static
     region: singapore
-    buildCommand: vite build
+    buildCommand: true
     staticPublishPath: dist
     rewriteRules:
       - source: "/**"
