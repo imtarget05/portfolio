@@ -1,9 +1,9 @@
 services:
-  - type: web
+  - type: static_site
     name: immersive-3d
     env: static
     region: singapore
-    buildCommand: npm ci && npm run build
+    buildCommand: vite build
     staticPublishPath: dist
     rewriteRules:
       - source: "/**"
