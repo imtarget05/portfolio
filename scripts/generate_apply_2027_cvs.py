@@ -44,7 +44,7 @@ VARIANTS = {
         "projects": [
             ("FlashSale-Backend", "github.com/imtarget05/FlashSale-Backend/tree/baf2aa16", "Duplicate and concurrent payment requests required consistent results. Implemented PostgreSQL idempotency and a RabbitMQ outbox; Java CI passed unit and Testcontainers integration checks on the cited commit. The payment provider is simulated."),
             ("retail-finance-core-platform", "github.com/imtarget05/retail-finance-core-platform/tree/7cc7069f", "Ledger retries and partner mismatches required traceable handling. Built Java/MySQL transaction and Python reconciliation examples; main CI passed MySQL 8 integration, a disposable Compose API demo, and reconciliation tests on the cited commit."),
-            ("QuanLyKho", "github.com/imtarget05/QuanLyKho/tree/582f4cbf", "Inventory changes required approval and auditability. Built a FastAPI maker/checker workflow with PostgreSQL migrations; main CI passed on the cited commit."),
+            ("QuanLyKho", "github.com/imtarget05/QuanLyKho/tree/2e753d1", "Inventory changes required approval and auditability. Built a FastAPI maker/checker workflow with double-entry general ledger, idempotency, and audit trails; main CI passed on the cited commit."),
         ],
     },
     "backend-java": {
@@ -52,9 +52,9 @@ VARIANTS = {
         "summary": "Early-career engineer focused on reliable transaction APIs, idempotency, and testable distributed workflows. Seeking Junior Backend roles in banking, fintech, and enterprise software.",
         "skills": "Java 17, Spring Boot, REST APIs, PostgreSQL, Redis, RabbitMQ, Docker, GitHub Actions, Python",
         "projects": [
-            ("FlashSale-Backend", "github.com/imtarget05/FlashSale-Backend", "Built a payment-service portfolio with PostgreSQL idempotency, RabbitMQ transactional outbox, Redis fallback, and JWT/OIDC boundaries. Unit and Testcontainers integration checks pass in GitHub CI; payment provider defaults to a simulator."),
-            ("retail-finance-core-platform", "github.com/imtarget05/retail-finance-core-platform", "Implemented a finance transaction and reconciliation example with Java and Python services. Backend CI and CodeQL pass on main; use this project to explain ledger consistency and exception handling."),
-            ("QuanLyKho", "github.com/imtarget05/QuanLyKho", "Built a FastAPI inventory workflow with PostgreSQL migrations and maker/checker approvals. Main CI passes; recent banking extensions on a feature branch require separate verification."),
+            ("FlashSale-Backend", "github.com/imtarget05/FlashSale-Backend/tree/baf2aa16", "Built a payment-service portfolio with PostgreSQL idempotency, RabbitMQ transactional outbox, Redis fallback, and JWT/OIDC boundaries. Unit and Testcontainers integration checks pass in GitHub CI; payment provider defaults to a simulator."),
+            ("retail-finance-core-platform", "github.com/imtarget05/retail-finance-core-platform/tree/7cc7069f", "Implemented a finance transaction and reconciliation example with Java and Python services. Backend CI and CodeQL pass on main; use this project to explain ledger consistency and exception handling."),
+            ("QuanLyKho", "github.com/imtarget05/QuanLyKho/tree/2e753d1", "Built a FastAPI inventory and banking workflow with double-entry general ledger, 3-layer idempotency, and hash-chain audit trails. Main CI passed with 133 banking and 1,285+ overall tests on the cited commit."),
         ],
     },
     "platform-sre": {
