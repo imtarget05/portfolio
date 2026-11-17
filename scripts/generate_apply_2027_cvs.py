@@ -1,4 +1,4 @@
-"""Generate three evidence-first, one-page CVs for Q1/2027 applications.
+"""Generate three track CVs and a JD-specific Bosch draft for Q1/2027.
 
 Run: python3 scripts/generate_apply_2027_cvs.py
 The repository's docs/apply-2027-evidence.md is the claim provenance ledger.
@@ -37,6 +37,16 @@ COMMON = {
 }
 
 VARIANTS = {
+    "bosch-q1-2027-fullstack-intern": {
+        "title": "FULLSTACK ENGINEER INTERN — BOSCH Q1 2027",
+        "summary": "Final-year UIT student applying for Bosch's Q1 2027 Fullstack Engineer Internship. Developed Java and Python services with database-backed tests, and contributed to React/Next.js and Node.js features during a fullstack internship.",
+        "skills": "Java 17, Spring Boot, SQL, PostgreSQL, MySQL, REST APIs, React, Next.js, Node.js, Python, Docker, GitHub Actions",
+        "projects": [
+            ("FlashSale-Backend", "github.com/imtarget05/FlashSale-Backend/tree/baf2aa16", "Duplicate and concurrent payment requests required consistent results. Implemented PostgreSQL idempotency and a RabbitMQ outbox; Java CI passed unit and Testcontainers integration checks on the cited commit. The payment provider is simulated."),
+            ("retail-finance-core-platform", "github.com/imtarget05/retail-finance-core-platform/tree/7cc7069f", "Ledger retries and partner mismatches required traceable handling. Built Java/MySQL transaction and Python reconciliation examples; main CI passed MySQL 8 integration, a disposable Compose API demo, and reconciliation tests on the cited commit."),
+            ("QuanLyKho", "github.com/imtarget05/QuanLyKho/tree/582f4cbf", "Inventory changes required approval and auditability. Built a FastAPI maker/checker workflow with PostgreSQL migrations; main CI passed on the cited commit."),
+        ],
+    },
     "backend-java": {
         "title": "BACKEND JAVA / FINTECH SOFTWARE ENGINEER",
         "summary": "Early-career engineer focused on reliable transaction APIs, idempotency, and testable distributed workflows. Seeking Junior Backend roles in banking, fintech, and enterprise software.",
