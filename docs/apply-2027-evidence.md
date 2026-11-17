@@ -1,0 +1,18 @@
+# Application evidence ledger — Q1/2027
+
+Snapshot: 2026-11-17. This file separates code present in a repository from a test result and from a verified deployment. Refresh the commit and CI columns before using a claim in a CV.
+
+| Track / repository | Defensible claim and code anchor | Test or CI evidence at snapshot | Missing proof before a stronger CV claim |
+|---|---|---|---|
+| Backend — [FlashSale-Backend](https://github.com/imtarget05/FlashSale-Backend/tree/dc0bf0cc) | Java payment service with PostgreSQL idempotency and RabbitMQ outbox; see `src/payment-service-java/` and `RECRUITER-EVIDENCE.md`. | `PaymentServiceTest` and `PaymentOutboxRelayTest` passed locally on 2026-11-17. Main's latest Java CI and payment-service CI succeeded. | Docker was unavailable locally, so Testcontainers tests were not rerun. Latest successful deployment workflow skipped both deploy jobs; no live AKS claim. |
+| Backend — [retail-finance-core-platform](https://github.com/imtarget05/retail-finance-core-platform/tree/11620ed6) | Reconciliation logic in `reconciliation-service/app/reconciler.py`; security and reconciliation tests under `reconciliation-service/tests/`. | Latest `backend-ci` and CodeQL runs on main succeeded. | Record a repeatable end-to-end ledger-to-reconciliation run on a database and its output before claiming production behavior. |
+| Backend — [QuanLyKho](https://github.com/imtarget05/QuanLyKho/tree/265a27c4) | FastAPI inventory and maker/checker workflow; see `backend/app/` and `docs/portfolio/claim-matrix.md`. | Latest main CI succeeded. | Reverify recent feature-branch banking changes on the eventual CV commit; keep demo and production claims separate. |
+| Platform — [AKS-SRE-Platform](https://github.com/imtarget05/AKS-SRE-Platform/tree/b5b17d45) | AKS/GitOps configuration and rollback tooling; see `.github/workflows/`, `docs/rollback/rollback-contract.md`, and `scripts/test_zero_downtime_rollback_drill.sh`. | Latest main `pr-gate`, `gitops-validate`, and SBOM scan succeeded. | Capture one current deploy → health → alert → rollback drill with timestamps, logs, and cluster identity. |
+| AI — [SmartDoc](https://github.com/imtarget05/Enterprise-Document-Intelligence-Corrective-RAG-Platform/tree/c0d6a9f1) | Corrective RAG and local LLM evaluation; see `agent/`, `eval/`, and `.github/workflows/local-llm-eval.yml`. | Latest main Compliance & Verification succeeded; local LLM evaluation and nightly load test failed. | Rerun authenticated local LLM evaluation on its fix commit and collect a live retrieval benchmark with dataset/model provenance. Do not present fixture scores as live accuracy. |
+| AI/Platform — [IncidentIQ](https://github.com/imtarget05/incidentiq/tree/42499981) | Tenant-aware retrieval and ETL; see `api/src/`, `mcp/`, and `scripts/eval_harness.py`. | Main preview deployment succeeded; main CI failed at SonarCloud authentication (HTTP 403). | Fix credential/configuration and pass main CI; evaluate representative live retrieval, tenant isolation, latency, and cost. |
+
+## Application gate
+
+For each CV variant, choose at most three relevant repositories. Every quantitative bullet must link to a result produced at the cited commit. A repository is ready to cite when its main CI passes on that commit, its demo can be run from documented commands, and the stated behavior has direct test or runtime evidence. A successful workflow with skipped deploy jobs is not deployment evidence.
+
+Current status: **no track is yet verified end-to-end against this gate**. FlashSale has the strongest backend evidence, but its deployment description needed correction; SmartDoc and IncidentIQ still have failed main checks. The three CV variants and interview scripts remain to be produced from verified results.
