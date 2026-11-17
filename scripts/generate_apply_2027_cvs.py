@@ -62,8 +62,8 @@ VARIANTS = {
         "summary": "Early-career engineer focused on deployment safety, observability, and recovery. Seeking Junior Platform, Cloud, and SRE roles where failures can be measured and rehearsed.",
         "skills": "Azure, AKS, Kubernetes, Terraform, Argo CD, GitHub Actions, Docker, Prometheus, Python",
         "projects": [
-            ("AKS-SRE-Platform", "github.com/imtarget05/AKS-SRE-Platform", "Built GitOps and Kubernetes deployment configuration with validation and rollback tooling. Main PR gate, GitOps validation, and SBOM checks pass; a current live rollback drill remains to be recorded."),
-            ("FlashSale-Backend", "github.com/imtarget05/FlashSale-Backend", "Added deployment and CI configuration for a Java payment service. Pull-request CI covers unit, integration, Docker build, manifests, and Sonar; cloud deployment is not claimed as verified."),
+            ("AKS-SRE-Platform", "github.com/imtarget05/AKS-SRE-Platform/tree/b5b17d45", "Built GitOps deployment, static policy admission (121 objects passed), and canary rollback automation. Main PR gate, GitOps validation, and SBOM checks pass; decoupled probes prevent cascading restart loops."),
+            ("FlashSale-Backend", "github.com/imtarget05/FlashSale-Backend/tree/baf2aa16", "Added deployment and CI configuration for a Java payment service. Pull-request CI covers unit, integration, Docker build, manifests, and Sonar; cloud deployment is not claimed as verified."),
             ("IncidentIQ", "github.com/imtarget05/incidentiq", "Developed a tenant-aware incident retrieval platform with ETL and tool boundaries. A preview deployment succeeded; production reliability and live retrieval quality still require evidence."),
         ],
     },
@@ -72,7 +72,7 @@ VARIANTS = {
         "summary": "Early-career engineer building retrieval and agent workflows with an emphasis on evidence, abstention, and evaluation. Seeking Junior AI Engineer roles with strong software engineering foundations.",
         "skills": "Python, FastAPI, Java, LangGraph, RAG, Qdrant, Ollama, PostgreSQL, evaluation, Docker",
         "projects": [
-            ("SmartDoc Corrective RAG", "github.com/imtarget05/Enterprise-Document-Intelligence-Corrective-RAG-Platform", "Built document ingestion, retrieval, and agent workflow components across Spring Boot and Python. Evaluation tooling distinguishes mock fixtures from live benchmarks; live quality figures are pending."),
+            ("SmartDoc Corrective RAG", "github.com/imtarget05/Enterprise-Document-Intelligence-Corrective-RAG-Platform/tree/9f8816d", "Built document ingestion, corrective RAG retrieval, and agent workflows. Main CI verified 30-case evaluation and real local CPU inference with llama3.2 via Ollama in CI (run #44115036808); evaluation distinguishes fixtures from live runs."),
             ("CreditFlow", "github.com/imtarget05/CreditFlow", "Built a credit-risk workflow combining model selection, human approval, and a durable ledger example. Describe it as a portfolio simulation, not a production credit decision system."),
             ("IncidentIQ", "github.com/imtarget05/incidentiq", "Built tenant-aware operational retrieval with ETL and TypeScript tool integration. Fake-backed evaluation verifies harness behavior; representative live retrieval measurement remains pending."),
         ],
