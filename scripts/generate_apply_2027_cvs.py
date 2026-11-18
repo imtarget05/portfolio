@@ -17,6 +17,7 @@ from reportlab.pdfgen import canvas
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "output" / "pdf"
+QUANLYKHO_VERIFIED_URL = "github.com/imtarget05/QuanLyKho/tree/2e753d1"
 FONT_DIR = Path("/System/Library/Fonts/Supplemental")
 pdfmetrics.registerFont(TTFont("ArialCV", str(FONT_DIR / "Arial.ttf")))
 pdfmetrics.registerFont(TTFont("ArialCV-Bold", str(FONT_DIR / "Arial Bold.ttf")))
@@ -44,7 +45,7 @@ VARIANTS = {
         "projects": [
             ("FlashSale-Backend", "github.com/imtarget05/FlashSale-Backend/tree/baf2aa16", "Duplicate and concurrent payment requests required consistent results. Implemented PostgreSQL idempotency and a RabbitMQ outbox; Java CI passed unit and Testcontainers integration checks on the cited commit. The payment provider is simulated."),
             ("retail-finance-core-platform", "github.com/imtarget05/retail-finance-core-platform/tree/7cc7069f", "Ledger retries and partner mismatches required traceable handling. Built Java/MySQL transaction and Python reconciliation examples; main CI passed MySQL 8 integration, a disposable Compose API demo, and reconciliation tests on the cited commit."),
-            ("QuanLyKho", "github.com/imtarget05/QuanLyKho/tree/2e753d1", "Inventory changes required approval and auditability. Built a FastAPI maker/checker workflow with double-entry general ledger, idempotency, and audit trails; main CI passed on the cited commit."),
+            ("QuanLyKho", QUANLYKHO_VERIFIED_URL, "Inventory changes required approval and auditability. Built a FastAPI maker/checker workflow with double-entry general ledger, idempotency, and audit trails; main CI passed on the cited commit."),
         ],
     },
     "backend-java": {
@@ -54,7 +55,7 @@ VARIANTS = {
         "projects": [
             ("FlashSale-Backend", "github.com/imtarget05/FlashSale-Backend/tree/baf2aa16", "Built a payment-service portfolio with PostgreSQL idempotency, RabbitMQ transactional outbox, Redis fallback, and JWT/OIDC boundaries. Unit and Testcontainers integration checks pass in GitHub CI; payment provider defaults to a simulator."),
             ("retail-finance-core-platform", "github.com/imtarget05/retail-finance-core-platform/tree/7cc7069f", "Implemented a finance transaction and reconciliation example with Java and Python services. Backend CI and CodeQL pass on main; use this project to explain ledger consistency and exception handling."),
-            ("QuanLyKho", "github.com/imtarget05/QuanLyKho/tree/2e753d1", "Built a FastAPI inventory and banking workflow with double-entry general ledger, 3-layer idempotency, and hash-chain audit trails. Main CI passed with 133 banking and 1,285+ overall tests on the cited commit."),
+            ("QuanLyKho", QUANLYKHO_VERIFIED_URL, "Built a FastAPI inventory and banking workflow with double-entry general ledger, 3-layer idempotency, and hash-chain audit trails. Main CI passed with 133 banking and 1,285+ overall tests on the cited commit."),
         ],
     },
     "platform-sre": {
@@ -62,9 +63,9 @@ VARIANTS = {
         "summary": "Early-career engineer focused on deployment safety, observability, and recovery. Seeking Junior Platform, Cloud, and SRE roles where failures can be measured and rehearsed.",
         "skills": "Azure, AKS, Kubernetes, Terraform, Argo CD, GitHub Actions, Docker, Prometheus, Python",
         "projects": [
-            ("AKS-SRE-Platform", "github.com/imtarget05/AKS-SRE-Platform/tree/b5b17d45", "Built GitOps deployment, static policy admission (121 objects passed), and canary rollback automation. Main PR gate, GitOps validation, and SBOM checks pass; decoupled probes prevent cascading restart loops."),
+            ("AKS-SRE-Platform", "github.com/imtarget05/AKS-SRE-Platform/tree/8413e972", "Built GitOps deployment checks and a reproducible kind rollback drill for the repo API. Main CI detected a bad image pull, kept two replicas ready, and restored the exact image with HTTP 200; its artifact records a 0.099-second rollback in that run. No live AKS claim."),
             ("FlashSale-Backend", "github.com/imtarget05/FlashSale-Backend/tree/baf2aa16", "Added deployment and CI configuration for a Java payment service. Pull-request CI covers unit, integration, Docker build, manifests, and Sonar; cloud deployment is not claimed as verified."),
-            ("IncidentIQ", "github.com/imtarget05/incidentiq", "Developed a tenant-aware incident retrieval platform with ETL and tool boundaries. A preview deployment succeeded; production reliability and live retrieval quality still require evidence."),
+            ("QuanLyKho", QUANLYKHO_VERIFIED_URL, "Built a FastAPI/PostgreSQL inventory workflow with maker/checker approvals and banking tests. Main CI passes; use its service as a separate workload when explaining deployment and recovery tradeoffs."),
         ],
     },
     "ai-engineer": {
