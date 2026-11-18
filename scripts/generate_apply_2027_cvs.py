@@ -62,9 +62,9 @@ VARIANTS = {
         "summary": "Early-career engineer focused on deployment safety, observability, and recovery. Seeking Junior Platform, Cloud, and SRE roles where failures can be measured and rehearsed.",
         "skills": "Azure, AKS, Kubernetes, Terraform, Argo CD, GitHub Actions, Docker, Prometheus, Python",
         "projects": [
-            ("AKS-SRE-Platform", "github.com/imtarget05/AKS-SRE-Platform/tree/b5b17d45", "Built GitOps deployment, static policy admission (121 objects passed), and canary rollback automation. Main PR gate, GitOps validation, and SBOM checks pass; decoupled probes prevent cascading restart loops."),
+            ("AKS-SRE-Platform", "github.com/imtarget05/AKS-SRE-Platform/tree/8413e972", "Built GitOps deployment checks and a reproducible kind rollback drill for the repo API. Main CI detected a bad image pull, kept two replicas ready, and restored the exact image with HTTP 200; its artifact records a 0.099-second rollback in that run. No live AKS claim."),
             ("FlashSale-Backend", "github.com/imtarget05/FlashSale-Backend/tree/baf2aa16", "Added deployment and CI configuration for a Java payment service. Pull-request CI covers unit, integration, Docker build, manifests, and Sonar; cloud deployment is not claimed as verified."),
-            ("IncidentIQ", "github.com/imtarget05/incidentiq", "Developed a tenant-aware incident retrieval platform with ETL and tool boundaries. A preview deployment succeeded; production reliability and live retrieval quality still require evidence."),
+            ("QuanLyKho", "github.com/imtarget05/QuanLyKho/tree/2e753d1", "Built a FastAPI/PostgreSQL inventory workflow with maker/checker approvals and banking tests. Main CI passes; use its service as a separate workload when explaining deployment and recovery tradeoffs."),
         ],
     },
     "ai-engineer": {
