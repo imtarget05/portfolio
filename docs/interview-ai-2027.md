@@ -12,7 +12,7 @@ Use this with the [AI CV](../output/pdf/mai-nguyen-binh-tan-ai-engineer-cv.pdf) 
 
 **3:20–4:10 — Failure handling.** Explain the circuit-breaker fault-injection test and the policy that confidential documents cannot fall back to a public provider. Show the test rather than claiming a live outage was handled. For IncidentIQ, PR #16's 30 synthetic cases used local keyword retrieval plus live Workers AI; that benchmark does not validate hosted hybrid retrieval.
 
-**4:10–5:00 — Limits.** SmartDoc's local benchmark corpus is small and synthetic. Live public API/agent, production latency and cloud cost are unverified. CreditFlow's 14 local synthetic scoring cases prove HTTP validation and actual model outputs, not model suitability for lending; the `past-defaults` fixture received APPROVE. IncidentIQ PRs still require review before main can be cited.
+**4:10–5:00 — Limits.** SmartDoc's local benchmark corpus is small and synthetic. Live public API/agent, production latency and cloud cost are unverified. CreditFlow's 14 local scoring cases and a separate REVIEW → approval → replay → ledger drill prove the synthetic API flow, not suitability for lending; the `past-defaults` scoring fixture received APPROVE. The graph run verified one disbursement row and audit record, with no real money movement. IncidentIQ PRs still require review before main can be cited.
 
 ## Questions to practice aloud
 
