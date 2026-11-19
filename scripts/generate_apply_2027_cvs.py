@@ -43,8 +43,8 @@ VARIANTS = {
         "summary": "Final-year UIT student applying for Bosch's Q1 2027 Fullstack Engineer Internship. Developed Java and Python services with database-backed tests, and contributed to React/Next.js and Node.js features during a fullstack internship.",
         "skills": "Java 17, Spring Boot, SQL, PostgreSQL, MySQL, REST APIs, React, Next.js, Node.js, Python, Docker, GitHub Actions",
         "projects": [
-            ("FlashSale-Backend", "github.com/imtarget05/FlashSale-Backend/tree/baf2aa16", "Duplicate and concurrent payment requests required consistent results. Implemented PostgreSQL idempotency and a RabbitMQ outbox; Java CI passed unit and Testcontainers integration checks on the cited commit. The payment provider is simulated."),
-            ("retail-finance-core-platform", "github.com/imtarget05/retail-finance-core-platform/tree/7cc7069f", "Ledger retries and partner mismatches required traceable handling. Built Java/MySQL transaction and Python reconciliation examples; main CI passed MySQL 8 integration, a disposable Compose API demo, and reconciliation tests on the cited commit."),
+            ("FlashSale-Backend", "github.com/imtarget05/FlashSale-Backend/tree/aa5ac1c", "Duplicate and concurrent payment requests required consistent results. Implemented PostgreSQL idempotency and a RabbitMQ outbox; 175 local Testcontainers tests and main Java CI passed. The payment provider is simulated."),
+            ("retail-finance-core-platform", "github.com/imtarget05/retail-finance-core-platform/tree/8bf4f57", "Ledger retries and partner mismatches required traceable handling. Built Java/MySQL transaction and Python reconciliation examples; 61 Java and 17 Python tests plus a disposable Compose API demo passed."),
             ("QuanLyKho", QUANLYKHO_VERIFIED_URL, "Inventory changes required approval and auditability. Built a FastAPI maker/checker workflow with double-entry general ledger, idempotency, and audit trails; main CI passed on the cited commit."),
         ],
     },
@@ -53,8 +53,8 @@ VARIANTS = {
         "summary": "Early-career engineer focused on reliable transaction APIs, idempotency, and testable distributed workflows. Seeking Junior Backend roles in banking, fintech, and enterprise software.",
         "skills": "Java 17, Spring Boot, REST APIs, PostgreSQL, Redis, RabbitMQ, Docker, GitHub Actions, Python",
         "projects": [
-            ("FlashSale-Backend", "github.com/imtarget05/FlashSale-Backend/tree/baf2aa16", "Built a payment-service portfolio with PostgreSQL idempotency, RabbitMQ transactional outbox, Redis fallback, and JWT/OIDC boundaries. Unit and Testcontainers integration checks pass in GitHub CI; payment provider defaults to a simulator."),
-            ("retail-finance-core-platform", "github.com/imtarget05/retail-finance-core-platform/tree/7cc7069f", "Implemented a finance transaction and reconciliation example with Java and Python services. Backend CI and CodeQL pass on main; use this project to explain ledger consistency and exception handling."),
+            ("FlashSale-Backend", "github.com/imtarget05/FlashSale-Backend/tree/aa5ac1c", "Built a payment-service portfolio with PostgreSQL idempotency, RabbitMQ transactional outbox, Redis fallback, and JWT/OIDC boundaries. Local 175-test suite and main Java CI pass; payment provider defaults to a simulator."),
+            ("retail-finance-core-platform", "github.com/imtarget05/retail-finance-core-platform/tree/8bf4f57", "Implemented a finance transaction and reconciliation example with Java and Python services. Main backend CI and CodeQL pass; local replay, concurrency, overdraft, audit and reconciliation demo is documented."),
             ("QuanLyKho", QUANLYKHO_VERIFIED_URL, "Built a FastAPI inventory and banking workflow with double-entry general ledger, 3-layer idempotency, and hash-chain audit trails. Main CI passed with 133 banking and 1,285+ overall tests on the cited commit."),
         ],
     },
@@ -63,8 +63,8 @@ VARIANTS = {
         "summary": "Early-career engineer focused on deployment safety, observability, and recovery. Seeking Junior Platform, Cloud, and SRE roles where failures can be measured and rehearsed.",
         "skills": "Azure, AKS, Kubernetes, Terraform, Argo CD, GitHub Actions, Docker, Prometheus, Python",
         "projects": [
-            ("AKS-SRE-Platform", "github.com/imtarget05/AKS-SRE-Platform/tree/8413e972", "Built GitOps deployment checks and a reproducible kind rollback drill for the repo API. Main CI detected a bad image pull, kept two replicas ready, and restored the exact image with HTTP 200; its artifact records a 0.099-second rollback in that run. No live AKS claim."),
-            ("FlashSale-Backend", "github.com/imtarget05/FlashSale-Backend/tree/baf2aa16", "Added deployment and CI configuration for a Java payment service. Pull-request CI covers unit, integration, Docker build, manifests, and Sonar; cloud deployment is not claimed as verified."),
+            ("AKS-SRE-Platform", "github.com/imtarget05/AKS-SRE-Platform/tree/4eaa0ec", "Built GitOps checks and a reproducible local kind rollback drill. An induced ErrImagePull left two replicas serving HTTP 200; rollout undo restored the exact image. The 0.143-second command timing is not outage recovery time. No live AKS claim."),
+            ("FlashSale-Backend", "github.com/imtarget05/FlashSale-Backend/tree/aa5ac1c", "Added deployment and CI configuration for a Java payment service. Main CI covers unit, integration, Docker build, manifests, and Sonar; cloud deployment is not claimed as verified."),
             ("QuanLyKho", QUANLYKHO_VERIFIED_URL, "Built a FastAPI/PostgreSQL inventory workflow with maker/checker approvals and banking tests. Main CI passes; use its service as a separate workload when explaining deployment and recovery tradeoffs."),
         ],
     },
@@ -73,9 +73,9 @@ VARIANTS = {
         "summary": "Early-career engineer building retrieval and agent workflows with an emphasis on evidence, abstention, and evaluation. Seeking Junior AI Engineer roles with strong software engineering foundations.",
         "skills": "Python, FastAPI, Java, LangGraph, RAG, Qdrant, Ollama, PostgreSQL, evaluation, Docker",
         "projects": [
-            ("SmartDoc Corrective RAG", "github.com/imtarget05/Enterprise-Document-Intelligence-Corrective-RAG-Platform/tree/9f8816d", "Built document ingestion, corrective RAG retrieval, and agent workflows. Main CI verified 30-case evaluation and real local CPU inference with llama3.2 via Ollama in CI (run #44115036808); evaluation distinguishes fixtures from live runs."),
-            ("CreditFlow", "github.com/imtarget05/CreditFlow", "Built a credit-risk workflow combining model selection, human approval, and a durable ledger example. Describe it as a portfolio simulation, not a production credit decision system."),
-            ("IncidentIQ", "github.com/imtarget05/incidentiq", "Built tenant-aware operational retrieval with ETL and TypeScript tool integration. Fake-backed evaluation verifies harness behavior; representative live retrieval measurement remains pending."),
+            ("SmartDoc Corrective RAG", "github.com/imtarget05/Enterprise-Document-Intelligence-Corrective-RAG-Platform/tree/f491cf9", "Built document ingestion, corrective RAG retrieval, and agent workflows. Main evaluation separates fixtures from a 15-question local Ollama benchmark with dataset and model provenance. Azure deploy is manual and not verified live."),
+            ("CreditFlow", "github.com/imtarget05/CreditFlow/tree/9a0444b", "Built a simulated credit-risk workflow with model selection and human approval. The local API image passed 14 synthetic HTTP cases after fixing startup dependencies; model decisions are not validated for lending."),
+            ("IncidentIQ", "github.com/imtarget05/incidentiq/pull/16", "Built tenant-aware retrieval with ETL and TypeScript integration. PR CI and Sonar pass; a 30-case local keyword retrieval benchmark uses live Workers AI, while hosted hybrid quality and PR review remain open."),
         ],
     },
 }
