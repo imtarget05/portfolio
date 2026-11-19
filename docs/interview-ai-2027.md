@@ -25,4 +25,4 @@ Use this with the [AI CV](../output/pdf/mai-nguyen-binh-tan-ai-engineer-cv.pdf) 
 | Is IncidentIQ hybrid retrieval ready? | No. The recorded local run is keyword only, and the hosted hybrid preview had weak fresh-document recall. PR #16 is still awaiting review. |
 | Why no Azure demo? | The hostnames did not resolve and the last Azure deploy failed login. Local tests support the current claim; no live cloud result is asserted. |
 
-Practice with the raw result JSON and identify one retrieval miss, one abstention and one limitation without looking at the script. A human rehearsal remains to be completed.
+Practice with the raw result JSON and identify one answer-rubric miss, one abstention and one limitation without looking at the script. A human rehearsal remains to be completed.
