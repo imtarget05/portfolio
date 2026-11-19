@@ -74,7 +74,7 @@ VARIANTS = {
         "skills": "Python, FastAPI, Java, LangGraph, RAG, Qdrant, Ollama, PostgreSQL, evaluation, Docker",
         "projects": [
             ("SmartDoc Corrective RAG", "github.com/imtarget05/Enterprise-Document-Intelligence-Corrective-RAG-Platform/tree/08478ac", "Built document ingestion, corrective RAG retrieval, and agent workflows. Main CI and evaluation pass; a 15-question local Ollama benchmark records source hits, abstention, and latency. Cloud deployment is unverified."),
-            ("CreditFlow", "github.com/imtarget05/CreditFlow/tree/ec6c381", "Built a simulated credit-risk workflow with model selection and human approval. The local API image passed 14 synthetic HTTP cases after fixing startup dependencies; model decisions are not validated for lending."),
+            ("CreditFlow", "github.com/imtarget05/CreditFlow/tree/4085404", "Built a simulated credit-risk workflow with model selection and human approval. Local API checks passed 14 synthetic scoring cases and a REVIEW-to-approval replay drill with one ledger row; lending decisions are not validated."),
         ],
     },
 }
