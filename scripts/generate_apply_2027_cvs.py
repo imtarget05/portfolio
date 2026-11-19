@@ -73,9 +73,8 @@ VARIANTS = {
         "summary": "Early-career engineer building retrieval and agent workflows with an emphasis on evidence, abstention, and evaluation. Seeking Junior AI Engineer roles with strong software engineering foundations.",
         "skills": "Python, FastAPI, Java, LangGraph, RAG, Qdrant, Ollama, PostgreSQL, evaluation, Docker",
         "projects": [
-            ("SmartDoc Corrective RAG", "github.com/imtarget05/Enterprise-Document-Intelligence-Corrective-RAG-Platform/tree/f491cf9", "Built document ingestion, corrective RAG retrieval, and agent workflows. Main evaluation separates fixtures from a 15-question local Ollama benchmark with dataset and model provenance. Azure deploy is manual and not verified live."),
-            ("CreditFlow", "github.com/imtarget05/CreditFlow/tree/9a0444b", "Built a simulated credit-risk workflow with model selection and human approval. The local API image passed 14 synthetic HTTP cases after fixing startup dependencies; model decisions are not validated for lending."),
-            ("IncidentIQ", "github.com/imtarget05/incidentiq/pull/16", "Built tenant-aware retrieval with ETL and TypeScript integration. PR CI and Sonar pass; a 30-case local keyword retrieval benchmark uses live Workers AI, while hosted hybrid quality and PR review remain open."),
+            ("SmartDoc Corrective RAG", "github.com/imtarget05/Enterprise-Document-Intelligence-Corrective-RAG-Platform/tree/08478ac", "Built document ingestion, corrective RAG retrieval, and agent workflows. Main CI and evaluation pass; a 15-question local Ollama benchmark records source hits, abstention, and latency. Cloud deployment is unverified."),
+            ("CreditFlow", "github.com/imtarget05/CreditFlow/tree/ec6c381", "Built a simulated credit-risk workflow with model selection and human approval. The local API image passed 14 synthetic HTTP cases after fixing startup dependencies; model decisions are not validated for lending."),
         ],
     },
 }
