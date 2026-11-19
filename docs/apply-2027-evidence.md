@@ -15,6 +15,8 @@ Snapshot: 2026-11-19. This ledger distinguishes source, tests, local or hosted r
 
 ## Application gate
 
+Practice guides: [Backend](interview-backend-2027.md), [Platform/SRE](interview-platform-2027.md), and [AI Engineer](interview-ai-2027.md). These are scripts to rehearse, not evidence that a human practice interview has happened.
+
 Each CV must select at most three relevant repositories. A quantitative bullet must point to an artifact produced from the cited source commit, and the main CI must pass on the commit linked from the CV. A passing build with skipped deployment jobs is not deployment evidence. Local kind, disposable Compose, local Ollama and hosted preview results must retain those labels. No Azure resource needs to be created to complete a localhost demo.
 
 **Do not send applications yet.** The user explicitly asked to complete all projects first. Outstanding work includes IncidentIQ PR reviews and hosted hybrid evaluation, adaptiveops Sonar configuration or a truthful decision to omit it from CVs, a fuller SmartDoc local app demo, CreditFlow graph/ledger demonstration, and a human 5-minute interview defense for each selected project. No application or interview result is claimed.
