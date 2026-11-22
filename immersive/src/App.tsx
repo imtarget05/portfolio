@@ -20,8 +20,13 @@ export function App() {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const saved = localStorage.getItem('immersive-lang');
-    if (saved === 'en' || saved === 'vi') setLang(saved);
+    try {
+      const storage = typeof window !== 'undefined' ? window.localStorage : null;
+      const saved = storage?.getItem('immersive-lang');
+      if (saved === 'en' || saved === 'vi') setLang(saved);
+    } catch {
+      // Storage unavailable or restricted
+    }
   }, []);
 
   const { scrollYProgress } = useScroll({
