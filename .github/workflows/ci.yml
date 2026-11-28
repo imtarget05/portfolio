@@ -27,17 +27,18 @@ jobs:
 
       - name: Security audit — npm audit
         run: npm audit --audit-level=high
-        continue-on-error: true
+
+      - name: Security audit — immersive
+        run: npm audit --prefix ./immersive --audit-level=high
 
       - name: Security scan — detect hardcoded secrets
         run: |
           echo "Scanning for hardcoded credentials..."
-          if rg -i 'postgresql://[^[:space:]]*@[^[:space:]]*' src/ immersive/ workers/ --no-heading 2>/dev/null | grep -v 'DATABASE_URL' | grep -v 'your_cloudflare' | grep -v 'dummy:'; then
+          if git grep -IlE 'postgres(ql)?://[^/[:space:]]+:[^@[:space:]]+@' -- src immersive workers scripts; then
             echo "❌ Hardcoded database credentials detected!"
             exit 1
           fi
           echo "✅ No hardcoded credentials found"
-        continue-on-error: true
 
       - name: Lint Next.js
         run: npm run lint
@@ -54,15 +55,21 @@ jobs:
         run: npm run lint --prefix ./immersive
 
       - name: Typecheck immersive
-        run: npx tsc --noEmit --prefix ./immersive
+        run: npm exec --prefix ./immersive -- tsc --noEmit -p immersive/tsconfig.json
 
       - name: Build immersive (Vite)
         run: npm run build --prefix ./immersive
 
+      - name: Test immersive
+        run: npm test --prefix ./immersive
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
       - name: Run Playwright E2E
         run: npx playwright test
         env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DATABASE_URL: postgresql://dummy:dummy@localhost:5432/dummy
 
       - name: Run Lighthouse CI
         run: npx lighthouse http://localhost:3000 --output=json --output-path=./lighthouse-report.json --chrome-flags="--headless --no-sandbox --disable-gpu"
@@ -75,37 +82,5 @@ jobs:
           name: lighthouse-report
           path: ./lighthouse-report.json
 
-  deploy:
-    needs: quality-gates
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' && needs.quality-gates.result == 'success'
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: Install Wrangler
-        run: npm install -g wrangler
-
-      - name: Deploy immersive 3D to Workers Static Assets
-        working-directory: ./immersive
-        run: wrangler pages deploy dist --project-name=immersive-3d
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-
-      - name: Deploy portfolio API Worker
-        run: wrangler deploy
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-
-      - name: Trigger Render deploy (fallback)
-        run: |
-          echo "Render autoDeploy disabled. Render kept as fallback."
-          echo "Add RENDER_DEPLOY_HOOK secret to enable automatic deployment after CI passes."
-        # curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
+  # Production deployment is intentionally not automated until a real preview
+  # environment and staging smoke tests are configured and verified.

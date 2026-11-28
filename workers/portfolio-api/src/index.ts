@@ -168,10 +168,10 @@ export default {
       const featured = projects.filter((p) => p.featured);
 
       return json({
-        publicRepos: 60,
+        publicRepos: null,
         flagshipProjects: featured.length,
         engineeringDomains: 6,
-        totalTestsPassing: 1460,
+        totalTestsPassing: null,
         roles: ['backend', 'devops', 'ai', 'network', 'bank', 'erp'],
         lastUpdated: new Date().toISOString(),
       });

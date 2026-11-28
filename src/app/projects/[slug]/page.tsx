@@ -1,8 +1,7 @@
 import { Project, projects } from '@/content/data';
 import { projectEvidence } from '@/content/projectEvidence';
-import { Metadata } from 'next';
 import Link from 'next/link';
-import { useLang } from '@/components/LanguageProvider';
+import { notFound } from 'next/navigation';
 import { ExternalLink, Github, Layers, ShieldAlert, Code2, Activity, Database, ArrowUpRight } from 'lucide-react';
 import { MermaidDiagram } from '@/components/MermaidDiagram';
 
@@ -15,13 +14,10 @@ interface ProjectDetailProps {
 }
 
 export default function ProjectDetail({ params }: ProjectDetailProps) {
-  const { lang } = useLang();
+  const lang: 'en' | 'vi' = 'en';
   const project: Project | undefined = projects.find((p) => p.id === params.slug);
-  const evidence = projectEvidence[project!.id];
-
-  if (!project) {
-    return <h1 className="text-2xl font-bold">Project not found</h1>;
-  }
+  if (!project) notFound();
+  const evidence = projectEvidence[project.id];
 
   return (
     <section id="project-detail" className="section project-detail-section">

@@ -1,0 +1,62 @@
+flowchart TD
+    subgraph USER["👥 End Users"]
+        V[Visitor / Recruiter]
+        T[Technical Lead]
+    end
+
+    subgraph CF["☁️ Cloudflare Edge"]
+        DNS[Cloudflare DNS]
+        TLS[Cloudflare TLS / HTTPS]
+        CDN[Cloudflare CDN Cache]
+        WAF[Cloudflare WAF / Rate Limit]
+    end
+
+    subgraph STATIC["📦 Static Assets (Workers Pages)"]
+        IMM[Immersive 3D App - Vite Build]
+        ASSETS[CSS, JS, Images, 3D Models]
+    end
+
+    subgraph API["🔧 Serverless API (Workers)"]
+        CHAT[Chat API - /api/chat]
+        HEALTH[Health Check - /api/health]
+        AI[Cloudflare Workers AI + Vectorize]
+    end
+
+    subgraph RENDER["🐳 Render Web Service (Docker)"]
+        NEXT[Next.js 14 Standalone App]
+        DB[(Neon PostgreSQL - Chat History)]
+    end
+
+    subgraph MON["📊 Observability"]
+        LOGS[Cloudflare Workers Logs]
+        METRICS[Render Metrics]
+        ALERT[Alerting]
+    end
+
+    V --> DNS
+    T --> DNS
+    DNS --> TLS
+    TLS --> WAF
+    WAF --> CDN
+
+    CDN -->|/immersive/*| STATIC
+    CDN -->|/api/*| API
+    CDN -->|/*| NEXT
+
+    STATIC --> ASSETS
+    API --> CHAT
+    API --> HEALTH
+    CHAT --> AI
+    NEXT --> DB
+    NEXT --> AI
+
+    NEXT --> LOGS
+    API --> LOGS
+    LOGS --> METRICS
+    METRICS --> ALERT
+
+    style CF fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    style STATIC fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+    style API fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+    style RENDER fill:#fff3e0,stroke:#e65100,stroke-width:2px
+    style MON fill:#eceff1,stroke:#455a64,stroke-width:2px
