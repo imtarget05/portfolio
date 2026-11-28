@@ -18,11 +18,11 @@ COPY . .
 # Build Next.js application
 RUN npm run build
 
-# Build Vite immersive 3D application
-RUN npm run build --prefix ./immersive
+# Build the separate Vite application for a non-conflicting public path.
+RUN VITE_BASE_PATH=/universe/ npm run build --prefix ./immersive
 
-# Copy immersive static output into Next.js public so it is served at /immersive
-RUN mkdir -p public/immersive && cp -r immersive/dist/* public/immersive/
+# /immersive is already a Next.js route; keep the Vite app at /universe/.
+RUN mkdir -p public/universe && cp -r immersive/dist/* public/universe/
 
 # Stage 2: Runtime
 FROM node:20-alpine AS runner

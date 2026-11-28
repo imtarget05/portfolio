@@ -1,0 +1,14 @@
+.git
+.next
+node_modules
+immersive/node_modules
+immersive/dist
+.env
+.env.*
+!.env.example
+.wrangler
+immersive/.wrangler
+coverage
+playwright-report
+test-results
+*.tsbuildinfo

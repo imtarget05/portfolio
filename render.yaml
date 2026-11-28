@@ -4,8 +4,6 @@ services:
     env: docker
     repo: https://github.com/imtarget05/portfolio
     dockerfilePath: ./Dockerfile
-    buildCommand: "npm run build"
-    startCommand: "npm start"
     envVars:
       - key: NODE_ENV
         value: production
@@ -16,14 +14,14 @@ services:
       - key: DATABASE_URL
         sync: false
       - key: CLOUDFLARE_ACCOUNT_ID
-        value: your_cloudflare_account_id
+        sync: false
       - key: CLOUDFLARE_API_TOKEN
-        value: your_cloudflare_api_token
+        sync: false
       - key: CLOUDFLARE_AI_MODEL
         value: "@cf/meta/llama-3.1-8b-instruct"
       - key: VECTORIZE_INDEX_ID
-        value: your_vectorize_index_id
+        sync: false
       - key: VECTORIZE_API_TOKEN
-        value: your_cloudflare_api_token
+        sync: false
     healthCheckPath: /
     autoDeploy: false

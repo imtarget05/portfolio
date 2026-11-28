@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { useLang } from './LanguageProvider';
 import { useMode, PortfolioMode } from './ModeProvider';
@@ -28,7 +27,9 @@ export function ModeToggle() {
       <button
         onClick={() => setMode(nextMode)}
         className={`p-3 rounded-lg border border-border bg-card text-foreground shadow-lg transition-all ${isTechnicalLead ? 'ring-2 ring-primary' : ''}`}
-        aria-label={lang === 'en' ? 'Switch to Technical Lead Mode' : 'Chuyển sang Chế độ Trưởng Kỹ thuật'}
+        aria-label={isTechnicalLead
+          ? (lang === 'en' ? 'Switch to Recruiter Mode' : 'Chuyển sang Chế độ Nhà tuyển dụng')
+          : (lang === 'en' ? 'Switch to Technical Lead Mode' : 'Chuyển sang Chế độ Trưởng Kỹ thuật')}
         title={isTechnicalLead
           ? (lang === 'en' ? 'Switch to Recruiter Mode' : 'Chuyển sang Chế độ Nhà tuyển dụng')
           : (lang === 'en' ? 'Switch to Technical Lead Mode' : 'Chuyển sang Chế độ Trưởng Kỹ thuật')}

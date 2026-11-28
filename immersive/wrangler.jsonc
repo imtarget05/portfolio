@@ -1,7 +1,6 @@
 {
   "$schema": "https://schemas.cloudflare.com/wrangler/v3-2025-01-17/json-schema/",
   "name": "immersive-3d",
-  "main": "src/main.tsx",
   "compatibility_date": "2026-11-28",
   "assets": {
     "directory": "./dist",

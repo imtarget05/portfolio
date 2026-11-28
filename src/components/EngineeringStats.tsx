@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { useLang } from './LanguageProvider'
 import { BarChart3, Layers, ShieldCheck, Code, Terminal, Database } from 'lucide-react'
 
 // Fallback stats khi chưa fetch được API

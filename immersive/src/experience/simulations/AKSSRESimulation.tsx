@@ -2,13 +2,13 @@ import { SimulationContainer, SimulationNode, SimulationEdge } from './Simulatio
 
 export function AKSSRESimulation() {
   const nodes: SimulationNode[] = [
-    { id: 'git', label: 'Git Repo', type: 'client', position: [-4, 2, 0], color: '#f59e0b', active: true, pulse: 0 },
-    { id: 'argocd', label: 'Argo CD', type: 'api', position: [0, 2, 0], color: '#3b82f6', active: true, pulse: 0 },
-    { id: 'aks', label: 'AKS Cluster', type: 'api', position: [4, 2, 0], color: '#3b82f6', active: true, pulse: 0 },
-    { id: 'pod-blue', label: 'Pod Blue (v1)', type: 'worker', position: [-2, -2, 0], color: '#10b981', active: true, pulse: 0 },
-    { id: 'pod-green', label: 'Pod Green (v2)', type: 'worker', position: [2, -2, 0], color: '#10b981', active: false, pulse: 0 },
-    { id: 'lb', label: 'Load Balancer', type: 'cache', position: [4, -2, 0], color: '#a855f7', active: true, pulse: 0 },
-    { id: 'mon', label: 'Prometheus+Grafana', type: 'db', position: [0, -4, 0], color: '#ef4444', active: true, pulse: 0 },
+    { id: 'git', label: 'Git Repo', type: 'client', position: { x: 100, y: 100 }, color: '#f59e0b', active: true },
+    { id: 'argocd', label: 'Argo CD', type: 'api', position: { x: 300, y: 100 }, color: '#3b82f6', active: true },
+    { id: 'aks', label: 'AKS Cluster', type: 'api', position: { x: 500, y: 100 }, color: '#3b82f6', active: true },
+    { id: 'pod-blue', label: 'Pod Blue (v1)', type: 'worker', position: { x: 150, y: 300 }, color: '#10b981', active: true },
+    { id: 'pod-green', label: 'Pod Green (v2)', type: 'worker', position: { x: 450, y: 300 }, color: '#10b981', active: false },
+    { id: 'lb', label: 'Load Balancer', type: 'cache', position: { x: 600, y: 300 }, color: '#a855f7', active: true },
+    { id: 'mon', label: 'Prometheus+Grafana', type: 'db', position: { x: 300, y: 450 }, color: '#ef4444', active: true },
   ];
 
   const edges: SimulationEdge[] = [
