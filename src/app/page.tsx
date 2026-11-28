@@ -11,26 +11,33 @@ import { Contact } from '@/components/Contact';
 import { ApplyCTA } from '@/components/ApplyCTA';
 import { Footer } from '@/components/Footer';
 import { LanguageProvider } from '@/components/LanguageProvider';
+import { ModeProvider } from '@/components/ModeProvider';
 import { ChatWidget } from '@/components/ChatWidget';
+import { EngineeringStats } from '@/components/EngineeringStats';
+import { ModeToggle } from '@/components/ModeToggle';
 
 export default function Home() {
   return (
-    <LanguageProvider>
-      <main className="flex-grow">
-        <Hero3D />
-        <CVTimeline />
-        <About />
-        <LicensesCertifications />
-        <Expertise />
-        <FeaturedProjects />
-        <TechStack />
-        <Services />
-        <Experience />
-        <Contact />
-        <ApplyCTA />
-        <ChatWidget />
-      </main>
-      <Footer />
-    </LanguageProvider>
+    <ModeProvider>
+      <LanguageProvider>
+        <main className="flex-grow">
+          <Hero3D />
+          <ModeToggle />
+          <EngineeringStats />
+          <CVTimeline />
+          <About />
+          <LicensesCertifications />
+          <Expertise />
+          <FeaturedProjects />
+          <TechStack />
+          <Services />
+          <Experience />
+          <Contact />
+          <ApplyCTA />
+          <ChatWidget />
+        </main>
+        <Footer />
+      </LanguageProvider>
+    </ModeProvider>
   );
 }

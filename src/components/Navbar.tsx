@@ -26,14 +26,16 @@ export function Navbar({ lang, setLang, t }: NavbarProps) {
 
   const links = [
     { key: 'nav.about', href: '#about' },
-    { key: 'nav.licenses', href: '#licenses' },
     { key: 'nav.expertise', href: '#expertise' },
     { key: 'nav.skills', href: '/skills' },
     { key: 'nav.projects', href: '#projects' },
+    { key: 'nav.roles', href: '/roles/backend' },
+    { key: 'nav.immersive', href: '/immersive' },
     { key: 'nav.tech', href: '#tech' },
-    { key: 'nav.services', href: '#services' },
     { key: 'nav.experience', href: '#experience' },
+    { key: 'nav.services', href: '#services' },
     { key: 'nav.contact', href: '#contact' },
+    { key: 'nav.career', href: '/cv' },
     { key: 'nav.apply', href: '#apply' },
   ];
 

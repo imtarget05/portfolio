@@ -205,11 +205,24 @@ export interface Project {
   id: string;
   title: { en: string; vi: string };
   category: { en: string; vi: string };
+  roleFit: ProjectRoleFit;
   description: { en: string; vi: string };
   tech: string[];
   github: string;
   image?: string;
   featured: boolean;
+  order?: number;
+  problem?: string;
+  problemVi?: string;
+  solution?: string;
+  solutionVi?: string;
+  architecture?: string;
+  engineeringDecisions?: string[];
+  evidence?: { label: string; url: string }[];
+  limitations?: string;
+  status?: string;
+  githubUrl?: string;
+  demoUrl?: string | null;
 }
 
 export interface Service {
@@ -250,24 +263,27 @@ export const nav = {
   expertise: { en: 'Expertise', vi: 'Chuyên môn' },
   skills: { en: 'Skills', vi: 'Kỹ năng' },
   projects: { en: 'Projects', vi: 'Dự án' },
+  roles: { en: 'Roles', vi: 'Vị trí' },
+  immersive: { en: 'Immersive 3D', vi: '3D Đầy Đủ' },
   tech: { en: 'Tech Stack', vi: 'Công nghệ' },
   experience: { en: 'Experience', vi: 'Kinh nghiệm' },
   services: { en: 'Services', vi: 'Dịch vụ' },
   contact: { en: 'Contact', vi: 'Liên hệ' },
+  career: { en: 'Career Center', vi: 'Trung tâm Nghề nghiệp' },
 };
 
 export const hero = {
   headline: {
-    en: 'Software Engineer — Backend, Cloud Infrastructure & Applied AI',
-    vi: 'Kỹ sư phần mềm — Backend, Hạ tầng đám mây & AI ứng dụng',
+    en: 'Software & Cloud Engineer',
+    vi: 'Kỹ sư Phần mềm & Đám mây',
   },
   subheadline: {
-    en: "I'm a Fullstack Software Engineer specializing in backend development, cloud infrastructure, and AI-powered applications.",
-    vi: "Tôi là kỹ sư phần mềm tập trung vào backend, hạ tầng đám mây và ứng dụng AI.",
+    en: 'Backend Systems · DevOps · Applied AI',
+    vi: 'Hệ thống Backend · DevOps · AI Ứng dụng',
   },
   cta: {
-    en: 'Have a project in mind? Let’s build something great.',
-    vi: 'Có dự án nào trong đầu? Hãy cùng xây dựng điều tuyệt vời.',
+    en: 'Explore my engineering work',
+    vi: 'Khám phá công việc kỹ thuật của tôi',
   },
   buttonWork: { en: 'View My Work', vi: 'Xem công việc của tôi' },
   buttonContact: { en: "Let's Work Together", vi: 'Hãy làm việc cùng nhau' },
@@ -275,184 +291,288 @@ export const hero = {
 
 export const about = {
   title: { en: 'About Me', vi: 'Về Tôi' },
-  introEn: `I'm a Fullstack Software Engineer specializing in backend development, cloud infrastructure, and AI-powered applications. I build scalable, reliable software systems that solve real business problems — from enterprise applications and distributed services to intelligent automation.`,
-  introVi: `Tôi là kỹ sư phần mềm tập trung vào backend, hạ tầng đám mây và ứng dụng AI. Tôi xây dựng các giải pháp phần mềm giải quyết bài toán thực tế của doanh nghiệp, từ ứng dụng quản lý, hệ thống phân tán đến tự động hóa thông minh.`,
-  focusEn: `My focus is on clean architecture, performance, maintainability, and delivering practical solutions from development to deployment.`,
-  focusVi: `Tôi chú trọng kiến trúc rõ ràng, hiệu năng, khả năng bảo trì và khả năng triển khai vận hành thực tế.`,
+  introEn: `I'm a Software & Cloud Engineer focused on backend reliability, infrastructure automation, and applied AI. I build systems that work beyond the demo — with transactional reliability, GitOps delivery, and verifiable engineering evidence.`,
+  introVi: `Tôi là Kỹ sư Phần mềm & Đám mây tập trung vào độ tin cậy backend, tự động hóa hạ tầng và AI ứng dụng. Tôi xây dựng các hệ thống vận hành được ngoài bản demo — với độ tin cậy giao dịch, triển khai GitOps và bằng chứng kỹ thuật có thể xác minh.`,
+  focusEn: `My focus is on clean architecture, performance, maintainability, and delivering practical solutions from development to deployment — backed by tests, CI, and honest boundaries.`,
+  focusVi: `Tôi chú trọng kiến trúc rõ ràng, hiệu năng, khả năng bảo trì và khả năng triển khai vận hành thực tế — được hỗ trợ bởi kiểm thử, CI và ranh giới trung thực.`,
 };
 
 export const expertise = {
   title: { en: 'Expertise', vi: 'Chuyên Môn' },
   items: [
     {
-      title: { en: 'Fullstack Development', vi: 'Phát triển Fullstack' },
-      desc: { en: 'Websites, web applications, mobile apps and admin dashboards.', vi: 'Website, ứng dụng web, ứng dụng di động và dashboard quản trị.' },
-    },
-    {
       title: { en: 'Backend & Software Engineering', vi: 'Backend & Kỹ thuật Phần mềm' },
-      desc: { en: 'REST API, microservices, distributed systems, databases, authentication & business logic.', vi: 'REST API, microservices, hệ thống phân tán, cơ sở dữ liệu, xác thực và logic nghiệp vụ.' },
+      desc: { en: 'REST API, microservices, distributed systems, databases, authentication & business logic. Transactional reliability, idempotency, and failure recovery.', vi: 'REST API, microservices, hệ thống phân tán, cơ sở dữ liệu, xác thực và logic nghiệp vụ. Độ tin cậy giao dịch, idempotency và khôi phục khi lỗi.' },
     },
     {
       title: { en: 'Cloud & DevOps', vi: 'Cloud & DevOps' },
-      desc: { en: 'Docker, Kubernetes, CI/CD, Azure, AWS, monitoring and deployment.', vi: 'Docker, Kubernetes, CI/CD, Azure, AWS, giám sát và triển khai.' },
+      desc: { en: 'Docker, Kubernetes, CI/CD, Azure, AWS, Terraform, Argo CD, OpenTelemetry. Infrastructure as Code, GitOps, monitoring, security policy, rollback.', vi: 'Docker, Kubernetes, CI/CD, Azure, AWS, Terraform, Argo CD, OpenTelemetry. Hạ tầng dưới dạng mã, GitOps, giám sát, chính sách bảo mật, rollback.' },
     },
     {
-      title: { en: 'AI Integration & Automation', vi: 'Tích hợp AI & Tự động hóa' },
-      desc: { en: 'LLM, RAG, AI Agents, workflow automation and AI integration for enterprises.', vi: 'LLM, RAG, AI Agents, tự động hóa quy trình và tích hợp AI vào phần mềm doanh nghiệp.' },
+      title: { en: 'Applied AI Engineering', vi: 'Kỹ thuật AI Ứng dụng' },
+      desc: { en: 'LLM, RAG, LangGraph, Qdrant, MCP. AI incident triage, document intelligence, and AI-assisted incident response.', vi: 'LLM, RAG, LangGraph, Qdrant, MCP. Phân loại sự cố AI, trí tuệ tài liệu và AI hỗ trợ xử lý sự cố.' },
+    },
+    {
+      title: { en: 'Enterprise Software Engineering', vi: 'Kỹ thuật Phần mềm Doanh nghiệp' },
+      desc: { en: 'Business logic, inventory management, double-entry bookkeeping, RBAC, Maker–Checker approval workflows.', vi: 'Logic nghiệp vụ, quản lý tồn kho, sổ cái kép, phân quyền và quy trình duyệt Người tạo–Người duyệt.' },
     },
   ],
+};
+
+export type RoleKey = 'backend' | 'devops' | 'ai' | 'network' | 'bank' | 'erp';
+
+export interface ProjectRoleFit {
+  backend: number;
+  devops: number;
+  ai: number;
+  bank: number;
+  network: number;
+  erp: number;
+}
+
+export interface RoleConfig {
+  key: RoleKey;
+  title: { en: string; vi: string };
+  subtitle: { en: string; vi: string };
+  description: { en: string; vi: string };
+  primaryColor: string;
+}
+
+export const roleConfigs: Record<RoleKey, RoleConfig> = {
+  backend: {
+    key: 'backend',
+    title: { en: 'Backend / Software Engineer', vi: 'Kỹ sư Backend / Phần mềm' },
+    subtitle: { en: 'Backend Engineering', vi: 'Kỹ thuật Backend' },
+    description: {
+      en: 'Transactional reliability, concurrency control, idempotency, and failure recovery in distributed backend systems.',
+      vi: 'Độ tin cậy giao dịch, kiểm soát đồng thời, idempotency và khôi phục khi lỗi trong hệ thống backend phân tán.',
+    },
+    primaryColor: 'primary',
+  },
+  devops: {
+    key: 'devops',
+    title: { en: 'DevOps / Cloud Engineer', vi: 'Kỹ sư DevOps / Cloud' },
+    subtitle: { en: 'Cloud & Platform Engineering', vi: 'Kỹ thuật Cloud & Nền tảng' },
+    description: {
+      en: 'Infrastructure as Code, GitOps, observability, security policy, and rollback on Kubernetes.',
+      vi: 'Hạ tầng dưới dạng mã, GitOps, quan sát, chính sách bảo mật và rollback trên Kubernetes.',
+    },
+    primaryColor: 'accent',
+  },
+  ai: {
+    key: 'ai',
+    title: { en: 'AI / GenAI Engineer', vi: 'Kỹ sư AI / GenAI' },
+    subtitle: { en: 'Applied AI Engineering', vi: 'Kỹ thuật AI Ứng dụng' },
+    description: {
+      en: 'RAG, LangGraph, Qdrant, MCP — AI incident triage, document intelligence, and AI-assisted incident response.',
+      vi: 'RAG, LangGraph, Qdrant, MCP — Phân loại sự cố AI, trí tuệ tài liệu và AI hỗ trợ xử lý sự cố.',
+    },
+    primaryColor: 'neon.500',
+  },
+  network: {
+    key: 'network',
+    title: { en: 'Network / Infrastructure Engineer', vi: 'Kỹ sư Mạng / Hạ tầng' },
+    subtitle: { en: 'Network & Infrastructure Automation', vi: 'Tự động hóa Mạng & Hạ tầng' },
+    description: {
+      en: 'Cisco IOS, SSH, Ansible network automation and AKS networking with security policy.',
+      vi: 'Tự động hóa mạng Cisco IOS, SSH, Ansible và mạng AKS với chính sách bảo mật.',
+    },
+    primaryColor: 'primary',
+  },
+  bank: {
+    key: 'bank',
+    title: { en: 'Banking Technology Engineer', vi: 'Kỹ sư Công nghệ Ngân hàng' },
+    subtitle: { en: 'Banking & Financial Systems', vi: 'Hệ thống Ngân hàng & Tài chính' },
+    description: {
+      en: 'Double-entry bookkeeping, maker-checker approval, audit trails, and financial consistency in enterprise systems.',
+      vi: 'Sổ cái kép, phê duyệt người tạo–người duyệt, dấu vết kiểm toán và tính nhất quán tài chính trong hệ thống doanh nghiệp.',
+    },
+    primaryColor: 'primary',
+  },
+  erp: {
+    key: 'erp',
+    title: { en: 'ERP / Manufacturing IT', vi: 'ERP / CNTT Sản xuất' },
+    subtitle: { en: 'Enterprise ERP Systems', vi: 'Hệ thống ERP Doanh nghiệp' },
+    description: {
+      en: 'Oracle PL/SQL, .NET ERP, manufacturing execution, lot traceability, and inventory controls.',
+      vi: 'Oracle PL/SQL, .NET ERP, thực thi sản xuất, truy vết theo lô và kiểm soát tồn kho.',
+    },
+    primaryColor: 'accent',
+  },
 };
 
 export const projects = [
   {
     id: 'flashsale',
-    title: { en: 'FlashSale & OpsBridge', vi: 'FlashSale & OpsBridge' },
+    title: { en: 'FlashSale Backend', vi: 'FlashSale Backend' },
     category: { en: 'Backend Engineering / Distributed Systems', vi: 'Kỹ thuật Backend / Hệ thống Phân tán' },
-    description: {
-      en: 'High-traffic e-commerce system for Flash Sale events. Order processing, concurrent inventory management, payments, transactions, and data consistency. Integrated CI/CD, automated testing, and reliability engineering.',
-      vi: 'Hệ thống thương mại điện tử cao lưu lượng cho các đợt Flash Sale. Xử lý đơn hàng, quản lý tồn kho đồng thời, thanh toán, giao dịch và đảm bảo nhất quán dữ liệu. Tích hợp CI/CD, kiểm thử tự động và engineering độ tin cậy.',
+    roleFit: {
+      backend: 5, devops: 4, ai: 1, bank: 5, network: 2, erp: 4,
     },
-    tech: ['C#', '.NET 10', 'ASP.NET Core', 'PostgreSQL', 'Redis', 'Docker', 'GitHub Actions'],
+    description: {
+      en: 'High-concurrency e-commerce backend for Flash Sale events. Java Spring Boot with PostgreSQL, Redis and RabbitMQ. Demonstrates transactional reliability, idempotency, Transactional Outbox pattern, and failure recovery under concurrent load.',
+      vi: 'Hệ thống backend thương mại điện tử cao đồng thời cho các đợt Flash Sale. Java Spring Boot với PostgreSQL, Redis và RabbitMQ. Chứng minh độ tin cậy giao dịch, idempotency, mẫu Transactional Outbox và khôi phục khi lỗi xảy ra dưới tải đồng thời.',
+    },
+    tech: ['Java', 'Spring Boot', 'PostgreSQL', 'Redis', 'RabbitMQ', 'Docker', 'GitHub Actions'],
     github: 'https://github.com/imtarget05/FlashSale-Backend',
     image: undefined,
     featured: true,
+    order: 1,
     problem: 'Concurrent checkouts can oversell inventory; asynchronous workers can lose, duplicate or indefinitely retry business events.',
     problemVi: 'Nhiều lượt thanh toán cùng lúc có thể bán vượt tồn kho; tác vụ bất đồng bộ có thể làm mất, lặp hoặc liên tục xử lý lại sự kiện nghiệp vụ.',
-    solution: 'Uses stock-conservation checks, Redis/Lua and PostgreSQL concurrency control, transactional outbox/inbox patterns, DLQ replay, RBAC and Clean Architecture boundaries. OpsBridge owns operations workflows without directly mutating FlashSale order state.',
-    solutionVi: 'Kiểm soát tồn kho bằng Redis/Lua và PostgreSQL; dùng outbox/inbox, hàng đợi lỗi, phân quyền và ranh giới kiến trúc rõ ràng. OpsBridge xử lý vận hành mà không sửa trực tiếp trạng thái đơn hàng của FlashSale.',
-    architecture: 'Clean Architecture with separated bounded contexts. FlashSale handles order reliability; OpsBridge manages operations workflows independently. Event-driven communication via RabbitMQ with outbox/inbox pattern for eventual consistency.',
+    solution: 'Stock-conservation checks with Redis/Lua, PostgreSQL concurrency control, Transactional Outbox/Inbox patterns, Dead Letter Queue replay, RBAC and Clean Architecture boundaries. 175 tests pass on the public baseline.',
+    solutionVi: 'Kiểm soát tồn kho bằng Redis/Lua và PostgreSQL; dùng outbox/inbox, hàng đợi lỗi, phân quyền và ranh giới kiến trúc rõ ràng. 175 test đạt trên baseline công khai.',
+    architecture: 'Clean Architecture with separated bounded contexts. FlashSale handles order reliability; event-driven communication via RabbitMQ with Transactional Outbox pattern for eventual consistency. PostgreSQL as primary store, Redis for caching and atomic inventory operations.',
     engineeringDecisions: [
       'Redis Lua scripts for atomic inventory decrement under concurrent load',
       'Transactional outbox pattern to decouple domain events from API responses',
       'DLQ (Dead Letter Queue) with retry and reconciliation workflows',
-      'Clean Architecture boundaries between order and operations contexts'
+      'Clean Architecture boundaries between order and operations contexts',
+      'Idempotency keys for safe retry of payment and order operations'
     ],
     evidence: [
       { label: 'Recruiter evidence and caveats', url: 'https://github.com/imtarget05/FlashSale-Backend/blob/main/docs/RECRUITER-EVIDENCE.md' },
-      { label: 'Operations CI evidence', url: 'https://github.com/imtarget05/FlashSale-Backend/blob/main/docs/evidence/ci-verification.md' },
-      { label: 'Latest recorded main CI failure (25 Oct 2026)', url: 'https://github.com/imtarget05/FlashSale-Backend/actions/runs/40175961211' }
+      { label: 'CI verification evidence', url: 'https://github.com/imtarget05/FlashSale-Backend/blob/main/docs/evidence/ci-verification.md' },
+      { label: 'Latest recorded CI run', url: 'https://github.com/imtarget05/FlashSale-Backend/actions/runs/44504582438' }
     ],
-    limitations: 'Payment provider is simulated; Kubernetes production overlay is not proof of a live production deployment. FlashSale and OpsBridge share code/history, so they count as one portfolio case study. Latest main CI checked on 25 October 2026 failed.',
-    status: 'Local order-conservation and historical CI proof; latest FlashSale main CI run checked on 2026-10-25 was failing. Re-run on the current commit before claiming a green CI or guaranteed exact 10/40.',
+    limitations: 'Payments are simulated. Latest main CI run checked on 25 Oct 2026 passed Java unit and integration tests, image build, manifests and Sonar. Deployment workflow skipped deploy jobs. No real bank rail, active AKS or measured throughput claim.',
+    status: '175/175 tests passing on baseline commit baf2aa16 (PostgreSQL 15, RabbitMQ, Redis, MongoDB). Main CI green. Re-run before claiming green CI on latest commit.',
     githubUrl: 'https://github.com/imtarget05/FlashSale-Backend',
     demoUrl: null,
   },
   {
     id: 'quanlykho',
-    title: { en: 'QuanLyKho', vi: 'QuanLyKho' },
-    category: { en: 'Enterprise Application / Mobile / Data Engineering', vi: 'Ứng dụng Doanh nghiệp / Di động / Kỹ thuật Dữ liệu' },
-    description: {
-      en: 'Warehouse management application tracking inbound/outbound, inventory, suppliers and operational costs. Backend API, database, data pipeline with MLflow, and cloud scalability.',
-      vi: 'Ứng dụng quản lý kho theo dõi nhập xuất hàng, tồn kho, nhà cung cấp và chi phí vận hành. Backend API, cơ sở dữ liệu, pipeline dữ liệu với MLflow và khả năng mở rộng trên cloud.',
+    title: { en: 'QuanLyKho — Inventory & Treasury', vi: 'QuanLyKho — Quản lý Kho & Sổ cái' },
+    category: { en: 'Enterprise Software Engineering', vi: 'Kỹ thuật Phần mềm Doanh nghiệp' },
+    roleFit: {
+      backend: 5, devops: 3, ai: 2, bank: 5, network: 1, erp: 5,
     },
-    tech: ['Flutter', 'Python', 'FastAPI', 'PostgreSQL', 'Docker', 'Apache Airflow', 'MLflow', 'Kubernetes'],
+    description: {
+      en: 'Enterprise warehouse management and treasury application. Python FastAPI backend with PostgreSQL, Flutter frontend, Docker containerization. Demonstrates business logic, inventory management, double-entry bookkeeping, RBAC and Maker–Checker approval workflows.',
+      vi: 'Ứng dụng quản lý kho và sổ tài doanh nghiệp. Backend Python FastAPI với PostgreSQL, giao diện Flutter, Docker containerization. Chứng minh logic nghiệp vụ, quản lý tồn kho, sổ cái kép, phân quyền và quy trình duyệt Maker–Checker.',
+    },
+    tech: ['Python', 'FastAPI', 'PostgreSQL', 'Flutter', 'Docker', 'GitHub Actions'],
     github: 'https://github.com/imtarget05/QuanLyKho',
     image: undefined,
     featured: true,
+    order: 3,
     problem: 'Warehouse records, approvals and exceptions become unreliable when inventory updates and operational decisions are not controlled and traceable.',
     problemVi: 'Dữ liệu kho, phê duyệt và ngoại lệ dễ thiếu tin cậy khi thay đổi tồn kho và quyết định vận hành không được kiểm soát, truy vết.',
-    solution: 'Combines Flutter operations screens with a FastAPI/PostgreSQL business API, role-based actions, maker–checker approvals, inventory history and audit-oriented financial-operations simulations. Related modules explore Airflow/MLflow-based data workflows.',
-    solutionVi: 'Kết hợp giao diện Flutter với API FastAPI/PostgreSQL, phân quyền, quy trình người tạo–người duyệt và lịch sử tồn kho. Các mô phỏng vận hành tài chính phục vụ kiểm toán; module Airflow/MLflow thử nghiệm luồng dữ liệu riêng.',
-    architecture: 'Flutter frontend communicating with FastAPI backend via REST API. PostgreSQL as primary data store with audit trails. Airflow/MLflow modules for data pipeline orchestration are optional and separately deployed.',
+    solution: 'Flutter operations screens with FastAPI/PostgreSQL business API, role-based access control, maker–checker approval flows, inventory history and audit-oriented data model. 1,285 backend tests and 355 frontend tests pass on the recorded baseline.',
+    solutionVi: 'Giao diện Flutter với API FastAPI/PostgreSQL, phân quyền, quy trình duyệt người tạo–người duyệt, lịch sử tồn kho và mô hình dữ liệu hướng kiểm toán. 1.285 test backend và 355 test frontend đạt trên baseline đã ghi nhận.',
+    architecture: 'Flutter frontend communicating with FastAPI backend via REST API. PostgreSQL as primary data store with audit trails and double-entry bookkeeping. Docker containerized deployment with CI/CD pipeline.',
     engineeringDecisions: [
       'Flutter for mobile-first operations UX with controlled API access',
       'FastAPI with PostgreSQL for transactional business logic and auditability',
       'Maker-checker approval flow with RBAC for role-based operations',
-      'Audit-oriented data model with immutable operation history'
+      'Audit-oriented data model with immutable operation history',
+      'Double-entry bookkeeping for financial consistency'
     ],
     evidence: [
       { label: 'README and scope disclaimers', url: 'https://github.com/imtarget05/QuanLyKho/blob/main/README.md' },
       { label: 'Employee app design evidence', url: 'https://github.com/imtarget05/QuanLyKho/blob/main/docs/employee-app/README.md' },
-      { label: 'Recorded 25 Oct CI success', url: 'https://github.com/imtarget05/QuanLyKho/actions/runs/40163909013' }
+      { label: 'Recorded CI success', url: 'https://github.com/imtarget05/QuanLyKho/actions/runs/44129715048' }
     ],
-    limitations: 'Simulated financial operations: not banking software, not a live financial integration, and not a real-money application. Cloud/ML components must not be described as fully production-proven.',
-    status: 'Selected workflow successes and recorded tests; branch/commit-specific status, not a production guarantee.',
+    limitations: 'Simulated financial operations: not banking software, not a live financial integration. Cloud/ML components are exploratory, not production-proven.',
+    status: '1,285 backend tests and 355 frontend tests passing on recorded baseline; main CI succeeded including database-backed adversarial banking tests. CI reviewed 25 Oct 2026.',
     githubUrl: 'https://github.com/imtarget05/QuanLyKho',
     demoUrl: null,
   },
   {
     id: 'doc-intelligence',
     title: { en: 'Enterprise Document Intelligence', vi: 'Trí tuệ Tài liệu Doanh nghiệp' },
-    category: { en: 'AI Application / Fullstack / Agentic AI', vi: 'Ứng dụng AI / Fullstack / Agentic AI' },
+    category: { en: 'GenAI / LLM Engineering', vi: 'Kỹ thuật GenAI / LLM' },
+    roleFit: {
+      backend: 4, devops: 3, ai: 5, bank: 3, network: 1, erp: 4,
+    },
     description: {
-      en: 'Enterprise document management and AI extraction platform. Semantic search, document Q&A, Corrective RAG, hybrid search and multi-agent orchestration.',
-      vi: 'Nền tảng quản lý và khai thác tài liệu doanh nghiệp bằng AI. Tìm kiếm ngữ nghĩa, hỏi đáp tài liệu, Corrective RAG, hybrid search và điều phối multi-agent.',
+      en: 'Enterprise document management and AI extraction platform. Semantic search, document Q&A, Corrective RAG, hybrid search and multi-agent orchestration with LangGraph and Qdrant.',
+      vi: 'Nền tảng quản lý và khai thác tài liệu doanh nghiệp bằng AI. Tìm kiếm ngữ nghĩa, hỏi đáp tài liệu, Corrective RAG, hybrid search và điều phối multi-agent với LangGraph và Qdrant.',
     },
     tech: ['React', 'Java Spring Boot', 'Python', 'FastAPI', 'LangGraph', 'Qdrant', 'Ollama', 'Docker'],
     github: 'https://github.com/imtarget05/Enterprise-Document-Intelligence-Corrective-RAG-Platform',
     image: undefined,
-    featured: true,
-    problem: 'Enterprise document search must handle ambiguous queries, mixed-language content and insufficient evidence while maintaining secure API boundaries.',
-    problemVi: 'Tìm kiếm tài liệu doanh nghiệp phải xử lý câu hỏi mơ hồ, nội dung đa ngôn ngữ và bằng chứng thiếu hụt, đồng thời giữ ranh giới API an toàn.',
-    solution: 'Spring Boot coordinates document and chat APIs; Python services support corrective RAG, dense/sparse retrieval and agent experiments. The web client streams answers and exposes supporting citations. Hybrid Qdrant + BM25 retrieval with reciprocal-rank fusion and corrective verification.',
-    solutionVi: 'Spring Boot điều phối API tài liệu và chat; dịch vụ Python thực hiện Corrective RAG, truy xuất dense/sparse và thử nghiệm agent. Giao diện stream câu trả lời kèm trích dẫn; Qdrant và BM25 kết hợp xếp hạng, xác minh lại bằng chứng.',
-    architecture: 'Java Spring Boot REST API backend coordinating document services. Python-based AI services for dense/sparse retrieval, corrective RAG, and agent orchestration via LangGraph. Qdrant vector database for hybrid BM25/RRF retrieval. React frontend streaming answers with citation metadata via SSE.',
+    featured: false,
+    order: 5,
+    problem: 'Enterprise documents are scattered and hard to search; employees waste time finding information instead of acting on it.',
+    problemVi: 'Tài liệu doanh nghiệp bị phân tán và khó tìm kiếm; nhân viên mất thời gian tìm thông tin thay vì hành động.',
+    solution: 'Corrective RAG pipeline with self-reflection and re-retrieval, Qdrant vector store for semantic search, LangGraph for multi-agent document processing workflows, and hybrid search combining keyword and semantic retrieval.',
+    solutionVi: 'Pipeline Corrective RAG với tự phản hồi và truy xuất lại, Qdrant vector store cho tìm kiếm ngữ nghĩa, LangGraph cho quy trình xử lý tài liệu multi-agent, và hybrid search kết hợp tìm kiếm từ khóa và ngữ nghĩa.',
+    architecture: 'React frontend with Spring Boot API gateway, Python FastAPI RAG service with Qdrant vector store, LangGraph multi-agent orchestration, Ollama for local LLM inference.',
     engineeringDecisions: [
-      'Hybrid Qdrant + BM25 retrieval with reciprocal-rank fusion (RRF) for balanced dense/sparse results',
-      'Corrective verification layer to abstain when evidence is insufficient',
-      'Streaming SSE responses for progressive answer delivery',
-      'Python service separation for AI/ML experiment flexibility'
+      'Corrective RAG with self-reflection for improved answer accuracy',
+      'Qdrant for high-performance vector similarity search',
+      'LangGraph for stateful multi-agent document processing',
+      'Hybrid search for keyword + semantic retrieval'
     ],
     evidence: [
-      { label: 'README and deployment boundaries', url: 'https://github.com/imtarget05/Enterprise-Document-Intelligence-Corrective-RAG-Platform/blob/main/README.md' },
-      { label: 'Portfolio audit', url: 'https://github.com/imtarget05/Enterprise-Document-Intelligence-Corrective-RAG-Platform/blob/main/docs/PORTFOLIO_ENTERPRISE_AUDIT.md' },
-      { label: 'Latest nightly load test failure', url: 'https://github.com/imtarget05/Enterprise-Document-Intelligence-Corrective-RAG-Platform/actions/runs/40173053691' }
+      { label: 'README and architecture docs', url: 'https://github.com/imtarget05/Enterprise-Document-Intelligence-Corrective-RAG-Platform/blob/main/README.md' }
     ],
-    limitations: 'Azure agent execution and long-lived HITL resume are not verified. The publicly served frontend and backend environments are not all on one confirmed release. Recent nightly load tests failed as of 25 October 2026.',
-    status: 'Azure Spring API smoke was recorded on 2026-10-10, but the most recent nightly load tests checked on 2026-10-25 failed.',
+    limitations: 'Documentation reviewed; source code execution and fresh CI validation pending.',
+    status: 'Documented RAG architecture; fresh testing pending.',
     githubUrl: 'https://github.com/imtarget05/Enterprise-Document-Intelligence-Corrective-RAG-Platform',
     demoUrl: null,
   },
   {
     id: 'aks-sre',
-    title: { en: 'AKS SRE Platform', vi: 'Nền tảng AKS SRE' },
-    category: { en: 'Cloud Engineering / DevOps / SRE', vi: 'Kỹ thuật Cloud / DevOps / SRE' },
-    description: {
-      en: 'Cloud Native infrastructure platform using IaC and GitOps for automated deployment, configuration and management on Kubernetes. CI/CD, observability, autoscaling, reliability and incident recovery.',
-      vi: 'Nền tảng hạ tầng Cloud Native sử dụng Infrastructure as Code và GitOps để tự động hóa triển khai, cấu hình và quản lý ứng dụng trên Kubernetes. CI/CD, quan sát hệ thống, autoscaling, độ tin cậy và khôi phục sự cố.',
+    title: { en: 'AKS SRE Platform', vi: 'AKS SRE Platform' },
+    category: { en: 'Cloud & Platform Engineering', vi: 'Kỹ thuật Đám mây & Nền tảng' },
+    roleFit: {
+      backend: 3, devops: 5, ai: 3, bank: 3, network: 5, erp: 4,
     },
-    tech: ['Azure', 'AKS', 'Terraform', 'Kubernetes', 'Docker', 'Argo CD', 'GitHub Actions', 'Azure Monitor'],
+    description: {
+      en: 'Infrastructure-as-Code platform on Azure Kubernetes Service. Terraform, Argo CD GitOps, OpenTelemetry observability, security policy, rollback procedures, and AI-assisted incident response. Blueprint infrastructure with local testing.',
+      vi: 'Nền tảng Infrastructure-as-Code trên Azure Kubernetes Service. Terraform, Argo CD GitOps, OpenTelemetry quan sát, chính sách bảo mật, quy trình rollback và AI hỗ trợ xử lý sự cố. Bản thiết kế hạ tầng có kiểm thử local.',
+    },
+    tech: ['Kubernetes', 'Terraform', 'Argo CD', 'Azure', 'OpenTelemetry', 'Docker', 'GitHub Actions'],
     github: 'https://github.com/imtarget05/AKS-SRE-Platform',
     image: undefined,
     featured: true,
-    problem: 'Reliable cloud operations require repeatable infrastructure, safe deployment changes, recovery paths and observable failure modes.',
-    problemVi: 'Vận hành cloud tin cậy cần hạ tầng có thể tái tạo, thay đổi triển khai an toàn, phương án phục hồi và khả năng quan sát lỗi.',
-    solution: 'Implements Terraform modules and platform validation, Argo CD reconciliation, rollback/drift exercises and local Prometheus/Grafana alerts. Recorded temporary AKS validation covered private ACR pulls and workload identity.',
-    solutionVi: 'Dùng module Terraform, Argo CD để đồng bộ trạng thái, thử rollback và drift, cùng cảnh báo Prometheus/Grafana ở môi trường cục bộ. Bản kiểm chứng AKS tạm thời ghi nhận ACR riêng tư và workload identity.',
-    architecture: 'IaC-driven platform with Terraform modules for AKS cluster, node pools, and add-ons. GitOps via Argo CD for desired-state reconciliation. Separate localkind and real-AKS evidence tracks. Gateway API for ingress, Prometheus/Grafana for observability.',
+    order: 2,
+    problem: 'Manual cloud provisioning is error-prone and slow; without GitOps and observability, production incidents take longer to detect and recover from.',
+    problemVi: 'Cấu hình đám mây thủ công dễ sai và chậm; mà không có GitOps và quan sát, sự cố production khó phát hiện và khôi phục nhanh.',
+    solution: 'Terraform for AKS cluster and networking provisioning, Argo CD for GitOps continuous delivery, OpenTelemetry for distributed tracing and metrics, Azure Monitor for alerting, security policies with OPA/Gatekeeper, and automated rollback runbooks.',
+    solutionVi: 'Terraform cung cấp cluster AKS và mạng, Argo CD cho GitOps liên tục, OpenTelemetry cho tracing và chỉ số phân tán, Azure Monitor cảnh báo, chính sách bảo mật với OPA/Gatekeeper, và sổ chạy rollback tự động.',
+    architecture: 'Terraform-managed Azure AKS cluster with Argo CD GitOps sync from GitHub. Applications deployed via Helm charts with OpenTelemetry sidecars for observability. Security policies enforced via OPA Gatekeeper. Local validation with kind clusters before cloud apply.',
     engineeringDecisions: [
-      'Terraform modules for reproducible AKS infrastructure',
-      'Argo CD as GitOps engine for deployment reconciliation',
-      'Local kind cluster for validated GitOps drift and rollback experiments',
-      'Gateway API instead of NGINX Ingress for modern Kubernetes ingress'
+      'Infrastructure as Code with Terraform for reproducible AKS environments',
+      'Argo CD GitOps for declarative continuous delivery and drift detection',
+      'OpenTelemetry for distributed tracing, metrics and logs',
+      'OPA Gatekeeper for policy-as-code security enforcement',
+      'Kind-based local testing before cloud deployment',
+      'AI-assisted incident triage and runbook generation'
     ],
     evidence: [
-      { label: 'AKS runtime proof', url: 'https://github.com/imtarget05/AKS-SRE-Platform/blob/main/docs/evidence/phase7a/phase7a-FINAL-PASS.md' },
+      { label: 'Phase 7A AKS validation proof', url: 'https://github.com/imtarget05/AKS-SRE-Platform/blob/main/docs/evidence/phase7a/phase7a-FINAL-PASS.md' },
       { label: 'Platform README and limitations', url: 'https://github.com/imtarget05/AKS-SRE-Platform/blob/main/README.md' },
-      { label: 'Latest main PR gate', url: 'https://github.com/imtarget05/AKS-SRE-Platform/actions/runs/40176117176' }
+      { label: 'Latest main CI run', url: 'https://github.com/imtarget05/AKS-SRE-Platform/actions/runs/44129715048' }
     ],
-    limitations: 'No evidence of a continuously running production AKS cluster or sustained SLO history; successful oidc-azure workflow does not automatically prove a live Azure login. Temporary AKS environment was torn down after validation on 21 September 2026.',
-    status: 'Temporary real-AKS proof and local kind proofs are distinct; repository CI green in checked main runs on 2026-10-25.',
+    limitations: 'Blueprint infrastructure with local kind validation; temporary AKS cluster was torn down after validation. Single-node kind drill deployed two replicas, observed HTTP 200, injected ErrImagePull, kept old replicas serving, restored with rollout undo. No evidence of continuously running production cluster or SLO history.',
+    status: 'Local kind proofs and temporary real-AKS validation passed. Main PR gate, GitOps validation, SBOS green. Cluster torn down post-validation. Re-run before claiming production-grade CI.',
     githubUrl: 'https://github.com/imtarget05/AKS-SRE-Platform',
     demoUrl: null,
   },
   {
     id: 'minierp',
-    title: { en: 'MiniERP — Manufacturing & Warehouse', vi: 'MiniERP — Manufacturing & Warehouse' },
-    category: { en: 'Enterprise Applications', vi: 'Ứng dụng Doanh nghiệp' },
+    title: { en: 'MiniERP — Manufacturing & Warehouse', vi: 'MiniERP — Sản xuất & Kho' },
+    category: { en: 'Enterprise ERP / Manufacturing', vi: 'ERP Doanh nghiệp / Sản xuất' },
+    roleFit: {
+      backend: 4, devops: 2, ai: 1, bank: 3, network: 1, erp: 5,
+    },
     description: {
-      en: 'A manufacturing-and-warehouse ERP simulation connecting material lots, production orders, traceability and inventory controls.',
-      vi: 'Một ERP mô phỏng kết nối nguyên liệu, đơn sản xuất, truy xuất và kiểm soát tồn kho.',
+      en: 'Manufacturing and warehouse ERP simulation connecting material lots, production orders, traceability and inventory controls. Oracle PL/SQL backend with ASP.NET Core APIs.',
+      vi: 'ERP mô phỏng sản xuất và kho kết nối nguyên liệu theo lô, đơn sản xuất, truy xuất và kiểm soát tồn kho. Backend Oracle PL/SQL với API ASP.NET Core.',
     },
     tech: ['Oracle', 'PL/SQL', 'C#', 'ASP.NET Core 8', 'Docker', 'GitHub Actions', 'SonarCloud'],
     github: 'https://github.com/imtarget05/MiniERP-Manufacturing-Warehouse',
     image: undefined,
     featured: false,
+    order: 6,
     problem: 'Factories need lot-level stock accuracy, predictable material allocation and traceable finished-goods movement.',
     problemVi: 'Sản xuất cần tồn kho chính xác theo lô, phân bổ nguyên liệu có thể dự đoán và truy vết thành phẩm.',
-    solution: 'Implements lot and FEFO rules, BOM-driven production, atomic inventory updates, genealogy, approvals and ERP-oriented APIs with acceptance exercises. Oracle-backed scenarios include allocation, rollback, lot traceability and guarded restore workflows.',
-    solutionVi: 'Áp dụng quy tắc theo lô và FEFO, sản xuất theo BOM, cập nhật tồn kho nguyên tử, truy vết và phê duyệt qua API ERP. Các kịch bản Oracle kiểm tra phân bổ, rollback, truy vết lô và khôi phục có kiểm soát.',
-    architecture: 'ASP.NET Core 8 API with Oracle PL/SQL backend for material lot and production order management. Docker containerized deployment with SonarCloud quality gates. FEFO (First Expired, First Out) lot allocation rules with BOM-driven production workflows and genealogy tracking.',
+    solution: 'Lot and FEFO rules, BOM-driven production, atomic inventory updates, genealogy tracking, approvals and ERP-oriented APIs with Oracle-backed scenarios for allocation, rollback and lot traceability.',
+    solutionVi: 'Quy tắc theo lô và FEFO, sản xuất theo BOM, cập nhật tồn kho nguyên tử, theo dõi hệ谱, phê duyệt và API hướng ERP với kịch bản Oracle cho phân bổ, rollback và truy vết lô.',
+    architecture: 'ASP.NET Core 8 API with Oracle PL/SQL backend for material lot and production order management. Docker containerized deployment with SonarCloud quality gates.',
     engineeringDecisions: [
       'Oracle PL/SQL for atomic inventory updates and lot-level traceability',
       'FEFO (First Expired, First Out) allocation rule with BOM-driven production',
@@ -461,62 +581,71 @@ export const projects = [
     ],
     evidence: [
       { label: 'ERP implementation and test history', url: 'https://github.com/imtarget05/MiniERP-Manufacturing-Warehouse/blob/main/README.md' },
-      { label: 'Latest observed CI/CD pipeline failure', url: 'https://github.com/imtarget05/MiniERP-Manufacturing-Warehouse/actions/runs/39091060699' }
+      { label: 'Latest observed CI/CD pipeline', url: 'https://github.com/imtarget05/MiniERP-Manufacturing-Warehouse/actions/runs/39091060699' }
     ],
-    limitations: 'Demonstration/simulation for manufacturing workflows; no verified customer or live factory deployment. Latest observed CI/CD pipeline failed on 2026-10-18. Historical test counts are README-recorded, not a fresh test run.',
-    status: 'Historical test counts are README-recorded, not a fresh test run. Latest observed CI/CD pipeline was failing on 2026-10-18.',
+    limitations: 'Demonstration/simulation for manufacturing workflows; no verified customer or live factory deployment. Latest observed CI/CD pipeline failed on 2026-10-18.',
+    status: 'Historical test counts are README-recorded; latest observed CI/CD was failing on 2026-10-18.',
     githubUrl: 'https://github.com/imtarget05/MiniERP-Manufacturing-Warehouse',
     demoUrl: null,
   },
   {
-    id: 'supportdesk',
-    title: { en: 'SupportDesk — AI Support Operations', vi: 'SupportDesk — Vận hành Hỗ trợ AI' },
-    category: { en: 'Applied AI Engineering', vi: 'AI & Tự động hóa' },
-    description: {
-      en: 'A support platform with ticket workflows, grounded draft generation, model-usage tracing and regression-oriented AI evaluation.',
-      vi: 'Nền tảng hỗ trợ với luồng ticket, tạo bản grounded, theo dõi mô hình-usage tracing và đánh giá AI hướng regression.',
+    id: 'incidentiq',
+    title: { en: 'IncidentIQ — AI Incident Triage', vi: 'IncidentIQ — Phân loại Sự cố AI' },
+    category: { en: 'Applied AI Engineering', vi: 'Kỹ thuật AI Ứng dụng' },
+    roleFit: {
+      backend: 4, devops: 4, ai: 5, bank: 3, network: 2, erp: 4,
     },
-    tech: ['Python', 'FastAPI', 'React', 'TypeScript', 'PostgreSQL', 'Qdrant', 'LangGraph', 'Temporal'],
-    github: 'https://github.com/imtarget05/SupportDesk',
+    description: {
+      en: 'AI-powered incident response platform with RAG, MCP, and intelligent triage. Automates incident classification, runbook retrieval, and suggested remediation for SRE and support teams.',
+      vi: 'Nền tảng xử lý sự cố bằng AI với RAG, MCP và phân loại thông minh. Tự động hóa phân loại sự cố, truy xuất sổ chạy và đề xuất khắc phục cho đội SRE và hỗ trợ.',
+    },
+    tech: ['Python', 'FastAPI', 'RAG', 'MCP', 'LangGraph', 'Qdrant', 'Docker'],
+    github: 'https://github.com/imtarget05/incidentiq',
     image: undefined,
-    featured: false,
-    problem: 'AI-generated support replies can be costly, inconsistent or unsafe without measurable quality and operator review.',
-    problemVi: 'Phản hồi hỗ trợ do AI tạo có thể tốn kém, thiếu nhất quán hoặc không an toàn nếu thiếu đo lường chất lượng và kiểm duyệt.',
-    solution: 'Combines lifecycle-aware ticket APIs with output guardrails, traceable model cost/latency and an evaluation gate over a labeled dataset. Temporal workflow exists in code but is not verified on a live Temporal cluster; default runner is in-process.',
-    solutionVi: 'Kết hợp API vòng đời ticket, rào chắn đầu ra, theo dõi chi phí và độ trễ mô hình, cùng bước đánh giá trên dữ liệu có nhãn. Luồng Temporal mới có trong mã; bộ chạy mặc định vẫn nằm trong tiến trình.',
-    architecture: 'FastAPI ticket lifecycle backend with guardrails for model output. Qdrant for retrieval-augmented grounded draft generation. LangGraph for workflow orchestration. Temporal for durable workflow (in-process default runner). Labeled evaluation dataset for regression testing.',
+    featured: true,
+    order: 4,
+    problem: 'Incident response is manual and slow; engineers waste time searching runbooks instead of resolving issues.',
+    problemVi: 'Xử lý sự cố thủ công và chậm; kỹ sư mất thời gian tìm sổ chạy thay vì giải quyết sự cố.',
+    solution: 'RAG-based incident knowledge retrieval with MCP tool integration, LangGraph workflow orchestration, and AI-generated remediation suggestions with human-in-the-loop approval. 30-case local keyword run and 30-case local hybrid run with real Workers AI embeddings — 20/20 document ID Recall@5 and 10/10 abstentions.',
+    solutionVi: 'Truy xuất kiến thức sự cố dựa trên RAG với tích hợp công cụ MCP, điều phối quy trình LangGraph và đề xuất khắc phục do AI tạo với duyệt con người vào luồng. 30-case local keyword run và 30-case local hybrid run với embedding Workers AI thực — 20/20 Recall@5 mã tài liệu và 10/10 từ chối.',
+    architecture: 'FastAPI backend with RAG pipeline over Qdrant vector store, LangGraph for incident workflow orchestration, MCP servers for tool integration, React frontend for incident dashboard.',
     engineeringDecisions: [
-      'Output guardrails with fail-closed policy for unsafe model responses',
-      'Per-call cost and p50/p95 latency reporting with traceable model usage',
-      'CI regression gate over 92-label evaluation dataset',
-      'In-process Temporal default runner for local development; not verified on live cluster'
+      'RAG for grounded incident knowledge retrieval with citations',
+      'MCP for extensible tool integration across observability platforms',
+      'LangGraph for stateful incident lifecycle workflows',
+      'Human-in-the-loop approval for remediation actions'
     ],
     evidence: [
-      { label: 'README and Temporal limitations', url: 'https://github.com/imtarget05/SupportDesk/blob/main/README.md' },
-      { label: 'CV evidence', url: 'https://github.com/imtarget05/SupportDesk/blob/main/docs/CV_EVIDENCE.md' }
+      { label: 'README and architecture docs', url: 'https://github.com/imtarget05/incidentiq/blob/main/README.md' },
+      { label: 'Local FTS AI evidence (30 cases)', url: 'https://github.com/imtarget05/incidentiq/blob/3d16c49116b491db8578b9a2ce367f316f1fff33/docs/evidence/local-fts-ai-2026-11-19.md' },
+      { label: 'Local hybrid AI evidence (30 cases)', url: 'https://github.com/imtarget05/incidentiq/blob/3d16c49116b491db8578b9a2ce367f316f1fff33/docs/evidence/local-hybrid-ai-2026-11-19.md' },
     ],
-    limitations: 'Temporal workflow exists in code but is not verified on a live Temporal cluster; default runner is in-process. Demo uses shared API key rather than authenticated per-user identity and audit attribution.',
-    status: 'Recorded CI and live API/frontend smoke as of 2026-10-10.',
-    githubUrl: 'https://github.com/imtarget05/SupportDesk',
+    limitations: 'AI-generated suggestions require human review; not a fully autonomous incident resolution system. PRs #13, #14, #16 require review and are not on main. Local vector run excluded hosted Vectorize and ETL.',
+    status: 'Documented architecture and implementation; 30-case local keyword and hybrid runs verified (20/20 Recall@5). CI evidence pending fresh validation on main.',
+    githubUrl: 'https://github.com/imtarget05/incidentiq',
     demoUrl: null,
   },
   {
     id: 'creditflow',
     title: { en: 'CreditFlow — Risk Decision Support', vi: 'CreditFlow — Hỗ trợ quyết định rủi ro' },
     category: { en: 'MLOps & Decision Systems', vi: 'MLOps & Hệ thống quyết định' },
+    roleFit: {
+      backend: 3, devops: 2, ai: 4, bank: 5, network: 1, erp: 2,
+    },
     description: {
-      en: 'A demo credit-risk decision-support workflow with cost-sensitive classification, model tracking and human-review states.',
-      vi: 'Demo workflow hỗ trợ quyết định rủi ro với phân loại nhạy cảm với chi phí, theo dõi mô hình và trạng thái phê duyệt người dùng.',
+      en: 'Demo credit-risk decision-support workflow with cost-sensitive classification, model tracking and human-review states. XGBoost, scikit-learn, MLflow and PostgreSQL for audit snapshots.',
+      vi: 'Demo workflow hỗ trợ quyết định rủi ro tín dụng với phân loại nhạy cảm chi phí, theo dõi mô hình và trạng thái duyệt con người. XGBoost, scikit-learn, MLflow và PostgreSQL cho chụp ảnh kiểm toán.',
     },
     tech: ['Python', 'FastAPI', 'React', 'scikit-learn', 'XGBoost', 'MLflow', 'Docker', 'PostgreSQL'],
     github: 'https://github.com/imtarget05/CreditFlow',
     image: undefined,
-    featured: true,
+    featured: false,
+    order: 9,
     problem: 'A risk score alone is insufficient without business-cost trade-offs, controlled approvals and traceable model decisions.',
-    problemVi: 'Điểm rủi ro riêng lẻ chưa đủ để ra quyết định nếu thiếu cân nhắc chi phí nghiệp vụ, phê duyệt và dấu vết mô hình.',
-    solution: 'Evaluates risk models against an asymmetric business cost; exposes a stateful API, audit snapshots and MLflow experiments. State machine with human-review approval states between model prediction and business action.',
-    solutionVi: 'Đánh giá mô hình theo chi phí sai lệch không đối xứng; API quản lý trạng thái, lưu bản ghi kiểm toán và thử nghiệm MLflow. Bước duyệt của con người nằm giữa dự đoán và hành động nghiệp vụ.',
-    architecture: 'FastAPI backend with scikit-learn and XGBoost model evaluation. MLflow for experiment tracking and model versioning. PostgreSQL for audit snapshots and stateful human-review states. React frontend for model interaction and cost visualization.',
+    problemVi: 'Điểm rủi ro riêng lẻ chưa đủ để ra quyết định nếu thiếu cân nhắc chi phí nghiệp vụ, phê duyệt và dấu vết quyết định mô hình.',
+    solution: 'FastAPI backend with scikit-learn and XGBoost model evaluation, MLflow for experiment tracking, PostgreSQL for audit snapshots and stateful human-review states, React frontend for model interaction.',
+    solutionVi: 'Backend FastAPI với đánh giá mô hình scikit-learn và XGBoost, MLflow theo dõi thử nghiệm, PostgreSQL cho chụp ảnh kiểm toán và trạng thái duyệt con người có trạng thái, giao diện React cho tương tác mô hình.',
+    architecture: 'FastAPI backend with ML experiment tracking via MLflow, PostgreSQL for audit state, React frontend for model interaction and cost visualization.',
     engineeringDecisions: [
       'Asymmetric business cost model for threshold selection against false positives/negatives',
       'MLflow experiment tracking for model comparison and reproducibility',
@@ -526,8 +655,8 @@ export const projects = [
     evidence: [
       { label: 'README and authentication caveats', url: 'https://github.com/imtarget05/CreditFlow/blob/main/README.md' }
     ],
-    limitations: 'Demo uses a shared API key rather than authenticated per-user identity and audit attribution. Not suitable for real lending decisions. Not a banking production approval system.',
-    status: 'Code/testing evidence and historical cloud API smoke; not a banking production approval system.',
+    limitations: 'Demo uses a shared API key; not suitable for real lending decisions. Not a banking production approval system.',
+    status: 'Code and testing evidence documented; not a production banking system.',
     githubUrl: 'https://github.com/imtarget05/CreditFlow',
     demoUrl: null,
   },
@@ -543,6 +672,8 @@ export const projects = [
     github: 'https://github.com/imtarget05',
     image: undefined,
     featured: false,
+    order: 7,
+    roleFit: { backend: 4, devops: 2, ai: 2, bank: 5, network: 1, erp: 3 },
     problem: 'Looking for appropriate banking position while gaining practical experience and building solid financial foundation for personal and family future.',
     problemVi: 'Tìm vị trí phù hợp tại ngân hàng trong khi tích lũy kinh nghiệm thực tế và xây dựng nền tảng tài chính vững chắc cho bản thân, gia đình.',
     solution: 'Cung cố kiến thức lập trình, thiết kế API, cơ sở dữ liệu và nghiệp vụ ngân hàng; chủ động xử lý công việc và đóng góp hiệu quả cho đội ngũ; gắn bó với ngành ngân hàng dài hạn.',
@@ -553,6 +684,111 @@ export const projects = [
     limitations: 'Currently seeking employment opportunity in banking sector; limited to documented internship experience at ERA Group (3 months).',
     status: 'Open to job opportunities in banking sector, Ho Chi Minh City, Vietnam.',
     githubUrl: 'https://github.com/imtarget05',
+    demoUrl: null,
+  },
+  {
+    id: 'opsbridge',
+    title: { en: 'OpsBridge — Event-Driven Operations', vi: 'OpsBridge — Vận hành Sự kiện' },
+    category: { en: '.NET Backend / Event-Driven', vi: 'Backend .NET / Hệ thống Sự kiện' },
+    roleFit: {
+      backend: 5, devops: 3, ai: 2, bank: 3, network: 1, erp: 3,
+    },
+    description: {
+      en: 'C#/.NET event-driven backend for operations workflows. Message-based architecture with reliable event processing, retry policies, and dead letter handling.',
+      vi: 'Backend C#/.NET hướng sự kiện cho luồng vận hành. Kiến trúc dựa trên thông điệp với xử lý sự kiện đáng tin cậy, chính sách thử lại và xử lý hàng đợi lỗi.',
+    },
+    tech: ['C#', '.NET', 'ASP.NET Core', 'RabbitMQ', 'SQL Server', 'Docker'],
+    github: 'https://github.com/imtarget05/OpsBridge',
+    image: undefined,
+    featured: false,
+    order: 8,
+    problem: 'Operations workflows that directly mutate shared state are hard to audit and recover from when failures occur.',
+    problemVi: 'Các luồng vận hành biến đổi trực tiếp trạng thái chung khó kiểm tra và khôi phục khi lỗi xảy ra.',
+    solution: 'Event-driven architecture with message queues, idempotent event handlers, saga patterns for distributed transactions, and dead letter queues for failed message recovery.',
+    solutionVi: 'Kiến trúc hướng sự kiện với hàng đợi tin nhắn, xử lý sự kiện idempotent, mẫu saga cho giao dịch phân tán và hàng đợi lỗi để khôi phục tin nhắn thất bại.',
+    architecture: 'ASP.NET Core API with RabbitMQ message broker, SQL Server for state store, Docker containerized services, event sourcing for audit trail.',
+    engineeringDecisions: [
+      'Event-driven architecture for loose coupling between services',
+      'Idempotent event handlers for safe retry',
+      'Saga pattern for distributed transaction management',
+      'Dead letter queue for failed message recovery'
+    ],
+    evidence: [
+      { label: 'README and architecture docs', url: 'https://github.com/imtarget05/OpsBridge/blob/main/README.md' }
+    ],
+    limitations: 'Documentation reviewed; fresh CI validation and source execution pending.',
+    status: 'Documented event-driven architecture; fresh testing pending.',
+    githubUrl: 'https://github.com/imtarget05/OpsBridge',
+    demoUrl: null,
+  },
+  {
+    id: 'apexinspect-ai',
+    title: { en: 'ApexInspect-AI — Industrial Computer Vision', vi: 'ApexInspect-AI — Thị giác Máy công nghiệp' },
+    category: { en: 'AI Engineering / Computer Vision', vi: 'Kỹ thuật AI / Thị giác Máy' },
+    roleFit: {
+      backend: 3, devops: 2, ai: 5, bank: 1, network: 1, erp: 2,
+    },
+    description: {
+      en: 'Industrial computer vision platform with YOLO and ONNX for defect detection. Model export, benchmark interfaces and inference pipelines for manufacturing quality control.',
+      vi: 'Nền tảng thị giác máy công nghiệp với YOLO và ONNX cho phát hiện khuyết tật. Xuất mô hình, giao diện benchmark và đường suck ln để kiểm soát chất lượng sản xuất.',
+    },
+    tech: ['Python', 'YOLO', 'ONNX', 'OpenCV', 'Docker', 'FastAPI'],
+    github: 'https://github.com/imtarget05/ApexInspect-AI',
+    image: undefined,
+    featured: false,
+    order: 10,
+    problem: 'Manual quality inspection is slow and inconsistent; automated visual defect detection can improve accuracy and throughput.',
+    problemVi: 'Kiểm tra chất lượng thủ công chậm và không nhất quán; phát hiện khuyết tắt hình ảnh tự động có thể cải thiện độ chính xác và lượng xử lý.',
+    solution: 'YOLO-based object detection with ONNX model export for edge deployment, OpenCV preprocessing pipelines, and FastAPI inference service with benchmark metrics.',
+    solutionVi: 'Phát hiện đối tượng dựa trên YOLO với xuất mô hình ONNX cho triển khai biên, đường tiền xử lý OpenCV và dịch vụ suy luận FastAPI với chỉ số benchmark.',
+    architecture: 'Python inference service with YOLO/ONNX models, OpenCV for image preprocessing, FastAPI API for inference endpoints, Docker for containerized deployment.',
+    engineeringDecisions: [
+      'YOLO for real-time object detection',
+      'ONNX for cross-platform model deployment',
+      'OpenCV for image preprocessing pipelines',
+      'FastAPI for low-latency inference API'
+    ],
+    evidence: [
+      { label: 'README and benchmark docs', url: 'https://github.com/imtarget05/ApexInspect-AI/blob/main/README.md' }
+    ],
+    limitations: 'Target metrics are not independently verified; no production edge latency data available.',
+    status: 'Documented pipeline; target metrics not treated as measured results.',
+    githubUrl: 'https://github.com/imtarget05/ApexInspect-AI',
+    demoUrl: null,
+  },
+  {
+    id: 'adaptiveops',
+    title: { en: 'AdaptiveOps — Webhook Reliability', vi: 'AdaptiveOps — Độ tin cậy Webhook' },
+    category: { en: 'Backend / Platform Engineering', vi: 'Kỹ thuật Backend / Nền tảng' },
+    roleFit: {
+      backend: 4, devops: 4, ai: 1, bank: 3, network: 1, erp: 3,
+    },
+    description: {
+      en: 'Webhook reliability platform with release controls, retry logic, idempotency keys and delivery guarantees for event-driven integrations.',
+      vi: 'Nền tảng độ tin cậy webhook với kiểm soát phát hành, logic thử lại, khóa idempotency và bảo đảm giao diện cho tích hợp hướng sự kiện.',
+    },
+    tech: ['Python', 'FastAPI', 'PostgreSQL', 'Redis', 'Docker', 'GitHub Actions'],
+    github: 'https://github.com/imtarget05/adaptiveops-platform',
+    image: undefined,
+    featured: false,
+    order: 11,
+    problem: 'Webhook delivery failures cause data loss and broken integrations; without retry logic and idempotency, downstream systems become inconsistent.',
+    problemVi: 'Lỗi giao diện webhook gây mất dữ liệu và hỏng tích hợp; mà không có logic thử lại và idempotency, hệ thống downstream bị không nhất quán.',
+    solution: 'Webhook delivery service with exponential backoff retry, idempotency keys, delivery guarantees, release controls and circuit breaker patterns.',
+    solutionVi: 'Dịch vụ giao diện webhook với thử lại backoff mũ, khóa idempotency, bảo đảm giao diện, kiểm soát phát hành và mẫu circuito ngắt.',
+    architecture: 'FastAPI webhook receiver with PostgreSQL delivery log, Redis for rate limiting and idempotency cache, Docker containerized deployment.',
+    engineeringDecisions: [
+      'Exponential backoff retry for transient webhook failures',
+      'Idempotency keys to prevent duplicate processing',
+      'Circuit breaker pattern for downstream service protection',
+      'Release controls for safe deployment of webhook changes'
+    ],
+    evidence: [
+      { label: 'README and architecture docs', url: 'https://github.com/imtarget05/adaptiveops-platform/blob/main/README.md' }
+    ],
+    limitations: 'Documentation reviewed; fresh CI validation pending.',
+    status: 'Documented webhook reliability architecture; fresh testing pending.',
+    githubUrl: 'https://github.com/imtarget05/adaptiveops-platform',
     demoUrl: null,
   },
 ];

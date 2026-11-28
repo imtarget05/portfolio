@@ -115,10 +115,10 @@ export function Hero3D() {
             {lang === 'en' ? <>MAI NGUYEN<br />BINH TAN<span>.</span></> : <>MAI NGUYỄN<br />BÌNH TÂN<span>.</span></>}
           </motion.h1>
           <motion.p key={`role-${lang}`} className="cinematic-role" initial={reducedMotion ? false : { opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .7, delay: .45 }}>
-            {lang === 'en' ? 'Software Engineer — Backend, Cloud Infrastructure & Applied AI' : 'Kỹ sư phần mềm — Backend, Hạ tầng đám mây & AI ứng dụng'}
+            {lang === 'en' ? 'Software & Cloud Engineer — Backend Systems · DevOps · Applied AI' : 'Kỹ sư Phần mềm & Đám mây — Hệ thống Backend · DevOps · AI Ứng dụng'}
           </motion.p>
           <motion.p className="cinematic-description" initial={reducedMotion ? false : { opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .7, delay: .55 }}>
-            {lang === 'en' ? 'Reliable backends. Thoughtful cloud systems. Applied AI built for real work.' : 'Backend tin cậy. Hạ tầng cloud có chiều sâu. AI ứng dụng cho công việc thực tế.'}
+            {lang === 'en' ? 'Building reliable backend systems, automated cloud infrastructure, and practical AI-powered applications.' : 'Xây dựng hệ thống backend tin cậy, hạ tầng đám mây tự động hóa và các ứng dụng AI thực tế.'}
           </motion.p>
           <motion.div className="cinematic-actions" initial={reducedMotion ? false : { opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .7, delay: .65 }}>
             <a href="#projects" className="cinematic-primary">{lang === 'en' ? 'View My Work' : 'Xem công việc của tôi'} <ArrowDownRight size={18} /></a>
