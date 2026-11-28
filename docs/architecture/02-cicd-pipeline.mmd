@@ -1,0 +1,46 @@
+flowchart TD
+    subgraph DEV["💻 Developer / GitHub"]
+        PUSH[git push to main]
+    end
+
+    subgraph CI["🔧 GitHub Actions CI / Quality Gates"]
+        LINT[Lint: next lint + immersive lint]
+        TSC[Typecheck: tsc --noEmit]
+        BUILD_NEXT[Build: next build]
+        BUILD_VITE[Build: npm run build --prefix immersive]
+        PLAYWRIGHT[Playwright E2E Tests]
+        LIGHTHOUSE[Lighthouse CI]
+    end
+
+    subgraph RENDER["☁️ Render Infrastructure"]
+        WEB[Render Web Service - Docker]
+        STATIC[Render Static Site - Vite dist]
+        HOOK[Render Deploy Hook]
+    end
+
+    subgraph ENV["🔐 Environment Variables (Render Dashboard)"]
+        DB_URL[DATABASE_URL]
+        CF_ID[CLOUDFLARE_ACCOUNT_ID]
+        CF_TOKEN[CLOUDFLARE_API_TOKEN]
+        VECT_ID[VECTORIZE_INDEX_ID]
+        VECT_TOKEN[VECTORIZE_API_TOKEN]
+    end
+
+    PUSH --> CI
+    CI --> LINT
+    CI --> TSC
+    CI --> BUILD_NEXT
+    CI --> BUILD_VITE
+    CI --> PLAYWRIGHT
+    CI --> LIGHTHOUSE
+
+    LIGHTHOUSE -->|All pass| HOOK
+    HOOK --> WEB
+    HOOK --> STATIC
+
+    WEB --> ENV
+    STATIC --> ENV
+
+    style CI fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+    style RENDER fill:#fff3e0,stroke:#e65100,stroke-width:2px
+    style ENV fill:#fce4ec,stroke:#880e4f,stroke-width:2px

@@ -1,0 +1,24 @@
+flowchart LR
+    subgraph USAGE_MODES["🎯 Three Usage Modes"]
+        REC[Recruiter Mode<br/>Fast, mobile-friendly, 2D]
+        TECH[Technical Lead Mode<br/>System design, ADR, CI/CD, evidence]
+        IMM[Immersive 3D Mode<br/>3D incident simulations]
+    end
+
+    subgraph CONTENT["📦 Shared Vetted Content Layer"]
+        DATA[src/content/data.ts]
+        EVIDENCE[src/content/projectEvidence.ts]
+    end
+
+    subgraph PORTS["🚢 Project Repositories<br/>(Reference & Evidence, Not Microservices)"]
+        FLASH[FlashSale]
+        AKS[AKS-SRE-Platform]
+        QUAN[QuanLyKho]
+        INCIDENT[IncidentIQ]
+    end
+
+    USAGE_MODES --> CONTENT
+    CONTENT --> PORTS
+
+    style CONTENT fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    style PORTS fill:#f3e5f5,stroke:#4a148c,stroke-width:2px

@@ -217,6 +217,7 @@ export interface Project {
   solution?: string;
   solutionVi?: string;
   architecture?: string;
+  mermaid?: string;
   engineeringDecisions?: string[];
   evidence?: { label: string; url: string }[];
   limitations?: string;
@@ -423,6 +424,18 @@ export const projects = [
     solution: 'Stock-conservation checks with Redis/Lua, PostgreSQL concurrency control, Transactional Outbox/Inbox patterns, Dead Letter Queue replay, RBAC and Clean Architecture boundaries. 175 tests pass on the public baseline.',
     solutionVi: 'Kiểm soát tồn kho bằng Redis/Lua và PostgreSQL; dùng outbox/inbox, hàng đợi lỗi, phân quyền và ranh giới kiến trúc rõ ràng. 175 test đạt trên baseline công khai.',
     architecture: 'Clean Architecture with separated bounded contexts. FlashSale handles order reliability; event-driven communication via RabbitMQ with Transactional Outbox pattern for eventual consistency. PostgreSQL as primary store, Redis for caching and atomic inventory operations.',
+    mermaid: `flowchart TB
+    Client[Client]:::client -->|HTTP| API[Spring Boot API]:::service
+    API -->|idempotency key| Redis[(Redis)]:::store
+    API -->|tx + outbox| PG[(PostgreSQL)]:::store
+    API -->|publish| MQ[(RabbitMQ)]:::bus
+    MQ -->|consume| Worker[Worker Service]:::service
+    Worker -->|update| PG
+    Redis -->|atomic check| PG
+    classDef client fill:#e2dbce,stroke:#a14731,color:#1b2020;
+    classDef service fill:#f3eee5,stroke:#a14731,color:#1b2020;
+    classDef store fill:#d6cec0,stroke:#a14731,color:#1b2020;
+    classDef bus fill:#deb997,stroke:#a14731,color:#1b2020;`,
     engineeringDecisions: [
       'Redis Lua scripts for atomic inventory decrement under concurrent load',
       'Transactional outbox pattern to decouple domain events from API responses',
@@ -461,6 +474,17 @@ export const projects = [
     solution: 'Flutter operations screens with FastAPI/PostgreSQL business API, role-based access control, maker–checker approval flows, inventory history and audit-oriented data model. 1,285 backend tests and 355 frontend tests pass on the recorded baseline.',
     solutionVi: 'Giao diện Flutter với API FastAPI/PostgreSQL, phân quyền, quy trình duyệt người tạo–người duyệt, lịch sử tồn kho và mô hình dữ liệu hướng kiểm toán. 1.285 test backend và 355 test frontend đạt trên baseline đã ghi nhận.',
     architecture: 'Flutter frontend communicating with FastAPI backend via REST API. PostgreSQL as primary data store with audit trails and double-entry bookkeeping. Docker containerized deployment with CI/CD pipeline.',
+    mermaid: `flowchart TB
+    Mobile[Flutter Mobile]:::client -->|REST API| API[FastAPI Backend]:::service
+    API -->|tx| PG[(PostgreSQL)]:::store
+    PG -->|audit trail| Audit[Audit Log]:::store
+    API -->|maker-checker| Approval[Approval Flow]:::service
+    API -->|double-entry| GL[General Ledger]:::store
+    Docker[Docker]:::tool -->|containerize| API
+    classDef client fill:#e2dbce,stroke:#a14731,color:#1b2020;
+    classDef service fill:#f3eee5,stroke:#a14731,color:#1b2020;
+    classDef store fill:#d6cec0,stroke:#a14731,color:#1b2020;
+    classDef tool fill:#d9d2c6,stroke:#a14731,color:#1b2020;`,
     engineeringDecisions: [
       'Flutter for mobile-first operations UX with controlled API access',
       'FastAPI with PostgreSQL for transactional business logic and auditability',
@@ -534,6 +558,21 @@ export const projects = [
     solution: 'Terraform for AKS cluster and networking provisioning, Argo CD for GitOps continuous delivery, OpenTelemetry for distributed tracing and metrics, Azure Monitor for alerting, security policies with OPA/Gatekeeper, and automated rollback runbooks.',
     solutionVi: 'Terraform cung cấp cluster AKS và mạng, Argo CD cho GitOps liên tục, OpenTelemetry cho tracing và chỉ số phân tán, Azure Monitor cảnh báo, chính sách bảo mật với OPA/Gatekeeper, và sổ chạy rollback tự động.',
     architecture: 'Terraform-managed Azure AKS cluster with Argo CD GitOps sync from GitHub. Applications deployed via Helm charts with OpenTelemetry sidecars for observability. Security policies enforced via OPA Gatekeeper. Local validation with kind clusters before cloud apply.',
+    mermaid: `flowchart TB
+    Dev[Developer]:::client -->|git push| GH[GitHub]:::service
+    GH -->|GitOps sync| AC[Argo CD]:::service
+    AC -->|deploy| AKS[(AKS Cluster)]:::infra
+    AKS -->|workloads| App[Application Pods]:::service
+    AKS -->|provision| TF[Terraform]:::tool
+    TF -->|infrastructure| Azure[Azure]:::cloud
+    OTel[OpenTelemetry]:::tool -->|traces/metrics| Monitor[Azure Monitor]:::monitor
+    App --> OTel
+    classDef client fill:#e2dbce,stroke:#a14731,color:#1b2020;
+    classDef service fill:#f3eee5,stroke:#a14731,color:#1b2020;
+    classDef infra fill:#d6cec0,stroke:#a14731,color:#1b2020;
+    classDef cloud fill:#deb997,stroke:#a14731,color:#1b2020;
+    classDef tool fill:#d9d2c6,stroke:#a14731,color:#1b2020;
+    classDef monitor fill:#cfc9be,stroke:#a14731,color:#1b2020;`,
     engineeringDecisions: [
       'Infrastructure as Code with Terraform for reproducible AKS environments',
       'Argo CD GitOps for declarative continuous delivery and drift detection',

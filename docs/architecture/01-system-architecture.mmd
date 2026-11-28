@@ -1,0 +1,66 @@
+flowchart TD
+    subgraph USERS["👥 Users"]
+        HR[HR / Recruiter]
+        TL[Technical Lead]
+        CAND[Candidate / Visitor]
+    end
+
+    subgraph CONTENT_LAYER["📦 Shared 2D/3D Content Layer (Vetted)"]
+        DATA[src/content/data.ts]
+        EVIDENCE[src/content/projectEvidence.ts]
+        PROJECTS[12 Projects + Evidence + Limitations]
+    end
+
+    subgraph MODE_1["📄 Mode 1: Recruiter Mode (Portfolio)"]
+        NEXT[Next.js 14.2.0 + TypeScript + Tailwind]
+        ROLES[6 Role-based Pages]
+        CASE[Case Study Pages]
+        CHAT[AI Chat Widget - Workers AI + Vectorize]
+        DB[(Neon PostgreSQL - Chat History)]
+    end
+
+    subgraph MODE_2["🎮 Mode 2: Immersive 3D (/immersive)"]
+        VITE[Vite 3D Static Build]
+        THREE[Three.js + React Three Fiber + Drei]
+        GSAP[GSAP Animation]
+        SIM[3D Incident Simulations]
+    end
+
+    subgraph MODE_3["💼 Mode 3: Career Center (/cv)"]
+        CV[CV Downloads]
+        CERTS[Certifications]
+        EXP[Experience]
+    end
+
+    subgraph INFRA["☁️ Production Infrastructure (Render)"]
+        RENDER_WEB[Render Web Service - Next.js Docker]
+        RENDER_STATIC[Render Static Site - Vite 3D]
+        CF[Cloudflare CDN]
+    end
+
+    subgraph REPOS["📁 Project Repositories (Reference & Evidence)"]
+        FLASH[FlashSale]
+        AKS[AKS-SRE-Platform]
+        QUAN[QuanLyKho]
+        INCIDENT[IncidentIQ]
+    end
+
+    HR --> NEXT
+    TL --> NEXT
+    CAND --> NEXT
+
+    CONTENT_LAYER --> NEXT
+    CONTENT_LAYER --> VITE
+    CONTENT_LAYER --> CV
+
+    MODE_1 --> REPOS
+    MODE_2 --> REPOS
+
+    NEXT --> RENDER_WEB
+    VITE --> RENDER_STATIC
+    RENDER_WEB --> CF
+    RENDER_STATIC --> CF
+
+    style CONTENT_LAYER fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    style INFRA fill:#fff3e0,stroke:#e65100,stroke-width:2px
+    style REPOS fill:#f3e5f5,stroke:#4a148c,stroke-width:2px

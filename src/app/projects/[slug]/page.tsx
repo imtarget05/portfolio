@@ -4,6 +4,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { useLang } from '@/components/LanguageProvider';
 import { ExternalLink, Github, Layers, ShieldAlert, Code2, Activity, Database, ArrowUpRight } from 'lucide-react';
+import { MermaidDiagram } from '@/components/MermaidDiagram';
 
 export const metadata = {
   title: 'Project Case Study',
@@ -72,9 +73,13 @@ export default function ProjectDetail({ params }: ProjectDetailProps) {
                 <Layers size={18} className="text-muted-foreground" />
                 <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">{lang === 'en' ? '03 — ARCHITECTURE' : '03 — KIẾN TRÚC'}</span>
               </div>
-              <div className="bg-secondary rounded-lg p-4 font-mono text-xs text-muted-foreground overflow-x-auto">
-                {project.architecture}
-              </div>
+              {project.mermaid ? (
+                <MermaidDiagram diagram={project.mermaid} className="h-[400px]" />
+              ) : (
+                <div className="bg-secondary rounded-lg p-4 font-mono text-xs text-muted-foreground overflow-x-auto">
+                  {project.architecture}
+                </div>
+              )}
             </div>
 
             {/* Engineering decisions */}

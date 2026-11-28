@@ -1,10 +1,18 @@
 import { neon } from '@neondatabase/serverless';
 
-const connectionString = 'postgresql://neondb_owner:npg_oRCTwA42hcvB@ep-old-cherry-aoqi8gyv-pooler.c-2.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require';
+const connectionString = process.env.DATABASE_URL;
 
-export const sql = neon(connectionString);
+export const sql = connectionString
+  ? neon(connectionString)
+  : ((..._args: any[]) => {
+      throw new Error('DATABASE_URL environment variable is required');
+    }) as any;
 
 export async function initDatabase() {
+  if (!connectionString) {
+    console.warn('DATABASE_URL not set; database initialization skipped.');
+    return;
+  }
   await sql`
     CREATE TABLE IF NOT EXISTS chat_sessions (
       id UUID PRIMARY KEY DEFAULT gen_random_uuid(),

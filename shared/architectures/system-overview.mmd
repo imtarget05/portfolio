@@ -1,0 +1,14 @@
+graph TD
+    Client[Client Browser] --> CF[Cloudflare CDN]
+    CF --> NextJS[Next.js on Render Docker]
+    CF --> Workers[Cloudflare Workers API]
+    CF --> Static[Workers Static Assets - Immersive 3D]
+    NextJS --> Neon[(Neon PostgreSQL)]
+    NextJS --> AI[Cloudflare Workers AI + Vectorize]
+    Workers --> AI
+    Workers --> Neon
+    Static -.-> NextJS[Back to Portfolio]
+    style CF fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    style NextJS fill:#fff3e0,stroke:#e65100,stroke-width:2px
+    style Workers fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+    style Static fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px

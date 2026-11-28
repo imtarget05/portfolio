@@ -1,0 +1,46 @@
+CV PLACEHOLDER — Backend Software Engineer
+==========================================
+
+Mai Nguyen Binh Tan
+Software & Cloud Engineer — Backend Systems · DevOps · Applied AI
+Ho Chi Minh City, Vietnam
+Email: tanmainguyenbinh@gmail.com
+GitHub: https://github.com/imtarget05
+LinkedIn: https://www.linkedin.com/in/mainguyenbinhtan2005/
+
+SUMMARY
+Early-career Software & Cloud Engineer focused on backend reliability,
+infrastructure automation, and applied AI. Builds systems that work beyond
+the demo — with transactional reliability, GitOps delivery, and verifiable
+engineering evidence.
+
+TECHNICAL SKILLS
+Backend: Java Spring Boot, Python FastAPI, PostgreSQL, Redis, RabbitMQ
+Cloud/DevOps: Kubernetes, Terraform, Argo CD, Azure, Docker, GitHub Actions
+AI: RAG, LangGraph, Qdrant, MCP
+Testing: 175+ tests (FlashSale), 1,285+ backend + 355+ frontend tests (QuanLyKho)
+
+FEATURED PROJECTS
+1. FlashSale Backend — Java Spring Boot, PostgreSQL, Redis, RabbitMQ
+   Transactional reliability, idempotency, Transactional Outbox pattern.
+   GitHub: https://github.com/imtarget05/FlashSale-Backend
+
+2. AKS SRE Platform — Kubernetes, Terraform, Argo CD, OpenTelemetry
+   Infrastructure as Code, GitOps, observability on Azure AKS.
+   GitHub: https://github.com/imtarget05/AKS-SRE-Platform
+
+3. QuanLyKho — Python FastAPI, PostgreSQL, Flutter, Docker
+   Enterprise inventory & treasury, double-entry bookkeeping, Maker-Checker.
+   GitHub: https://github.com/imtarget05/QuanLyKho
+
+4. IncidentIQ — Python FastAPI, RAG, LangGraph, Qdrant, MCP
+   AI incident triage with human-in-the-loop approval.
+   GitHub: https://github.com/imtarget05/incidentiq
+
+EDUCATION
+University of Information Technology (UIT), Ho Chi Minh City, Vietnam — 2023-2027
+
+CERTIFICATIONS
+Google AI Essentials, Google Crash Course on Python, TOEIC Listening & Reading (595/990)
+
+NOTE: This is a placeholder. Full PDF CV will be published before Q1/2027 applications.

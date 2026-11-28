@@ -3,7 +3,6 @@ services:
     name: portfolio-of-mainguyenbinhtan
     env: docker
     repo: https://github.com/imtarget05/portfolio
-    rootDir: portfolio
     dockerfilePath: ./Dockerfile
     buildCommand: "npm run build"
     startCommand: "npm start"
@@ -14,6 +13,8 @@ services:
         value: "1"
       - key: PORT
         value: 3000
+      - key: DATABASE_URL
+        sync: false
       - key: CLOUDFLARE_ACCOUNT_ID
         value: your_cloudflare_account_id
       - key: CLOUDFLARE_API_TOKEN
@@ -25,4 +26,4 @@ services:
       - key: VECTORIZE_API_TOKEN
         value: your_cloudflare_api_token
     healthCheckPath: /
-    autoDeploy: true
+    autoDeploy: false

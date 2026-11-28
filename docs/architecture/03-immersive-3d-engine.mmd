@@ -1,0 +1,70 @@
+flowchart TD
+    subgraph ENTRY["🎯 Entry: /immersive"]
+        HTML[index.html]
+        MAIN[main.tsx]
+        APP[App.tsx]
+    end
+
+    subgraph NAV["🧭 Navigation"]
+        GLASS_NAV[GlassNavbar - EN/VI toggle + chapter links]
+        GLASS_DOCK[GlassDock - chapter quick jump]
+    end
+
+    subgraph SCROLL["📜 Scroll-Driven Chapter System"]
+        SCROLL_REF[scrollRef - useScroll hook]
+        PROGRESS[scrollYProgress 0→1]
+        SPRING[useSpring - smooth progress]
+        TRANSFORM[useTransform - map to chapters 0-3]
+        LOOP[requestAnimationFrame loop - active chapter tracking]
+    end
+
+    subgraph CHAPTERS["📖 Four Chapters (3D Scenes)"]
+        CH1[Chapter01 - Introduction]
+        CH2[Chapter02 - Explore]
+        CH3[Chapter03 - Experience]
+        CH4[Chapter04 - Final Scene]
+    end
+
+    subgraph ENGINE["⚙️ 3D Engine Stack"]
+        THREE[Three.js]
+        R3F[React Three Fiber]
+        DREI[@react-three/drei]
+        GSAP[GSAP]
+    end
+
+    subgraph COMPONENTS["🧩 Shared Components"]
+        GLASS_BTN[GlassButton]
+        GLASS_CARD[GlassCard]
+        GLASS_MODAL[GlassModal]
+        WEBGL_FALLBACK[WebGLFallback - 2D fallback]
+        CHAPTER_LAYOUT[ChapterLayout]
+    end
+
+    subgraph SIMULATION["🎭 Incident Simulation Data (Mocked)"]
+        INCIDENT_IQ[IncidentIQ - AI incident triage]
+        FLASH_SALE[FlashSale - distributed system]
+        AKS[AKS-SRE-Platform - cloud infrastructure]
+        QUAN[QuanLyKho - ERP system]
+    end
+
+    ENTRY --> NAV
+    ENTRY --> SCROLL
+    ENTRY --> CHAPTERS
+
+    SCROLL --> LOOP
+    LOOP -->|activeIndex| CHAPTERS
+
+    CHAPTERS --> ENGINE
+    CHAPTERS --> COMPONENTS
+    CHAPTERS --> SIMULATION
+
+    ENGINE --> THREE
+    ENGINE --> R3F
+    ENGINE --> DREI
+    ENGINE --> GSAP
+
+    COMPONENTS --> WEBGL_FALLBACK
+
+    style SCROLL fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    style SIMULATION fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    style ENGINE fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px

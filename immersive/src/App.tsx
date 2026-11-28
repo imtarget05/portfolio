@@ -40,12 +40,17 @@ export function App() {
         setActiveIndex(p);
       }
     };
-    // Poll since useTransform progress isn't directly readable imperatively
-    const id = requestAnimationFrame(function loop() {
+    const frameRef = { current: 0 as number | null };
+    const loop = () => {
       handler();
-      return requestAnimationFrame(loop);
-    });
-    return () => cancelAnimationFrame(id);
+      frameRef.current = requestAnimationFrame(loop);
+    };
+    frameRef.current = requestAnimationFrame(loop);
+    return () => {
+      if (frameRef.current !== null) {
+        cancelAnimationFrame(frameRef.current);
+      }
+    };
   }, [activeIndex, activeProgress]);
 
   return (

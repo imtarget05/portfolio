@@ -31,6 +31,7 @@ export function Navbar({ lang, setLang, t }: NavbarProps) {
     { key: 'nav.projects', href: '#projects' },
     { key: 'nav.roles', href: '/roles/backend' },
     { key: 'nav.immersive', href: '/immersive' },
+    { key: 'nav.github', href: '/github-dashboard' },
     { key: 'nav.tech', href: '#tech' },
     { key: 'nav.experience', href: '#experience' },
     { key: 'nav.services', href: '#services' },

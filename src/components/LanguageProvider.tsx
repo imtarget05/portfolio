@@ -32,6 +32,10 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
         'nav.services': { en: 'Services', vi: 'Dịch vụ' },
         'nav.contact': { en: 'Contact', vi: 'Liên hệ' },
         'nav.apply': { en: 'Apply', vi: 'Ứng tuyển' },
+        'nav.roles': { en: 'Roles', vi: 'Vị trí' },
+        'nav.github': { en: 'GitHub Dashboard', vi: 'Bảng điều khiển GitHub' },
+        'nav.immersive': { en: 'Immersive 3D', vi: '3D Đầy Đủ' },
+        'nav.career': { en: 'Career Center', vi: 'Trung tâm Nghề nghiệp' },
         'hero.headline': {
           en: 'Building Scalable Software, Intelligent Applications & Reliable Cloud Systems.',
           vi: 'Xây dựng phần mềm mở rộng, ứng dụng thông minh và hệ thống đám mây tin cậy.',
